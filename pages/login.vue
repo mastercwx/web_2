@@ -140,6 +140,15 @@ async function handleLogin() {
             {{ loading ? $t('auth.login.submitting') : $t('auth.login.submit') }}
           </button>
         </div>
+
+        <div class="forgot-password">
+          <NuxtLink
+            to="/forgot-password"
+            class="forgot-link"
+          >
+            {{ $t('auth.forgotPassword.title') }}?
+          </NuxtLink>
+        </div>
       </form>
     </div>
   </div>
@@ -276,5 +285,20 @@ async function handleLogin() {
 
 .w-full {
   width: 100%;
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: -0.5rem;
+}
+
+.forgot-link {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
 }
 </style>
