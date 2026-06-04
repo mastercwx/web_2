@@ -8,6 +8,7 @@ const sidebarItems = [
   { label: '媒体库', icon: '🖼️', to: '/admin/media' },
   { label: '联系消息', icon: '✉️', to: '/admin/contacts' },
   { label: '内容审核', icon: '🛡️', to: '/admin/moderation' },
+  { label: '活动日志', icon: '📋', to: '/admin/activity' },
   { label: '系统设置', icon: '⚙️', to: '/admin/settings' },
 ]
 </script>

@@ -7,6 +7,7 @@ import {
   getVerificationEmailTemplate,
   getWelcomeEmailTemplate,
 } from '~/server/utils/email'
+import { logActivityFromEvent, ActivityActions } from '~/server/utils/activity-log'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -106,6 +107,13 @@ export default defineEventHandler(async (event) => {
     subject: '【HG Web】欢迎加入',
     html: getWelcomeEmailTemplate(user.username),
   }).catch((err) => console.error('Failed to send welcome email:', err))
+
+  // 记录注册活动
+  await logActivityFromEvent(event, ActivityActions.REGISTER, {
+    entity: 'user',
+    entityId: user.id,
+    details: `新用户 ${user.username} 注册成功`,
+  })
 
   return {
     code: 200,

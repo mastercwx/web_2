@@ -1,5 +1,6 @@
 import { prisma } from '~/server/utils/prisma'
 import { createNotification } from '~/server/utils/notification'
+import { logActivityFromEvent, ActivityActions } from '~/server/utils/activity-log'
 
 export default defineEventHandler(async (event) => {
   const auth = event.context['auth']
@@ -38,6 +39,14 @@ export default defineEventHandler(async (event) => {
     await prisma.like.delete({
       where: { id: existingLike.id },
     })
+
+    // 记录取消点赞活动
+    await logActivityFromEvent(event, ActivityActions.UNLIKE, {
+      entity: 'post',
+      entityId: postIdNum,
+      details: `取消点赞文章 #${postIdNum}`,
+    })
+
     return {
       success: true,
       data: { liked: false },
@@ -74,6 +83,13 @@ export default defineEventHandler(async (event) => {
         postId: postIdNum,
       })
     }
+
+    // 记录点赞活动
+    await logActivityFromEvent(event, ActivityActions.LIKE, {
+      entity: 'post',
+      entityId: postIdNum,
+      details: `点赞文章 #${postIdNum}`,
+    })
 
     return {
       success: true,

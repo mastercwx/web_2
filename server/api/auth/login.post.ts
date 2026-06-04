@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { prisma } from '~/server/utils/prisma'
 import { generateToken } from '~/server/utils/jwt'
+import { logActivityFromEvent, ActivityActions } from '~/server/utils/activity-log'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -50,6 +51,13 @@ export default defineEventHandler(async (event) => {
     userId: user.id,
     username: user.username,
     role: user.role,
+  })
+
+  // 记录登录活动
+  await logActivityFromEvent(event, ActivityActions.LOGIN, {
+    entity: 'user',
+    entityId: user.id,
+    details: `用户 ${user.username} 登录成功`,
   })
 
   return {
