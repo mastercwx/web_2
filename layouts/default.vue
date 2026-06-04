@@ -23,6 +23,12 @@
             {{ $t('nav.posts') }}
           </NuxtLink>
           <NuxtLink
+            to="/tags"
+            class="nav-link"
+          >
+            {{ $t('nav.tags') }}
+          </NuxtLink>
+          <NuxtLink
             to="/about"
             class="nav-link"
           >

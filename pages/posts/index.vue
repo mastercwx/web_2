@@ -117,13 +117,14 @@ function handlePageChange(newPage: number) {
             v-if="post.tags.length"
             class="flex gap-2"
           >
-            <span
+            <NuxtLink
               v-for="tag in post.tags"
               :key="tag.id"
-              class="px-2 py-0.5 bg-gray-100 rounded"
+              :to="`/tags/${tag.name}`"
+              class="px-2 py-0.5 bg-gray-100 rounded hover:bg-blue-100 hover:text-blue-700 transition-colors"
             >
               {{ tag.name }}
-            </span>
+            </NuxtLink>
           </div>
         </div>
       </article>

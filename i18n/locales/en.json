@@ -28,7 +28,8 @@
     "admin": "Admin",
     "profile": "Profile",
     "welcome": "Welcome",
-    "settings": "Settings"
+    "settings": "Settings",
+    "tags": "Tags"
   },
   "home": {
     "title": "Welcome to HG Web",
@@ -231,5 +232,18 @@
       "saving": "Updating...",
       "or": "Or upload a new avatar"
     }
+  },
+  "tags": {
+    "title": "Tags",
+    "description": "Browse all tags and discover more related content",
+    "sortBy": "Sort by",
+    "postCount": "Post Count",
+    "name": "Name",
+    "allTags": "All Tags",
+    "posts": "posts",
+    "noTags": "No tags yet",
+    "noPosts": "No posts under this tag",
+    "backToTags": "Back to tags",
+    "postsCount": "{count} posts total"
   }
 }
