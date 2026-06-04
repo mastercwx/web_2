@@ -110,6 +110,12 @@
           <!-- 用户状态 -->
           <template v-if="authStore.isAuthenticated">
             <NuxtLink
+              to="/dashboard"
+              class="nav-link"
+            >
+              {{ $t('nav.dashboard') }}
+            </NuxtLink>
+            <NuxtLink
               :to="`/users/${authStore.user?.id}`"
               class="nav-link"
             >

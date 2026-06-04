@@ -33,7 +33,8 @@
     "tags": "标签",
     "archive": "归档",
     "search": "搜索",
-    "series": "系列"
+    "series": "系列",
+    "dashboard": "仪表盘"
   },
   "home": {
     "title": "欢迎来到 HG Web",

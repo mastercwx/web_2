@@ -33,7 +33,8 @@
     "tags": "Tags",
     "archive": "Archive",
     "search": "Search",
-    "series": "Series"
+    "series": "Series",
+    "dashboard": "Dashboard"
   },
   "home": {
     "title": "Welcome to HG Web",
