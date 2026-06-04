@@ -15,7 +15,7 @@ if (authStore.user?.id !== userId.value) {
   })
 }
 
-const activeTab = ref<'profile' | 'password' | 'avatar'>('profile')
+const activeTab = ref<'profile' | 'password' | 'avatar' | 'notifications'>('profile')
 
 // 个人资料表单
 const profileForm = reactive({
@@ -44,6 +44,14 @@ const currentAvatar = computed(() => authStore.user?.avatar || '')
 const avatarLoading = ref(false)
 const avatarError = ref('')
 const avatarSuccess = ref('')
+
+// 邮件通知设置
+const notificationForm = reactive({
+  emailNotifications: true,
+})
+const notificationLoading = ref(false)
+const notificationError = ref('')
+const notificationSuccess = ref('')
 
 async function updateProfile() {
   profileLoading.value = true
@@ -132,7 +140,7 @@ async function updateAvatar() {
   }
 }
 
-function handleTabChange(tab: 'profile' | 'password' | 'avatar') {
+function handleTabChange(tab: 'profile' | 'password' | 'avatar' | 'notifications') {
   activeTab.value = tab
   // 清除消息
   profileError.value = ''
@@ -141,6 +149,46 @@ function handleTabChange(tab: 'profile' | 'password' | 'avatar') {
   passwordSuccess.value = ''
   avatarError.value = ''
   avatarSuccess.value = ''
+  notificationError.value = ''
+  notificationSuccess.value = ''
+}
+
+async function updateNotifications() {
+  notificationLoading.value = true
+  notificationError.value = ''
+  notificationSuccess.value = ''
+
+  try {
+    const result = await $fetch<{ code: number; message: string }>('/api/users/notifications', {
+      method: 'PUT',
+      body: {
+        emailNotifications: notificationForm.emailNotifications,
+      },
+      headers: authStore.token ? { Authorization: `Bearer ${authStore.token}` } : {},
+    })
+
+    if (result.code === 200) {
+      notificationSuccess.value = result.message
+    }
+  } catch (err: any) {
+    notificationError.value = err.data?.message || '更新失败'
+  } finally {
+    notificationLoading.value = false
+  }
+}
+
+// 加载通知设置
+async function loadNotificationSettings() {
+  try {
+    const data = await $fetch<any>('/api/users/notifications', {
+      headers: authStore.token ? { Authorization: `Bearer ${authStore.token}` } : {},
+    })
+    if (data.code === 200) {
+      notificationForm.emailNotifications = data.data.emailNotifications
+    }
+  } catch (err) {
+    console.error('Failed to load notification settings:', err)
+  }
 }
 </script>
 
@@ -173,6 +221,16 @@ function handleTabChange(tab: 'profile' | 'password' | 'avatar') {
           @click="handleTabChange('avatar')"
         >
           {{ t('settings.avatar.title') }}
+        </button>
+        <button
+          class="tab-btn"
+          :class="{ active: activeTab === 'notifications' }"
+          @click="
+            handleTabChange('notifications')
+            loadNotificationSettings()
+          "
+        >
+          {{ t('settings.notifications.title') }}
         </button>
       </div>
 
@@ -360,6 +418,64 @@ function handleTabChange(tab: 'profile' | 'password' | 'avatar') {
           />
         </div>
       </div>
+
+      <!-- 邮件通知设置 -->
+      <div
+        v-if="activeTab === 'notifications'"
+        class="settings-content card"
+      >
+        <h2>{{ t('settings.notifications.title') }}</h2>
+
+        <div
+          v-if="notificationError"
+          class="error-message"
+        >
+          {{ notificationError }}
+        </div>
+        <div
+          v-if="notificationSuccess"
+          class="success-message"
+        >
+          {{ notificationSuccess }}
+        </div>
+
+        <form @submit.prevent="updateNotifications">
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input
+                v-model="notificationForm.emailNotifications"
+                type="checkbox"
+              />
+              <span>{{ t('settings.notifications.emailEnabled') }}</span>
+            </label>
+            <p class="form-hint">
+              {{ t('settings.notifications.emailHint') }}
+            </p>
+          </div>
+
+          <div class="notification-info">
+            <h4>{{ t('settings.notifications.types') }}</h4>
+            <ul>
+              <li>💬 {{ t('settings.notifications.typesList.comments') }}</li>
+              <li>❤️ {{ t('settings.notifications.typesList.likes') }}</li>
+              <li>👥 {{ t('settings.notifications.typesList.follows') }}</li>
+              <li>📢 {{ t('settings.notifications.typesList.system') }}</li>
+            </ul>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-primary"
+            :disabled="notificationLoading"
+          >
+            {{
+              notificationLoading
+                ? t('settings.notifications.saving')
+                : t('settings.notifications.save')
+            }}
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -526,6 +642,45 @@ function handleTabChange(tab: 'profile' | 'password' | 'avatar') {
 
 .upload-section p {
   margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.checkbox-label input[type='checkbox'] {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.notification-info {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+}
+
+.notification-info h4 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.notification-info ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.notification-info li {
+  margin-bottom: 0.5rem;
   color: var(--text-secondary);
 }
 

@@ -118,6 +118,22 @@
       "backToLogin": "返回登录",
       "requestNew": "重新申请",
       "failed": "重置失败，请稍后重试"
+    },
+    "verify": {
+      "verifying": "正在验证邮箱...",
+      "pleaseWait": "请稍候",
+      "success": "邮箱验证成功！",
+      "successMessage": "你的邮箱已成功验证，现在可以正常使用所有功能。",
+      "goToLogin": "前往登录",
+      "failed": "验证失败",
+      "errorMessage": "验证过程中出现错误，请稍后重试。",
+      "checkEmail": "请检查邮箱",
+      "checkEmailMessage": "我们已向你的邮箱发送了验证链接，请点击链接完成验证。",
+      "resend": "重新发送验证邮件",
+      "resending": "发送中...",
+      "emailSent": "验证邮件已发送",
+      "sendFailed": "发送失败",
+      "goHome": "返回首页"
     }
   },
   "posts": {
@@ -315,6 +331,20 @@
       "save": "更新头像",
       "saving": "更新中...",
       "or": "或者上传新头像"
+    },
+    "notifications": {
+      "title": "邮件通知",
+      "emailEnabled": "启用邮件通知",
+      "emailHint": "开启后，当有新评论、点赞或关注时会收到邮件提醒",
+      "types": "通知类型",
+      "typesList": {
+        "comments": "新评论通知 - 有人评论你的文章时",
+        "likes": "点赞通知 - 有人点赞你的文章时",
+        "follows": "关注通知 - 有人关注你时",
+        "system": "系统公告 - 重要系统更新和公告"
+      },
+      "save": "保存设置",
+      "saving": "保存中..."
     }
   },
   "tags": {
