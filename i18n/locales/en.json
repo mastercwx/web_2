@@ -1,0 +1,192 @@
+{
+  "common": {
+    "appName": "HG Web",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "reset": "Reset",
+    "back": "Back",
+    "next": "Next",
+    "prev": "Previous",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "posts": "Posts",
+    "about": "About",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "admin": "Admin",
+    "profile": "Profile",
+    "welcome": "Welcome"
+  },
+  "home": {
+    "title": "Welcome to HG Web",
+    "subtitle": "A modern web application built with Nuxt 3",
+    "features": {
+      "nuxt": {
+        "title": "Nuxt 3",
+        "description": "Full-stack framework based on Vue 3"
+      },
+      "typescript": {
+        "title": "TypeScript",
+        "description": "Type-safe development experience"
+      },
+      "tailwind": {
+        "title": "Tailwind CSS",
+        "description": "Utility-first CSS framework"
+      }
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "description": "HG Web is a modern web application built with Nuxt 3, using the latest frontend technology stack, committed to providing excellent user experience and development experience.",
+    "techStack": "Tech Stack"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to your account",
+      "subtitle": "Or",
+      "registerLink": "register a new account",
+      "username": "Username or email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "noAccount": "Don't have an account?"
+    },
+    "register": {
+      "title": "Create a new account",
+      "subtitle": "Or",
+      "loginLink": "sign in to your existing account",
+      "username": "Username",
+      "email": "Email address",
+      "password": "Password (at least 6 characters)",
+      "confirmPassword": "Confirm password",
+      "submit": "Register",
+      "submitting": "Registering...",
+      "hasAccount": "Already have an account?"
+    },
+    "errors": {
+      "required": "Please fill in all required fields",
+      "usernameLength": "Username must be between 2-50 characters",
+      "passwordLength": "Password must be at least 6 characters",
+      "passwordMismatch": "Passwords do not match",
+      "invalidEmail": "Invalid email format",
+      "loginFailed": "Login failed",
+      "registerFailed": "Registration failed"
+    }
+  },
+  "posts": {
+    "title": "Posts",
+    "create": "Write Post",
+    "search": "Search posts...",
+    "noPosts": "No posts yet",
+    "author": "Author",
+    "date": "Date",
+    "tags": "Tags",
+    "readMore": "Read more",
+    "detail": {
+      "title": "Post Detail",
+      "backToList": "Back to list",
+      "edit": "Edit Post",
+      "delete": "Delete Post"
+    },
+    "createPage": {
+      "title": "Create Post",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Enter post title",
+      "contentLabel": "Content",
+      "contentPlaceholder": "Enter post content (Markdown supported)",
+      "tagsLabel": "Tags",
+      "tagsPlaceholder": "Press Enter to add tags",
+      "submit": "Publish Post",
+      "submitting": "Publishing..."
+    },
+    "editPage": {
+      "title": "Edit Post",
+      "submit": "Save Changes",
+      "submitting": "Saving..."
+    }
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "dashboard": {
+      "title": "Dashboard",
+      "users": "Total Users",
+      "posts": "Total Posts",
+      "published": "Published",
+      "drafts": "Drafts",
+      "recentUsers": "Recent Users",
+      "recentPosts": "Recent Posts"
+    },
+    "users": {
+      "title": "User Management",
+      "search": "Search users...",
+      "id": "ID",
+      "username": "Username",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "posts": "Posts",
+      "createdAt": "Registered",
+      "actions": "Actions",
+      "delete": "Delete",
+      "roles": {
+        "USER": "User",
+        "ADMIN": "Admin",
+        "GUEST": "Guest"
+      },
+      "statuses": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "BANNED": "Banned"
+      }
+    },
+    "posts": {
+      "title": "Post Management",
+      "search": "Search posts...",
+      "id": "ID",
+      "titleColumn": "Title",
+      "author": "Author",
+      "tags": "Tags",
+      "status": "Status",
+      "createdAt": "Created",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "published": "Published",
+      "draft": "Draft",
+      "allStatus": "All Status"
+    }
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Toggle theme"
+  },
+  "language": {
+    "zh-CN": "中文",
+    "en": "English",
+    "toggle": "Switch language"
+  },
+  "errors": {
+    "404": "Page Not Found",
+    "403": "Access Denied",
+    "500": "Server Error",
+    "default": "Something went wrong",
+    "notFoundMessage": "The page you visited may have been deleted or does not exist",
+    "forbiddenMessage": "Please contact the administrator for access",
+    "serverErrorMessage": "Please try again later or contact the administrator",
+    "goHome": "Go Home"
+  }
+}

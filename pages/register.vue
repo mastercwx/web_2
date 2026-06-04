@@ -4,6 +4,7 @@ definePageMeta({
   middleware: ['guest'],
 })
 
+const { t } = useI18n()
 const authStore = useAuthStore()
 const router = useRouter()
 
@@ -20,28 +21,28 @@ const error = ref('')
 async function handleRegister() {
   // 验证表单
   if (!form.username || !form.email || !form.password || !form.confirmPassword) {
-    error.value = '请填写所有必填字段'
+    error.value = t('auth.errors.required')
     return
   }
 
   if (form.username.length < 2 || form.username.length > 50) {
-    error.value = '用户名长度需要在 2-50 个字符之间'
+    error.value = t('auth.errors.usernameLength')
     return
   }
 
   if (form.password.length < 6) {
-    error.value = '密码长度不能少于 6 个字符'
+    error.value = t('auth.errors.passwordLength')
     return
   }
 
   if (form.password !== form.confirmPassword) {
-    error.value = '两次输入的密码不一致'
+    error.value = t('auth.errors.passwordMismatch')
     return
   }
 
   const emailRegex = /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/
   if (!emailRegex.test(form.email)) {
-    error.value = '邮箱格式不正确'
+    error.value = t('auth.errors.invalidEmail')
     return
   }
 
@@ -52,7 +53,7 @@ async function handleRegister() {
     await authStore.register(form.username, form.email, form.password)
     router.push('/')
   } catch (e: any) {
-    error.value = e.message || '注册失败'
+    error.value = e.message || t('auth.errors.registerFailed')
   } finally {
     loading.value = false
   }
@@ -63,14 +64,16 @@ async function handleRegister() {
   <div class="auth-container">
     <div class="auth-card">
       <div>
-        <h2 class="auth-title">注册新账号</h2>
+        <h2 class="auth-title">
+          {{ $t('auth.register.title') }}
+        </h2>
         <p class="auth-subtitle">
-          或者
+          {{ $t('auth.register.subtitle') }}
           <NuxtLink
             to="/login"
             class="auth-link"
           >
-            登录已有账号
+            {{ $t('auth.register.loginLink') }}
           </NuxtLink>
         </p>
       </div>
@@ -97,7 +100,7 @@ async function handleRegister() {
             <label
               for="username"
               class="sr-only"
-              >用户名</label
+              >{{ $t('auth.register.username') }}</label
             >
             <input
               id="username"
@@ -106,14 +109,14 @@ async function handleRegister() {
               type="text"
               required
               class="input-top"
-              placeholder="用户名"
+              :placeholder="$t('auth.register.username')"
             />
           </div>
           <div>
             <label
               for="email"
               class="sr-only"
-              >邮箱</label
+              >{{ $t('auth.register.email') }}</label
             >
             <input
               id="email"
@@ -122,14 +125,14 @@ async function handleRegister() {
               type="email"
               required
               class="input-middle"
-              placeholder="邮箱地址"
+              :placeholder="$t('auth.register.email')"
             />
           </div>
           <div>
             <label
               for="password"
               class="sr-only"
-              >密码</label
+              >{{ $t('auth.register.password') }}</label
             >
             <input
               id="password"
@@ -138,14 +141,14 @@ async function handleRegister() {
               type="password"
               required
               class="input-middle"
-              placeholder="密码（至少 6 个字符）"
+              :placeholder="$t('auth.register.password')"
             />
           </div>
           <div>
             <label
               for="confirm-password"
               class="sr-only"
-              >确认密码</label
+              >{{ $t('auth.register.confirmPassword') }}</label
             >
             <input
               id="confirm-password"
@@ -154,7 +157,7 @@ async function handleRegister() {
               type="password"
               required
               class="input-bottom"
-              placeholder="确认密码"
+              :placeholder="$t('auth.register.confirmPassword')"
             />
           </div>
         </div>
@@ -190,7 +193,7 @@ async function handleRegister() {
                 />
               </svg>
             </span>
-            {{ loading ? '注册中...' : '注册' }}
+            {{ loading ? $t('auth.register.submitting') : $t('auth.register.submit') }}
           </button>
         </div>
       </form>
