@@ -29,7 +29,8 @@
     "profile": "个人资料",
     "welcome": "欢迎",
     "settings": "设置",
-    "tags": "标签"
+    "tags": "标签",
+    "search": "搜索"
   },
   "home": {
     "title": "欢迎来到 HG Web",
@@ -245,5 +246,12 @@
     "noPosts": "该标签下暂无文章",
     "backToTags": "返回标签列表",
     "postsCount": "共 {count} 篇文章"
+  },
+  "search": {
+    "title": "搜索",
+    "placeholder": "搜索文章...",
+    "button": "搜索",
+    "noResults": "未找到与 \"{query}\" 相关的文章",
+    "resultsCount": "找到 {count} 篇与 \"{query}\" 相关的文章"
   }
 }

@@ -29,7 +29,8 @@
     "profile": "Profile",
     "welcome": "Welcome",
     "settings": "Settings",
-    "tags": "Tags"
+    "tags": "Tags",
+    "search": "Search"
   },
   "home": {
     "title": "Welcome to HG Web",
@@ -245,5 +246,12 @@
     "noPosts": "No posts under this tag",
     "backToTags": "Back to tags",
     "postsCount": "{count} posts total"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search posts...",
+    "button": "Search",
+    "noResults": "No posts found for \"{query}\"",
+    "resultsCount": "Found {count} posts for \"{query}\""
   }
 }

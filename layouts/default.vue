@@ -28,6 +28,51 @@
           >
             {{ $t('nav.tags') }}
           </NuxtLink>
+
+          <!-- 搜索 -->
+          <div class="search-wrapper">
+            <button
+              class="search-toggle"
+              :title="t('nav.search')"
+              @click="toggleSearch"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+
+            <div
+              v-if="showSearch"
+              class="search-dropdown"
+            >
+              <input
+                ref="searchInput"
+                v-model="searchQuery"
+                type="text"
+                :placeholder="t('search.placeholder')"
+                class="search-input"
+                @keyup.enter="goToSearch"
+              />
+              <button
+                class="search-btn"
+                @click="goToSearch"
+              >
+                {{ t('search.button') }}
+              </button>
+            </div>
+          </div>
+
           <NuxtLink
             to="/about"
             class="nav-link"
@@ -96,8 +141,50 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 const authStore = useAuthStore()
+const router = useRouter()
 const currentYear = new Date().getFullYear()
+
+const showSearch = ref(false)
+const searchQuery = ref('')
+const searchInput = ref<HTMLInputElement | null>(null)
+
+const toggleSearch = () => {
+  showSearch.value = !showSearch.value
+  if (showSearch.value) {
+    nextTick(() => {
+      searchInput.value?.focus()
+    })
+  }
+}
+
+const goToSearch = () => {
+  if (searchQuery.value.trim()) {
+    router.push({
+      path: '/search',
+      query: { q: searchQuery.value.trim() },
+    })
+    showSearch.value = false
+    searchQuery.value = ''
+  }
+}
+
+// 点击外部关闭搜索框
+const closeSearch = (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  if (!target.closest('.search-wrapper')) {
+    showSearch.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', closeSearch)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', closeSearch)
+})
 </script>
 
 <style scoped>
@@ -140,6 +227,72 @@ const currentYear = new Date().getFullYear()
 }
 
 .btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.search-toggle:hover {
+  color: var(--color-primary);
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 50;
+  min-width: 300px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.search-btn {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background var(--transition-fast);
+}
+
+.search-btn:hover {
   background: var(--color-primary-hover);
 }
 </style>
