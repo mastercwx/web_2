@@ -43,6 +43,12 @@
             >
               {{ $t('nav.profile') }}
             </NuxtLink>
+            <NuxtLink
+              :to="`/users/${authStore.user?.id}/settings`"
+              class="nav-link"
+            >
+              {{ $t('nav.settings') }}
+            </NuxtLink>
             <span class="text-sm text-secondary">
               {{ $t('nav.welcome') }}，{{ authStore.username }}
             </span>
