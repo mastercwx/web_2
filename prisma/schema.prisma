@@ -33,6 +33,9 @@ model User {
   followers Follow[] @relation("following")
   following Follow[] @relation("follower")
 
+  // 阅读历史
+  readingHistory ReadingHistory[]
+
   // 表名映射
   @@map("users")
 }
@@ -55,6 +58,9 @@ model Post {
   comments  Comment[]
   likes     Like[]
   favorites Favorite[]
+
+  // 阅读历史
+  readingHistory ReadingHistory[]
 
   // 索引
   @@index([authorId])
@@ -172,6 +178,25 @@ model Follow {
   @@index([followerId])
   @@index([followingId])
   @@map("follows")
+}
+
+// 阅读历史模型
+model ReadingHistory {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  postId    Int      @map("post_id")
+  readAt    DateTime @default(now()) @map("read_at")
+
+  // 关联
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // 唯一约束（同一用户同一文章只记录一次，更新时间）
+  @@unique([userId, postId])
+  @@index([userId])
+  @@index([postId])
+  @@index([readAt])
+  @@map("reading_history")
 }
 
 // 用户角色枚举

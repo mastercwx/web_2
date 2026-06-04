@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const slug = route.params['slug'] as string
+const authStore = useAuthStore()
 
 const { data, error } = await useFetch(`/api/posts/${slug}`)
 
@@ -24,6 +25,14 @@ useSeo({
   author: post.value?.author?.username,
   tags: post.value?.tags?.map((t: any) => t.name),
 })
+
+// 记录阅读历史
+if (authStore.isLoggedIn && post.value?.id) {
+  $fetch('/api/reading-history/record', {
+    method: 'POST',
+    body: { postId: post.value.id },
+  }).catch(() => {})
+}
 </script>
 
 <template>
