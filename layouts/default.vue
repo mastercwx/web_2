@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <header class="bg-white shadow-sm border-b border-gray-200">
+    <header class="header">
       <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
         <NuxtLink
           to="/"
-          class="text-xl font-bold text-primary-600"
+          class="text-xl font-bold text-primary"
         >
           HG Web
         </NuxtLink>
@@ -29,11 +29,14 @@
             关于
           </NuxtLink>
 
+          <!-- 主题切换 -->
+          <ThemeSwitcher />
+
           <!-- 用户状态 -->
           <template v-if="authStore.isAuthenticated">
-            <span class="text-sm text-gray-600"> 欢迎，{{ authStore.username }} </span>
+            <span class="text-sm text-secondary"> 欢迎，{{ authStore.username }} </span>
             <button
-              class="text-sm text-gray-500 hover:text-gray-700"
+              class="text-sm text-secondary hover:text-primary"
               @click="authStore.logout()"
             >
               退出
@@ -48,7 +51,7 @@
             </NuxtLink>
             <NuxtLink
               to="/register"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
+              class="btn-primary"
             >
               注册
             </NuxtLink>
@@ -61,8 +64,8 @@
       <slot />
     </main>
 
-    <footer class="bg-gray-100 border-t border-gray-200 py-4">
-      <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+    <footer class="footer">
+      <div class="container mx-auto px-4 text-center text-secondary text-sm">
         &copy; {{ currentYear }} HG Web. All rights reserved.
       </div>
     </footer>
@@ -75,11 +78,45 @@ const currentYear = new Date().getFullYear()
 </script>
 
 <style scoped>
+.header {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 0;
+}
+
 .nav-link {
-  @apply text-gray-600 hover:text-primary-600 transition-colors duration-200;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
 }
 
 .nav-link.router-link-active {
-  @apply text-primary-600 font-medium;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  color: var(--text-inverse);
+  background: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
 }
 </style>

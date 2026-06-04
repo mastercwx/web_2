@@ -57,6 +57,11 @@ function handleSearch() {
   page.value = 1
   refresh()
 }
+
+function handlePageChange(newPage: number) {
+  page.value = newPage
+  refresh()
+}
 </script>
 
 <template>
@@ -161,10 +166,7 @@ function handleSearch() {
         :key="p"
         class="px-4 py-2 rounded-md transition-colors"
         :class="p === page ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-        @click="
-          page = p
-          refresh()
-        "
+        @click="handlePageChange(p)"
       >
         {{ p }}
       </button>

@@ -14,6 +14,9 @@ export default defineNuxtConfig({
     },
   },
 
+  // 全局 CSS
+  css: ['~/assets/css/main.css', '~/assets/css/theme.css'],
+
   // 运行时配置
   runtimeConfig: {
     // 服务端私有配置

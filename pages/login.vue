@@ -36,15 +36,15 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
+  <div class="auth-container">
+    <div class="auth-card">
       <div>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">登录账号</h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
+        <h2 class="auth-title">登录账号</h2>
+        <p class="auth-subtitle">
           或者
           <NuxtLink
             to="/register"
-            class="font-medium text-blue-600 hover:text-blue-500"
+            class="auth-link"
           >
             注册新账号
           </NuxtLink>
@@ -52,23 +52,23 @@ async function handleLogin() {
       </div>
 
       <form
-        class="mt-8 space-y-6"
+        class="auth-form"
         @submit.prevent="handleLogin"
       >
         <div
           v-if="error"
-          class="rounded-md bg-red-50 p-4"
+          class="error-message"
         >
           <div class="flex">
             <div class="ml-3">
-              <h3 class="text-sm font-medium text-red-800">
+              <h3 class="text-sm font-medium">
                 {{ error }}
               </h3>
             </div>
           </div>
         </div>
 
-        <div class="rounded-md shadow-sm -space-y-px">
+        <div class="input-group">
           <div>
             <label
               for="username"
@@ -81,7 +81,7 @@ async function handleLogin() {
               name="username"
               type="text"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              class="input-top"
               placeholder="用户名或邮箱"
             />
           </div>
@@ -97,7 +97,7 @@ async function handleLogin() {
               name="password"
               type="password"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              class="input-bottom"
               placeholder="密码"
             />
           </div>
@@ -107,14 +107,14 @@ async function handleLogin() {
           <button
             type="submit"
             :disabled="loading"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="btn-primary w-full"
           >
             <span
               v-if="loading"
-              class="absolute left-0 inset-y-0 flex items-center pl-3"
+              class="loading-spinner"
             >
               <svg
-                class="animate-spin h-5 w-5 text-blue-300"
+                class="animate-spin h-5 w-5"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -141,3 +141,137 @@ async function handleLogin() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.auth-card {
+  max-width: 28rem;
+  width: 100%;
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.auth-subtitle {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.auth-link {
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.auth-link:hover {
+  color: var(--color-primary-hover);
+}
+
+.auth-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.error-message {
+  border-radius: var(--radius-md);
+  background: #fef2f2;
+  padding: 1rem;
+  color: #991b1b;
+}
+
+:root.dark .error-message {
+  background: #450a0a;
+  color: #fca5a5;
+}
+
+.input-group {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.input-top,
+.input-bottom {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.input-top {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.input-bottom {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  border-top: 0;
+}
+
+.input-top:focus,
+.input-bottom:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+  z-index: 10;
+  position: relative;
+}
+
+.input-top::placeholder,
+.input-bottom::placeholder {
+  color: var(--text-tertiary);
+}
+
+.loading-spinner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 0.75rem;
+  color: var(--color-primary-light);
+}
+
+.btn-primary {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  color: var(--text-inverse);
+  background: var(--color-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.w-full {
+  width: 100%;
+}
+</style>
