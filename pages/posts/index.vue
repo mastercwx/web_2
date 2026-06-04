@@ -1,5 +1,12 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const route = useRoute()
+
+useSeo({
+  title: t('nav.posts'),
+  description: t('posts.title'),
+  url: '/posts',
+})
 
 const page = ref(Number(route.query['page']) || 1)
 const search = ref((route.query['search'] as string) || '')

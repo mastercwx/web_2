@@ -36,6 +36,13 @@ const pagination = ref<Pagination | null>(null)
 const loading = ref(false)
 const error = ref('')
 
+// SEO
+useSeo({
+  title: `#${tagName.value}`,
+  description: t('tags.postsCount', { count: pagination.value?.total || 0 }),
+  url: `/tags/${tagName.value}`,
+})
+
 async function fetchPosts(page = 1) {
   loading.value = true
   error.value = ''

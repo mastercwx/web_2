@@ -12,6 +12,18 @@ if (error.value) {
 }
 
 const post = computed(() => (data.value as any)?.data?.post)
+
+// SEO 优化
+useSeo({
+  title: post.value?.title,
+  description: post.value?.content?.substring(0, 160) || '',
+  url: `/posts/${slug}`,
+  type: 'article',
+  publishedTime: post.value?.createdAt,
+  modifiedTime: post.value?.updatedAt,
+  author: post.value?.author?.username,
+  tags: post.value?.tags?.map((t: any) => t.name),
+})
 </script>
 
 <template>
