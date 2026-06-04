@@ -20,6 +20,10 @@ model User {
   status           Status    @default(ACTIVE)
   resetToken       String?   @db.VarChar(64)
   resetTokenExpiry DateTime?
+  emailVerified    Boolean   @default(false) @map("email_verified")
+  verifyToken      String?   @unique @db.VarChar(64) @map("verify_token")
+  verifyTokenExpiry DateTime? @map("verify_token_expiry")
+  emailNotifications Boolean @default(true) @map("email_notifications")
   createdAt        DateTime  @default(now()) @map("created_at")
   updatedAt        DateTime  @updatedAt @map("updated_at")
 

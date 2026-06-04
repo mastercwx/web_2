@@ -118,6 +118,22 @@
       "backToLogin": "Back to Login",
       "requestNew": "Request New",
       "failed": "Reset failed, please try again"
+    },
+    "verify": {
+      "verifying": "Verifying email...",
+      "pleaseWait": "Please wait",
+      "success": "Email Verified!",
+      "successMessage": "Your email has been verified successfully. You can now use all features.",
+      "goToLogin": "Go to Login",
+      "failed": "Verification Failed",
+      "errorMessage": "An error occurred during verification. Please try again later.",
+      "checkEmail": "Check Your Email",
+      "checkEmailMessage": "We have sent a verification link to your email. Please click the link to verify.",
+      "resend": "Resend Verification Email",
+      "resending": "Sending...",
+      "emailSent": "Verification email sent",
+      "sendFailed": "Failed to send",
+      "goHome": "Go Home"
     }
   },
   "posts": {
@@ -315,6 +331,20 @@
       "save": "Update Avatar",
       "saving": "Updating...",
       "or": "Or upload a new avatar"
+    },
+    "notifications": {
+      "title": "Email Notifications",
+      "emailEnabled": "Enable Email Notifications",
+      "emailHint": "Receive email alerts when there are new comments, likes, or followers",
+      "types": "Notification Types",
+      "typesList": {
+        "comments": "Comment notifications - when someone comments on your post",
+        "likes": "Like notifications - when someone likes your post",
+        "follows": "Follow notifications - when someone follows you",
+        "system": "System announcements - important updates and announcements"
+      },
+      "save": "Save Settings",
+      "saving": "Saving..."
     }
   },
   "tags": {
