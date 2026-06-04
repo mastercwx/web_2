@@ -380,7 +380,11 @@
     "sortDateAsc": "最早发布",
     "sortLikes": "最多点赞",
     "tag": "标签",
-    "tryOtherKeywords": "请尝试其他关键词"
+    "tryOtherKeywords": "请尝试其他关键词",
+    "dateRange": "日期范围",
+    "author": "作者",
+    "authorPlaceholder": "输入用户名",
+    "clearFilters": "清除筛选"
   },
   "archive": {
     "title": "文章归档",
