@@ -309,10 +309,24 @@
   },
   "search": {
     "title": "搜索",
-    "placeholder": "搜索文章...",
+    "subtitle": "搜索文章、标签和作者",
+    "placeholder": "输入关键词搜索...",
     "button": "搜索",
     "noResults": "未找到与 \"{query}\" 相关的文章",
-    "resultsCount": "找到 {count} 篇与 \"{query}\" 相关的文章"
+    "resultsCount": "找到 {count} 篇与 \"{query}\" 相关的文章",
+    "suggestions": "搜索建议",
+    "hotTags": "热门标签",
+    "hotSearches": "热门搜索",
+    "posts": "篇文章",
+    "history": "搜索历史",
+    "clearHistory": "清除历史",
+    "sortBy": "排序方式",
+    "sortRelevance": "相关性",
+    "sortDateDesc": "最新发布",
+    "sortDateAsc": "最早发布",
+    "sortLikes": "最多点赞",
+    "tag": "标签",
+    "tryOtherKeywords": "请尝试其他关键词"
   },
   "archive": {
     "title": "文章归档",

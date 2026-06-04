@@ -309,10 +309,24 @@
   },
   "search": {
     "title": "Search",
-    "placeholder": "Search posts...",
+    "subtitle": "Search posts, tags and authors",
+    "placeholder": "Enter keywords to search...",
     "button": "Search",
     "noResults": "No posts found for \"{query}\"",
-    "resultsCount": "Found {count} posts for \"{query}\""
+    "resultsCount": "Found {count} posts for \"{query}\"",
+    "suggestions": "Suggestions",
+    "hotTags": "Hot Tags",
+    "hotSearches": "Hot Searches",
+    "posts": "posts",
+    "history": "Search History",
+    "clearHistory": "Clear History",
+    "sortBy": "Sort By",
+    "sortRelevance": "Relevance",
+    "sortDateDesc": "Newest First",
+    "sortDateAsc": "Oldest First",
+    "sortLikes": "Most Liked",
+    "tag": "Tag",
+    "tryOtherKeywords": "Please try other keywords"
   },
   "archive": {
     "title": "Archive",
