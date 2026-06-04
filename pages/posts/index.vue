@@ -105,15 +105,33 @@ function handlePageChange(newPage: number) {
         v-for="post in posts"
         :key="post.id"
         class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+        :class="{
+          'border-l-4 border-blue-500': post.pinned,
+          'border-l-4 border-purple-500': post.featured && !post.pinned,
+        }"
       >
-        <NuxtLink
-          :to="`/posts/${post.slug}`"
-          class="block"
-        >
-          <h2 class="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600">
-            {{ post.title }}
-          </h2>
-        </NuxtLink>
+        <div class="flex items-start justify-between">
+          <NuxtLink
+            :to="`/posts/${post.slug}`"
+            class="block flex-1"
+          >
+            <div class="flex items-center gap-2 mb-2">
+              <span
+                v-if="post.pinned"
+                class="px-2 py-0.5 text-xs bg-blue-100 text-blue-800 rounded-full"
+                >📌 置顶</span
+              >
+              <span
+                v-if="post.featured"
+                class="px-2 py-0.5 text-xs bg-purple-100 text-purple-800 rounded-full"
+                >⭐ 推荐</span
+              >
+            </div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600">
+              {{ post.title }}
+            </h2>
+          </NuxtLink>
+        </div>
         <p class="text-gray-600 mb-4 line-clamp-3">{{ post.content.substring(0, 200) }}...</p>
         <div class="flex items-center justify-between text-sm text-gray-500">
           <div class="flex items-center gap-4">

@@ -31,12 +31,14 @@ export default defineEventHandler(async (event) => {
       where,
       skip: (page - 1) * pageSize,
       take: pageSize,
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ pinned: 'desc' }, { featured: 'desc' }, { createdAt: 'desc' }],
       select: {
         id: true,
         title: true,
         slug: true,
         content: true,
+        pinned: true,
+        featured: true,
         createdAt: true,
         author: {
           select: {
