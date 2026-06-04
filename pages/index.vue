@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6">
     <div class="text-center py-12">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">欢迎来到 HG Web</h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">基于 Nuxt 3 构建的现代化 Web 应用</p>
+      <h1 class="text-4xl font-bold text-primary mb-4">欢迎来到 HG Web</h1>
+      <p class="text-lg text-secondary max-w-2xl mx-auto">基于 Nuxt 3 构建的现代化 Web 应用</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">

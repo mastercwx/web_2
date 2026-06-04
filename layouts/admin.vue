@@ -9,30 +9,31 @@ const sidebarItems = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100">
+  <div class="min-h-screen admin-layout">
     <!-- 顶部导航 -->
-    <header class="bg-white shadow-sm border-b border-gray-200">
+    <header class="admin-header">
       <div class="flex items-center justify-between px-6 py-3">
         <div class="flex items-center gap-4">
           <NuxtLink
             to="/admin"
-            class="text-xl font-bold text-blue-600"
+            class="text-xl font-bold text-primary"
           >
             HG Web 管理后台
           </NuxtLink>
         </div>
         <div class="flex items-center gap-4">
-          <span class="text-sm text-gray-600">
+          <span class="text-sm text-secondary">
             {{ authStore.username }}
           </span>
+          <ThemeSwitcher />
           <NuxtLink
             to="/"
-            class="text-sm text-gray-500 hover:text-gray-700"
+            class="text-sm text-secondary hover:text-primary"
           >
             返回前台
           </NuxtLink>
           <button
-            class="text-sm text-gray-500 hover:text-gray-700"
+            class="text-sm text-secondary hover:text-primary"
             @click="authStore.logout()"
           >
             退出
@@ -43,14 +44,14 @@ const sidebarItems = [
 
     <div class="flex">
       <!-- 侧边栏 -->
-      <aside class="w-64 bg-white shadow-sm min-h-[calc(100vh-57px)]">
+      <aside class="admin-sidebar">
         <nav class="p-4 space-y-2">
           <NuxtLink
             v-for="item in sidebarItems"
             :key="item.to"
             :to="item.to"
-            class="flex items-center gap-3 px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
-            active-class="bg-blue-50 text-blue-600"
+            class="sidebar-link"
+            active-class="sidebar-link-active"
           >
             <span>{{ item.icon }}</span>
             <span>{{ item.label }}</span>
@@ -65,3 +66,41 @@ const sidebarItems = [
     </div>
   </div>
 </template>
+
+<style scoped>
+.admin-layout {
+  background: var(--bg-secondary);
+}
+
+.admin-header {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-sidebar {
+  width: 16rem;
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-sm);
+  min-height: calc(100vh - 57px);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: background var(--transition-fast);
+}
+
+.sidebar-link:hover {
+  background: var(--bg-tertiary);
+}
+
+.sidebar-link-active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+</style>
