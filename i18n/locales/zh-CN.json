@@ -319,5 +319,31 @@
       "nov": "十一月",
       "dec": "十二月"
     }
+  },
+  "dashboard": {
+    "title": "仪表盘",
+    "totalPosts": "总文章数",
+    "publishedPosts": "已发布",
+    "draftPosts": "草稿",
+    "totalComments": "总评论数",
+    "pendingComments": "待审核",
+    "totalUsers": "注册用户",
+    "totalViews": "总阅读量",
+    "totalTags": "标签数",
+    "todayData": "今日数据",
+    "todayPosts": "新文章",
+    "todayComments": "新评论",
+    "todayUsers": "新用户",
+    "trendPosts": "近7天文章发布趋势",
+    "trendComments": "近7天评论趋势",
+    "topByViews": "最多阅读",
+    "topByComments": "最多评论",
+    "topByLikes": "最多点赞",
+    "activeUsers": "活跃用户",
+    "viewsCount": "{count} 次阅读",
+    "commentsCount": "{count} 条评论",
+    "likesCount": "{count} 个赞",
+    "postsCount": "{count} 篇文章",
+    "userComments": "{count} 条评论"
   }
 }

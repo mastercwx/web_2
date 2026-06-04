@@ -319,5 +319,31 @@
       "nov": "November",
       "dec": "December"
     }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalPosts": "Total Posts",
+    "publishedPosts": "Published",
+    "draftPosts": "Drafts",
+    "totalComments": "Total Comments",
+    "pendingComments": "Pending",
+    "totalUsers": "Users",
+    "totalViews": "Total Views",
+    "totalTags": "Tags",
+    "todayData": "Today's Data",
+    "todayPosts": "New Posts",
+    "todayComments": "New Comments",
+    "todayUsers": "New Users",
+    "trendPosts": "Posts in Last 7 Days",
+    "trendComments": "Comments in Last 7 Days",
+    "topByViews": "Most Viewed",
+    "topByComments": "Most Commented",
+    "topByLikes": "Most Liked",
+    "activeUsers": "Active Users",
+    "viewsCount": "{count} views",
+    "commentsCount": "{count} comments",
+    "likesCount": "{count} likes",
+    "postsCount": "{count} posts",
+    "userComments": "{count} comments"
   }
 }
