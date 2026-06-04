@@ -21,7 +21,15 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "db:reset": "prisma migrate reset"
+    "db:reset": "prisma migrate reset",
+    "pm2:start": "pm2 start ecosystem.config.cjs --env production",
+    "pm2:stop": "pm2 stop hg-web",
+    "pm2:restart": "pm2 restart hg-web",
+    "pm2:reload": "pm2 reload hg-web",
+    "pm2:delete": "pm2 delete hg-web",
+    "pm2:status": "pm2 status",
+    "pm2:logs": "pm2 logs hg-web",
+    "pm2:monit": "pm2 monit"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"

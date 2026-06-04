@@ -500,7 +500,87 @@ error TS4111: Property 'DATABASE_URL' comes from an index signature
 
 ---
 
-## 6. 待办事项
+## 6. PM2 进程管理配置
+
+**日期**: 2026-06-04
+
+### 6.1 PM2 版本
+
+- PM2: 7.0.1
+
+### 6.2 配置文件
+
+**ecosystem.config.cjs**:
+
+```javascript
+module.exports = {
+  apps: [
+    {
+      name: 'hg-web',
+      script: '.output/server/index.mjs',
+      cwd: __dirname,
+      instances: 'max',
+      exec_mode: 'cluster',
+      env: {
+        NODE_ENV: 'development',
+        PORT: 3000,
+      },
+      env_production: {
+        NODE_ENV: 'production',
+        PORT: 3000,
+      },
+      error_file: './logs/error.log',
+      out_file: './logs/out.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+      merge_logs: true,
+      log_type: 'json',
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+      kill_timeout: 5000,
+      listen_timeout: 10000,
+      shutdown_with_message: true,
+      health_check: {
+        enabled: true,
+        url: 'http://localhost:3000/api/health',
+        interval: 30000,
+        timeout: 5000,
+        max_restarts: 3,
+      },
+    },
+  ],
+}
+```
+
+### 6.3 部署脚本
+
+**scripts/deploy.sh**:
+
+- 检查 Node.js 版本（>= 18）
+- 检查并安装 PM2
+- 安装依赖
+- 生成 Prisma Client
+- 构建项目
+- 同步数据库
+- 启动/重载 PM2
+- 保存进程列表
+
+**scripts/start-dev.sh**:
+
+- 检查 MySQL 服务
+- 检查数据库连接
+- 启动开发服务器
+
+### 6.4 验证结果
+
+- ✓ PM2 7.0.1 已安装
+- ✓ 配置文件创建成功
+- ✓ 部署脚本创建成功
+- ✓ 开发脚本创建成功
+
+---
+
+## 7. 待办事项
 
 - [x] 安装 Prisma ORM
 - [x] 配置 `.env` 文件
@@ -508,10 +588,11 @@ error TS4111: Property 'DATABASE_URL' comes from an index signature
 - [x] 配置 Prisma Client 单例
 - [x] 编写数据库迁移脚本
 - [x] 创建种子数据
+- [x] 配置 PM2 进程管理
 
 ---
 
-## 6. 常用命令
+## 8. 常用命令
 
 ```bash
 # 开发
@@ -530,10 +611,25 @@ npm run typecheck        # TypeScript 类型检查
 npm run test             # 运行测试
 npm run test:watch       # 监听模式运行测试
 
-# 数据库（待配置）
-npx prisma generate      # 生成 Prisma Client
-npx prisma migrate dev   # 运行迁移
-npx prisma db push       # 推送 schema 到数据库
-npx prisma studio        # 打开 Prisma Studio
-npx prisma db seed       # 运行种子数据
+# 数据库
+npm run db:generate      # 生成 Prisma Client
+npm run db:push          # 推送 schema 到数据库
+npm run db:migrate       # 创建迁移
+npm run db:seed          # 运行种子数据
+npm run db:studio        # 打开 Prisma Studio
+npm run db:reset         # 重置数据库
+
+# PM2 进程管理
+npm run pm2:start        # 启动应用（生产模式）
+npm run pm2:stop         # 停止应用
+npm run pm2:restart      # 重启应用
+npm run pm2:reload       # 重载应用（0 停机）
+npm run pm2:delete       # 删除应用
+npm run pm2:status       # 查看状态
+npm run pm2:logs         # 查看日志
+npm run pm2:monit        # 监控面板
+
+# 部署脚本
+./scripts/deploy.sh      # 一键部署
+./scripts/start-dev.sh   # 启动开发环境
 ```
