@@ -239,6 +239,10 @@
     "following": "Following",
     "follow": "Follow",
     "unfollow": "Following",
+    "readingHistory": "Reading History",
+    "clearHistory": "Clear History",
+    "noHistory": "No reading history yet",
+    "readAt": "Read at",
     "noPosts": "No posts yet",
     "noFavorites": "No favorites yet",
     "noLikes": "No likes yet"

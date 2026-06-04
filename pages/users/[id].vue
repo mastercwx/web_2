@@ -60,7 +60,7 @@ if (error.value) {
   })
 }
 
-const activeTab = ref<'posts' | 'favorites' | 'likes'>('posts')
+const activeTab = ref<'posts' | 'favorites' | 'likes' | 'history'>('posts')
 
 const posts = ref<Post[]>([])
 const postsPagination = ref<Pagination | null>(null)
@@ -73,6 +73,16 @@ const favoritesLoading = ref(false)
 const likes = ref<Post[]>([])
 const likesPagination = ref<Pagination | null>(null)
 const likesLoading = ref(false)
+
+interface HistoryItem {
+  id: number
+  readAt: string
+  post: Post
+}
+
+const history = ref<HistoryItem[]>([])
+const historyPagination = ref<Pagination | null>(null)
+const historyLoading = ref(false)
 
 async function fetchPosts(page = 1) {
   postsLoading.value = true
@@ -130,7 +140,27 @@ async function fetchLikes(page = 1) {
   }
 }
 
-function handleTabChange(tab: 'posts' | 'favorites' | 'likes') {
+async function fetchHistory(page = 1) {
+  if (!isSelf.value) return
+  historyLoading.value = true
+  try {
+    const data = await $fetch<{ history: HistoryItem[]; pagination: Pagination }>(
+      `/api/users/${userId.value}/reading-history`,
+      {
+        params: { page, pageSize: 10 },
+        headers: authStore.token ? { Authorization: `Bearer ${authStore.token}` } : {},
+      },
+    )
+    history.value = data.history
+    historyPagination.value = data.pagination
+  } catch (err: any) {
+    console.error('Failed to fetch history:', err)
+  } finally {
+    historyLoading.value = false
+  }
+}
+
+function handleTabChange(tab: 'posts' | 'favorites' | 'likes' | 'history') {
   activeTab.value = tab
   if (tab === 'posts' && posts.value.length === 0) {
     fetchPosts()
@@ -138,6 +168,8 @@ function handleTabChange(tab: 'posts' | 'favorites' | 'likes') {
     fetchFavorites()
   } else if (tab === 'likes' && likes.value.length === 0) {
     fetchLikes()
+  } else if (tab === 'history' && history.value.length === 0) {
+    fetchHistory()
   }
 }
 
@@ -151,6 +183,30 @@ function handleFavoritesPageChange(page: number) {
 
 function handleLikesPageChange(page: number) {
   fetchLikes(page)
+}
+
+function handleHistoryPageChange(page: number) {
+  fetchHistory(page)
+}
+
+async function clearHistory() {
+  if (!confirm('确定要清空阅读历史吗？')) return
+  try {
+    await $fetch('/api/reading-history/clear', { method: 'DELETE' })
+    history.value = []
+    historyPagination.value = null
+  } catch (err: any) {
+    console.error('Failed to clear history:', err)
+  }
+}
+
+async function deleteHistoryItem(id: number) {
+  try {
+    await $fetch(`/api/reading-history/${id}`, { method: 'DELETE' })
+    history.value = history.value.filter((item) => item.id !== id)
+  } catch (err: any) {
+    console.error('Failed to delete history item:', err)
+  }
 }
 
 function formatDate(dateStr: string) {
@@ -241,6 +297,14 @@ await fetchPosts()
         @click="handleTabChange('likes')"
       >
         {{ t('user.likes') }} ({{ user._count.likes }})
+      </button>
+      <button
+        v-if="isSelf"
+        class="tab-btn"
+        :class="{ active: activeTab === 'history' }"
+        @click="handleTabChange('history')"
+      >
+        {{ t('user.readingHistory') }}
       </button>
     </div>
 
@@ -469,6 +533,96 @@ await fetchPosts()
             :disabled="likesPagination.page >= likesPagination.totalPages"
             class="btn-secondary"
             @click="handleLikesPageChange(likesPagination.page + 1)"
+          >
+            {{ t('common.next') }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 阅读历史 -->
+    <div
+      v-if="activeTab === 'history' && isSelf"
+      class="tab-content"
+    >
+      <div class="history-header">
+        <h3>{{ t('user.readingHistory') }}</h3>
+        <button
+          v-if="history.length > 0"
+          class="btn-clear"
+          @click="clearHistory"
+        >
+          {{ t('user.clearHistory') }}
+        </button>
+      </div>
+      <div
+        v-if="historyLoading"
+        class="loading"
+      >
+        {{ t('common.loading') }}
+      </div>
+      <div
+        v-else-if="history.length === 0"
+        class="empty"
+      >
+        {{ t('user.noHistory') }}
+      </div>
+      <div
+        v-else
+        class="posts-list"
+      >
+        <article
+          v-for="item in history"
+          :key="item.id"
+          class="post-card card"
+        >
+          <div class="history-item-header">
+            <h3 class="post-title">
+              <NuxtLink :to="`/posts/${item.post.slug}`">
+                {{ item.post.title }}
+              </NuxtLink>
+            </h3>
+            <button
+              class="btn-delete"
+              @click="deleteHistoryItem(item.id)"
+            >
+              ✕
+            </button>
+          </div>
+          <p class="post-author">{{ t('posts.author') }}: {{ item.post.author.username }}</p>
+          <p
+            v-if="item.post.excerpt"
+            class="post-excerpt"
+          >
+            {{ item.post.excerpt }}
+          </p>
+          <div class="post-meta">
+            <span class="post-date">{{ t('user.readAt') }}: {{ formatDate(item.readAt) }}</span>
+            <div class="post-stats">
+              <span>💬 {{ item.post._count.comments }}</span>
+              <span>❤️ {{ item.post._count.likes }}</span>
+            </div>
+          </div>
+        </article>
+
+        <div
+          v-if="historyPagination && historyPagination.totalPages > 1"
+          class="pagination"
+        >
+          <button
+            :disabled="historyPagination.page <= 1"
+            class="btn-secondary"
+            @click="handleHistoryPageChange(historyPagination.page - 1)"
+          >
+            {{ t('common.prev') }}
+          </button>
+          <span class="page-info">
+            {{ historyPagination.page }} / {{ historyPagination.totalPages }}
+          </span>
+          <button
+            :disabled="historyPagination.page >= historyPagination.totalPages"
+            class="btn-secondary"
+            @click="handleHistoryPageChange(historyPagination.page + 1)"
           >
             {{ t('common.next') }}
           </button>
@@ -720,6 +874,58 @@ await fetchPosts()
 .btn-secondary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.history-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.btn-clear {
+  padding: 0.5rem 1rem;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.btn-clear:hover {
+  background: #dc2626;
+}
+
+.history-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.btn-delete {
+  padding: 0.25rem 0.5rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-delete:hover {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #ef4444;
 }
 
 @media (max-width: 640px) {

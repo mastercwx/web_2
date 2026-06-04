@@ -239,6 +239,10 @@
     "following": "关注",
     "follow": "关注",
     "unfollow": "已关注",
+    "readingHistory": "阅读历史",
+    "clearHistory": "清空历史",
+    "noHistory": "暂无阅读记录",
+    "readAt": "阅读时间",
     "noPosts": "暂无文章",
     "noFavorites": "暂无收藏",
     "noLikes": "暂无点赞"
