@@ -32,7 +32,8 @@
     "settings": "Settings",
     "tags": "Tags",
     "archive": "Archive",
-    "search": "Search"
+    "search": "Search",
+    "series": "Series"
   },
   "home": {
     "title": "Welcome to HG Web",
@@ -148,7 +149,11 @@
       "titleContentRequired": "Title and content are required",
       "createFailed": "Failed to create post",
       "submit": "Publish Post",
-      "submitting": "Publishing..."
+      "submitting": "Publishing...",
+      "seriesLabel": "Series",
+      "noSeries": "No Series",
+      "seriesOrder": "Series Order",
+      "seriesOrderHint": "Order in the series"
     },
     "editPage": {
       "title": "Edit Post",
@@ -360,6 +365,14 @@
     "copyLink": "Copy Link",
     "copied": "Copied",
     "shareTo": "Share to"
+  },
+  "series": {
+    "title": "Post Series",
+    "description": "Browse all post series for systematic learning",
+    "empty": "No post series yet",
+    "postCount": "{count} posts",
+    "backToList": "Back to series list",
+    "seriesPosts": "Series Posts"
   },
   "notifications": {
     "title": "Notification Center",

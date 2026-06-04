@@ -34,6 +34,12 @@
           >
             {{ $t('nav.archive') }}
           </NuxtLink>
+          <NuxtLink
+            to="/series"
+            class="nav-link"
+          >
+            {{ $t('nav.series') }}
+          </NuxtLink>
 
           <!-- 搜索 -->
           <div class="search-wrapper">
