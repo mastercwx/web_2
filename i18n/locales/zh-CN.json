@@ -221,6 +221,29 @@
       "published": "已发布",
       "draft": "草稿",
       "allStatus": "全部状态"
+    },
+    "media": {
+      "title": "媒体库",
+      "upload": "上传文件",
+      "uploadFile": "上传文件",
+      "totalFiles": "文件总数",
+      "totalSize": "总大小",
+      "allTypes": "所有类型",
+      "images": "图片",
+      "videos": "视频",
+      "documents": "文档",
+      "searchPlaceholder": "搜索文件名...",
+      "noFiles": "暂无文件",
+      "dragOrClick": "拖放文件到这里，或点击选择",
+      "maxSize": "最大支持 10MB",
+      "copyUrl": "复制链接",
+      "urlCopied": "链接已复制",
+      "editFile": "编辑文件",
+      "altText": "替代文本",
+      "altPlaceholder": "图片描述（用于无障碍访问）",
+      "caption": "说明文字",
+      "captionPlaceholder": "文件说明文字",
+      "confirmDelete": "确定要删除 \"{name}\" 吗？"
     }
   },
   "theme": {

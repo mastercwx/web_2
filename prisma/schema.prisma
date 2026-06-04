@@ -45,6 +45,9 @@ model User {
   reports         Report[] @relation("reporter")
   resolvedReports Report[] @relation("resolved_reports")
 
+  // 媒体文件
+  mediaFiles Media[]
+
   // 表名映射
   @@map("users")
 }
@@ -297,6 +300,32 @@ model Notification {
   @@index([createdAt])
   @@index([type])
   @@map("notifications")
+}
+
+// 媒体文件模型
+model Media {
+  id         Int      @id @default(autoincrement())
+  filename   String   @db.VarChar(255)
+  originalName String @map("original_name") @db.VarChar(255)
+  mimeType   String   @map("mime_type") @db.VarChar(100)
+  size       Int
+  url        String   @db.VarChar(500)
+  alt        String?  @db.VarChar(255)
+  caption    String?  @db.VarChar(500)
+  folder     String   @default("uploads") @db.VarChar(100)
+  uploaderId Int      @map("uploader_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  uploader User @relation(fields: [uploaderId], references: [id])
+
+  // 索引
+  @@index([uploaderId])
+  @@index([mimeType])
+  @@index([folder])
+  @@index([createdAt])
+  @@map("media")
 }
 
 // 用户角色枚举

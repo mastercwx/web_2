@@ -5,6 +5,7 @@ const sidebarItems = [
   { label: '仪表盘', icon: '📊', to: '/admin' },
   { label: '用户管理', icon: '👥', to: '/admin/users' },
   { label: '文章管理', icon: '📝', to: '/admin/posts' },
+  { label: '媒体库', icon: '🖼️', to: '/admin/media' },
   { label: '联系消息', icon: '✉️', to: '/admin/contacts' },
   { label: '内容审核', icon: '🛡️', to: '/admin/moderation' },
   { label: '系统设置', icon: '⚙️', to: '/admin/settings' },
