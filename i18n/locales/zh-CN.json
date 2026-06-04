@@ -179,6 +179,16 @@
     "en": "English",
     "toggle": "切换语言"
   },
+  "user": {
+    "joined": "加入时间",
+    "posts": "文章",
+    "comments": "评论",
+    "likes": "点赞",
+    "favorites": "收藏",
+    "noPosts": "暂无文章",
+    "noFavorites": "暂无收藏",
+    "noLikes": "暂无点赞"
+  },
   "errors": {
     "404": "页面不存在",
     "403": "没有权限访问",

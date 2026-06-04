@@ -25,7 +25,12 @@ const post = computed(() => (data.value as any)?.data?.post)
           {{ post.title }}
         </h1>
         <div class="flex items-center gap-4 text-sm text-secondary">
-          <span>{{ post.author.username }}</span>
+          <NuxtLink
+            :to="`/users/${post.author.id}`"
+            class="author-link"
+          >
+            {{ post.author.username }}
+          </NuxtLink>
           <span>{{ new Date(post.createdAt).toLocaleDateString() }}</span>
           <div
             v-if="post.tags.length"
@@ -145,5 +150,15 @@ const post = computed(() => (data.value as any)?.data?.post)
 
 .text-primary:hover {
   color: var(--color-primary-hover);
+}
+
+.author-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.author-link:hover {
+  color: var(--color-primary);
 }
 </style>
