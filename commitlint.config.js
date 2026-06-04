@@ -37,6 +37,7 @@ export default {
         'test', // 测试
         'build', // 构建
         'db', // 数据库
+        'pm2', // PM2 进程管理
       ],
     ],
     // subject 最大长度
