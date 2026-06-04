@@ -49,3 +49,16 @@ export interface LoginResponse {
   token: string
   user: User
 }
+
+/** 注册请求 */
+export interface RegisterRequest {
+  username: string
+  email: string
+  password: string
+}
+
+/** 注册响应 */
+export interface RegisterResponse {
+  token: string
+  user: User
+}
