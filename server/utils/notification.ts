@@ -8,7 +8,7 @@ import {
 
 interface CreateNotificationParams {
   userId: number
-  type: 'like' | 'comment' | 'follow' | 'system'
+  type: 'like' | 'comment' | 'follow' | 'system' | 'moderation'
   title: string
   content?: string
   link?: string
