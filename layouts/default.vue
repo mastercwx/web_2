@@ -6,7 +6,7 @@
           to="/"
           class="text-xl font-bold text-primary"
         >
-          HG Web
+          {{ $t('common.appName') }}
         </NuxtLink>
 
         <div class="flex items-center gap-4">
@@ -14,32 +14,37 @@
             to="/"
             class="nav-link"
           >
-            首页
+            {{ $t('nav.home') }}
           </NuxtLink>
           <NuxtLink
             to="/posts"
             class="nav-link"
           >
-            文章
+            {{ $t('nav.posts') }}
           </NuxtLink>
           <NuxtLink
             to="/about"
             class="nav-link"
           >
-            关于
+            {{ $t('nav.about') }}
           </NuxtLink>
 
           <!-- 主题切换 -->
           <ThemeSwitcher />
 
+          <!-- 语言切换 -->
+          <LanguageSwitcher />
+
           <!-- 用户状态 -->
           <template v-if="authStore.isAuthenticated">
-            <span class="text-sm text-secondary"> 欢迎，{{ authStore.username }} </span>
+            <span class="text-sm text-secondary">
+              {{ $t('nav.welcome') }}，{{ authStore.username }}
+            </span>
             <button
               class="text-sm text-secondary hover:text-primary"
               @click="authStore.logout()"
             >
-              退出
+              {{ $t('nav.logout') }}
             </button>
           </template>
           <template v-else>
@@ -47,13 +52,13 @@
               to="/login"
               class="nav-link"
             >
-              登录
+              {{ $t('nav.login') }}
             </NuxtLink>
             <NuxtLink
               to="/register"
               class="btn-primary"
             >
-              注册
+              {{ $t('nav.register') }}
             </NuxtLink>
           </template>
         </div>
@@ -66,7 +71,7 @@
 
     <footer class="footer">
       <div class="container mx-auto px-4 text-center text-secondary text-sm">
-        &copy; {{ currentYear }} HG Web. All rights reserved.
+        &copy; {{ currentYear }} {{ $t('common.appName') }}. All rights reserved.
       </div>
     </footer>
   </div>

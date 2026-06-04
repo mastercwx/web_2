@@ -4,6 +4,7 @@ definePageMeta({
   middleware: ['guest'],
 })
 
+const { t } = useI18n()
 const authStore = useAuthStore()
 const router = useRouter()
 
@@ -17,7 +18,7 @@ const error = ref('')
 
 async function handleLogin() {
   if (!form.username || !form.password) {
-    error.value = '请填写用户名和密码'
+    error.value = t('auth.errors.required')
     return
   }
 
@@ -28,7 +29,7 @@ async function handleLogin() {
     await authStore.login(form.username, form.password)
     router.push('/')
   } catch (e: any) {
-    error.value = e.message || '登录失败'
+    error.value = e.message || t('auth.errors.loginFailed')
   } finally {
     loading.value = false
   }
@@ -39,14 +40,16 @@ async function handleLogin() {
   <div class="auth-container">
     <div class="auth-card">
       <div>
-        <h2 class="auth-title">登录账号</h2>
+        <h2 class="auth-title">
+          {{ $t('auth.login.title') }}
+        </h2>
         <p class="auth-subtitle">
-          或者
+          {{ $t('auth.login.subtitle') }}
           <NuxtLink
             to="/register"
             class="auth-link"
           >
-            注册新账号
+            {{ $t('auth.login.registerLink') }}
           </NuxtLink>
         </p>
       </div>
@@ -73,7 +76,7 @@ async function handleLogin() {
             <label
               for="username"
               class="sr-only"
-              >用户名</label
+              >{{ $t('auth.login.username') }}</label
             >
             <input
               id="username"
@@ -82,14 +85,14 @@ async function handleLogin() {
               type="text"
               required
               class="input-top"
-              placeholder="用户名或邮箱"
+              :placeholder="$t('auth.login.username')"
             />
           </div>
           <div>
             <label
               for="password"
               class="sr-only"
-              >密码</label
+              >{{ $t('auth.login.password') }}</label
             >
             <input
               id="password"
@@ -98,7 +101,7 @@ async function handleLogin() {
               type="password"
               required
               class="input-bottom"
-              placeholder="密码"
+              :placeholder="$t('auth.login.password')"
             />
           </div>
         </div>
@@ -134,7 +137,7 @@ async function handleLogin() {
                 />
               </svg>
             </span>
-            {{ loading ? '登录中...' : '登录' }}
+            {{ loading ? $t('auth.login.submitting') : $t('auth.login.submit') }}
           </button>
         </div>
       </form>

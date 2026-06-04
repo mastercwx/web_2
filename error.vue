@@ -6,6 +6,8 @@ defineProps<{
   }
 }>()
 
+const { t } = useI18n()
+
 const handleError = () => {
   clearError({ redirect: '/' })
 }
@@ -19,11 +21,17 @@ const handleError = () => {
           {{ error.statusCode }}
         </h1>
         <p class="text-2xl text-primary mt-4">
-          <template v-if="error.statusCode === 404"> 页面不存在 </template>
-          <template v-else-if="error.statusCode === 403"> 没有权限访问 </template>
-          <template v-else-if="error.statusCode === 500"> 服务器错误 </template>
+          <template v-if="error.statusCode === 404">
+            {{ t('errors.404') }}
+          </template>
+          <template v-else-if="error.statusCode === 403">
+            {{ t('errors.403') }}
+          </template>
+          <template v-else-if="error.statusCode === 500">
+            {{ t('errors.500') }}
+          </template>
           <template v-else>
-            {{ error.message || '出错了' }}
+            {{ error.message || t('errors.default') }}
           </template>
         </p>
       </div>
@@ -33,13 +41,19 @@ const handleError = () => {
           class="btn-primary"
           @click="handleError"
         >
-          返回首页
+          {{ t('errors.goHome') }}
         </button>
 
         <p class="text-sm text-secondary">
-          <template v-if="error.statusCode === 404"> 你访问的页面可能已被删除或不存在 </template>
-          <template v-else-if="error.statusCode === 403"> 请联系管理员获取权限 </template>
-          <template v-else-if="error.statusCode === 500"> 请稍后再试，或联系管理员 </template>
+          <template v-if="error.statusCode === 404">
+            {{ t('errors.notFoundMessage') }}
+          </template>
+          <template v-else-if="error.statusCode === 403">
+            {{ t('errors.forbiddenMessage') }}
+          </template>
+          <template v-else-if="error.statusCode === 500">
+            {{ t('errors.serverErrorMessage') }}
+          </template>
         </p>
       </div>
     </div>

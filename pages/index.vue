@@ -1,24 +1,28 @@
 <template>
   <div class="space-y-6">
     <div class="text-center py-12">
-      <h1 class="text-4xl font-bold text-primary mb-4">欢迎来到 HG Web</h1>
-      <p class="text-lg text-secondary max-w-2xl mx-auto">基于 Nuxt 3 构建的现代化 Web 应用</p>
+      <h1 class="text-4xl font-bold text-primary mb-4">
+        {{ $t('home.title') }}
+      </h1>
+      <p class="text-lg text-secondary max-w-2xl mx-auto">
+        {{ $t('home.subtitle') }}
+      </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
       <FeatureCard
-        title="Nuxt 3"
-        description="基于 Vue 3 的全栈框架"
+        :title="$t('home.features.nuxt.title')"
+        :description="$t('home.features.nuxt.description')"
         icon="⚡"
       />
       <FeatureCard
-        title="TypeScript"
-        description="类型安全的开发体验"
+        :title="$t('home.features.typescript.title')"
+        :description="$t('home.features.typescript.description')"
         icon="🔒"
       />
       <FeatureCard
-        title="Tailwind CSS"
-        description="实用优先的 CSS 框架"
+        :title="$t('home.features.tailwind.title')"
+        :description="$t('home.features.tailwind.description')"
         icon="🎨"
       />
     </div>
@@ -26,8 +30,9 @@
 </template>
 
 <script setup lang="ts">
-// 页面元数据
+const { t } = useI18n()
+
 useHead({
-  title: '首页 - HG Web',
+  title: () => `${t('nav.home')} - ${t('common.appName')}`,
 })
 </script>
