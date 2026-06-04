@@ -221,6 +221,29 @@
       "published": "Published",
       "draft": "Draft",
       "allStatus": "All Status"
+    },
+    "media": {
+      "title": "Media Library",
+      "upload": "Upload",
+      "uploadFile": "Upload File",
+      "totalFiles": "Total Files",
+      "totalSize": "Total Size",
+      "allTypes": "All Types",
+      "images": "Images",
+      "videos": "Videos",
+      "documents": "Documents",
+      "searchPlaceholder": "Search filename...",
+      "noFiles": "No files yet",
+      "dragOrClick": "Drag and drop files here, or click to select",
+      "maxSize": "Maximum 10MB",
+      "copyUrl": "Copy URL",
+      "urlCopied": "URL copied",
+      "editFile": "Edit File",
+      "altText": "Alt Text",
+      "altPlaceholder": "Image description (for accessibility)",
+      "caption": "Caption",
+      "captionPlaceholder": "File caption",
+      "confirmDelete": "Are you sure you want to delete \"{name}\"?"
     }
   },
   "theme": {

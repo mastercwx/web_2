@@ -3,6 +3,7 @@ import formidable from 'formidable'
 import { join } from 'node:path'
 import { mkdir, rename } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
+import { prisma } from '~/server/utils/prisma'
 
 export default defineEventHandler(async (event) => {
   const auth = event.context['auth']
@@ -48,8 +49,21 @@ export default defineEventHandler(async (event) => {
   const newPath = join(uploadDir, filename)
   await rename(oldPath, newPath)
 
-  // 返回文件 URL
+  // 文件 URL
   const url = `/uploads/images/${filename}`
+
+  // 保存到媒体库
+  await prisma.media.create({
+    data: {
+      filename,
+      originalName: file.originalFilename || 'unknown',
+      mimeType: file.mimetype || 'image/jpeg',
+      size: file.size,
+      url,
+      folder: 'uploads/images',
+      uploaderId: auth.userId,
+    },
+  })
 
   return {
     code: 200,
