@@ -92,6 +92,9 @@
             {{ $t('nav.contact') }}
           </NuxtLink>
 
+          <!-- 通知 -->
+          <NotificationBell />
+
           <!-- 主题切换 -->
           <ThemeSwitcher />
 

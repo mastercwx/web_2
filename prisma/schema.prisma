@@ -36,6 +36,10 @@ model User {
   // 阅读历史
   readingHistory ReadingHistory[]
 
+  // 通知
+  notifications        Notification[] @relation("notifications_received")
+  triggeredNotifications Notification[] @relation("notifications_actor")
+
   // 表名映射
   @@map("users")
 }
@@ -61,6 +65,9 @@ model Post {
 
   // 阅读历史
   readingHistory ReadingHistory[]
+
+  // 通知
+  notifications Notification[]
 
   // 索引
   @@index([authorId])
@@ -197,6 +204,32 @@ model ReadingHistory {
   @@index([postId])
   @@index([readAt])
   @@map("reading_history")
+}
+
+// 通知模型
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  type      String   @db.VarChar(50)
+  title     String   @db.VarChar(200)
+  content   String?  @db.Text
+  link      String?  @db.VarChar(500)
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // 关联信息
+  actorId   Int?     @map("actor_id")
+  postId    Int?     @map("post_id")
+
+  user  User  @relation("notifications_received", fields: [userId], references: [id], onDelete: Cascade)
+  actor User? @relation("notifications_actor", fields: [actorId], references: [id], onDelete: SetNull)
+  post  Post? @relation(fields: [postId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+  @@index([type])
+  @@map("notifications")
 }
 
 // 用户角色枚举

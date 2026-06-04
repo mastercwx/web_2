@@ -361,6 +361,25 @@
     "copied": "Copied",
     "shareTo": "Share to"
   },
+  "notifications": {
+    "title": "Notification Center",
+    "empty": "No notifications",
+    "markAllRead": "Mark all read",
+    "unreadCount": "{count} unread",
+    "viewAll": "View all notifications",
+    "types": {
+      "like": "New like",
+      "comment": "New comment",
+      "follow": "New follower",
+      "system": "System notification"
+    },
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{count} minutes ago",
+      "hoursAgo": "{count} hours ago",
+      "daysAgo": "{count} days ago"
+    }
+  },
   "contact": {
     "title": "Contact Us",
     "description": "Have any questions or suggestions? Feel free to contact us",
