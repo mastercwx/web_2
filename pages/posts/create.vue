@@ -13,10 +13,23 @@ const form = reactive({
   content: '',
   published: false,
   scheduledAt: '',
+  seriesId: null as number | null,
+  seriesOrder: null as number | null,
 })
 
 const loading = ref(false)
 const error = ref('')
+const userSeries = ref<any[]>([])
+
+// 获取用户的系列列表
+async function fetchUserSeries() {
+  try {
+    const data = await $fetch(`/api/series?authorId=${authStore.user?.id}&limit=100`)
+    userSeries.value = (data as any).data.series
+  } catch (err) {
+    console.error('获取系列失败:', err)
+  }
+}
 
 async function handleSubmit() {
   if (!form.title || !form.content) {
@@ -38,6 +51,12 @@ async function handleSubmit() {
     if (form.scheduledAt) {
       body.scheduledAt = new Date(form.scheduledAt).toISOString()
       body.published = false
+    }
+
+    // 如果选择了系列
+    if (form.seriesId) {
+      body.seriesId = form.seriesId
+      body.seriesOrder = form.seriesOrder
     }
 
     const { data, error: fetchError } = await useFetch('/api/posts', {
@@ -67,6 +86,10 @@ const minDateTime = computed(() => {
   const now = new Date()
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
   return now.toISOString().slice(0, 16)
+})
+
+onMounted(() => {
+  fetchUserSeries()
 })
 </script>
 
@@ -130,6 +153,47 @@ const minDateTime = computed(() => {
           />
           <p class="form-hint">
             {{ t('posts.createPage.scheduledHint') }}
+          </p>
+        </div>
+      </div>
+
+      <div
+        v-if="userSeries.length > 0"
+        class="form-row"
+      >
+        <div class="form-group">
+          <label for="series">{{ t('posts.createPage.seriesLabel') }}</label>
+          <select
+            id="series"
+            v-model="form.seriesId"
+          >
+            <option :value="null">
+              {{ t('posts.createPage.noSeries') }}
+            </option>
+            <option
+              v-for="s in userSeries"
+              :key="s.id"
+              :value="s.id"
+            >
+              {{ s.title }}
+            </option>
+          </select>
+        </div>
+
+        <div
+          v-if="form.seriesId"
+          class="form-group"
+        >
+          <label for="seriesOrder">{{ t('posts.createPage.seriesOrder') }}</label>
+          <input
+            id="seriesOrder"
+            v-model.number="form.seriesOrder"
+            type="number"
+            min="1"
+            placeholder="1"
+          />
+          <p class="form-hint">
+            {{ t('posts.createPage.seriesOrderHint') }}
           </p>
         </div>
       </div>

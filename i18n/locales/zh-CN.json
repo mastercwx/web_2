@@ -32,7 +32,8 @@
     "settings": "设置",
     "tags": "标签",
     "archive": "归档",
-    "search": "搜索"
+    "search": "搜索",
+    "series": "系列"
   },
   "home": {
     "title": "欢迎来到 HG Web",
@@ -148,7 +149,11 @@
       "titleContentRequired": "标题和内容不能为空",
       "createFailed": "创建失败",
       "submit": "发布文章",
-      "submitting": "发布中..."
+      "submitting": "发布中...",
+      "seriesLabel": "所属系列",
+      "noSeries": "不加入系列",
+      "seriesOrder": "系列顺序",
+      "seriesOrderHint": "在系列中的排列顺序"
     },
     "editPage": {
       "title": "编辑文章",
@@ -360,6 +365,14 @@
     "copyLink": "复制链接",
     "copied": "已复制",
     "shareTo": "分享到"
+  },
+  "series": {
+    "title": "文章系列",
+    "description": "浏览所有文章系列，系统化学习知识",
+    "empty": "暂无文章系列",
+    "postCount": "{count} 篇文章",
+    "backToList": "返回系列列表",
+    "seriesPosts": "系列文章"
   },
   "notifications": {
     "title": "通知中心",

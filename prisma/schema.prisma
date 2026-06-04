@@ -28,6 +28,7 @@ model User {
   comments  Comment[]
   likes     Like[]
   favorites Favorite[]
+  series    Series[]
 
   // 关注关系
   followers Follow[] @relation("following")
@@ -44,6 +45,26 @@ model User {
   @@map("users")
 }
 
+// 文章系列模型
+model Series {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(200)
+  description String?  @db.Text
+  slug        String   @unique @db.VarChar(200)
+  coverImage  String?  @db.VarChar(500) @map("cover_image")
+  authorId    Int      @map("author_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  author User @relation(fields: [authorId], references: [id])
+  posts  Post[]
+
+  // 索引
+  @@index([authorId])
+  @@map("series")
+}
+
 // 文章模型
 model Post {
   id          Int       @id @default(autoincrement())
@@ -53,11 +74,14 @@ model Post {
   published   Boolean   @default(false)
   scheduledAt DateTime? @map("scheduled_at")
   authorId    Int       @map("author_id")
+  seriesId    Int?      @map("series_id")
+  seriesOrder Int?      @map("series_order")
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
   // 关联
   author    User       @relation(fields: [authorId], references: [id])
+  series    Series?    @relation(fields: [seriesId], references: [id], onDelete: SetNull)
   tags      Tag[]
   comments  Comment[]
   likes     Like[]
@@ -71,6 +95,7 @@ model Post {
 
   // 索引
   @@index([authorId])
+  @@index([seriesId])
   @@index([scheduledAt])
   @@map("posts")
 }
