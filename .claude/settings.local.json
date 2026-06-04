@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill -f nuxi)",
+      "Bash(rm -rf .* *)",
+      "Bash(git checkout *)",
+      "Bash(git clean *)",
+      "Bash(mkdir -p .husky)",
+      "Bash(npx husky *)"
+    ]
+  }
+}
