@@ -32,7 +32,9 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-useHead({
-  title: () => `${t('nav.home')} - ${t('common.appName')}`,
+useSeo({
+  title: t('nav.home'),
+  description: t('home.subtitle'),
+  url: '/',
 })
 </script>

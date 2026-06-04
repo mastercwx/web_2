@@ -9,6 +9,12 @@ interface Tag {
 
 const { t } = useI18n()
 
+useSeo({
+  title: t('tags.title'),
+  description: t('tags.description'),
+  url: '/tags',
+})
+
 const { data, error } = await useFetch<{ tags: Tag[] }>('/api/tags')
 
 if (error.value) {
