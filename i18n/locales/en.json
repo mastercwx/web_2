@@ -22,6 +22,7 @@
     "home": "Home",
     "posts": "Posts",
     "about": "About",
+    "contact": "Contact",
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
@@ -345,5 +346,28 @@
     "likesCount": "{count} likes",
     "postsCount": "{count} posts",
     "userComments": "{count} comments"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Have any questions or suggestions? Feel free to contact us",
+    "email": "Email",
+    "workHours": "Work Hours",
+    "workHoursValue": "Mon-Fri 9:00 - 18:00",
+    "address": "Address",
+    "addressValue": "China · Internet",
+    "sendMessage": "Send Message",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "subject": "Subject",
+    "subjectPlaceholder": "Enter message subject (optional)",
+    "content": "Content",
+    "contentPlaceholder": "Enter your message...",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "success": "Message sent, we will reply as soon as possible",
+    "required": "Please fill in required fields",
+    "invalidEmail": "Invalid email format"
   }
 }

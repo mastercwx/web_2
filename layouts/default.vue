@@ -85,6 +85,12 @@
           >
             {{ $t('nav.about') }}
           </NuxtLink>
+          <NuxtLink
+            to="/contact"
+            class="nav-link"
+          >
+            {{ $t('nav.contact') }}
+          </NuxtLink>
 
           <!-- 主题切换 -->
           <ThemeSwitcher />

@@ -5,6 +5,7 @@ const sidebarItems = [
   { label: '仪表盘', icon: '📊', to: '/admin' },
   { label: '用户管理', icon: '👥', to: '/admin/users' },
   { label: '文章管理', icon: '📝', to: '/admin/posts' },
+  { label: '联系消息', icon: '✉️', to: '/admin/contacts' },
 ]
 </script>
 
