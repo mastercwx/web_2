@@ -1,4 +1,5 @@
 import { prisma } from '~/server/utils/prisma'
+import { logActivityFromEvent, ActivityActions } from '~/server/utils/activity-log'
 
 export default defineEventHandler(async (event) => {
   const auth = event.context['auth']
@@ -77,6 +78,13 @@ export default defineEventHandler(async (event) => {
         },
       },
     },
+  })
+
+  // 记录创建文章活动
+  await logActivityFromEvent(event, ActivityActions.POST_CREATE, {
+    entity: 'post',
+    entityId: post.id,
+    details: `创建文章: ${post.title}`,
   })
 
   return {

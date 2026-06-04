@@ -52,6 +52,9 @@ model User {
   // 媒体文件
   mediaFiles Media[]
 
+  // 活动日志
+  activityLogs ActivityLog[]
+
   // 表名映射
   @@map("users")
 }
@@ -330,6 +333,29 @@ model Media {
   @@index([folder])
   @@index([createdAt])
   @@map("media")
+}
+
+// 活动日志模型
+model ActivityLog {
+  id         Int      @id @default(autoincrement())
+  userId     Int?     @map("user_id")
+  action     String   @db.VarChar(50)
+  entity     String?  @db.VarChar(50)
+  entityId   Int?     @map("entity_id")
+  details    String?  @db.Text
+  ipAddress  String?  @map("ip_address") @db.VarChar(45)
+  userAgent  String?  @map("user_agent") @db.VarChar(500)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // 关联
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  // 索引
+  @@index([userId])
+  @@index([action])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("activity_logs")
 }
 
 // 用户角色枚举
