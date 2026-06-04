@@ -22,8 +22,10 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // 关联
-  posts     Post[]
-  comments  Comment[]
+  posts      Post[]
+  comments   Comment[]
+  likes      Like[]
+  favorites  Favorite[]
 
   // 表名映射
   @@map("users")
@@ -41,9 +43,11 @@ model Post {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // 关联
-  author    User      @relation(fields: [authorId], references: [id])
+  author    User       @relation(fields: [authorId], references: [id])
   tags      Tag[]
   comments  Comment[]
+  likes     Like[]
+  favorites Favorite[]
 
   // 索引
   @@index([authorId])
@@ -78,6 +82,42 @@ model Comment {
   @@index([postId])
   @@index([authorId])
   @@map("comments")
+}
+
+// 点赞模型
+model Like {
+  id        Int      @id @default(autoincrement())
+  postId    Int      @map("post_id")
+  userId    Int      @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // 关联
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  // 唯一约束
+  @@unique([postId, userId])
+  @@index([postId])
+  @@index([userId])
+  @@map("likes")
+}
+
+// 收藏模型
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  postId    Int      @map("post_id")
+  userId    Int      @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // 关联
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  // 唯一约束
+  @@unique([postId, userId])
+  @@index([postId])
+  @@index([userId])
+  @@map("favorites")
 }
 
 // 用户角色枚举
