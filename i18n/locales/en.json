@@ -27,7 +27,8 @@
     "logout": "Logout",
     "admin": "Admin",
     "profile": "Profile",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "settings": "Settings"
   },
   "home": {
     "title": "Welcome to HG Web",
@@ -190,13 +191,45 @@
     "noLikes": "No likes yet"
   },
   "errors": {
-    "404": "Page Not Found",
     "403": "Access Denied",
+    "404": "Page Not Found",
     "500": "Server Error",
     "default": "Something went wrong",
     "notFoundMessage": "The page you visited may have been deleted or does not exist",
     "forbiddenMessage": "Please contact the administrator for access",
     "serverErrorMessage": "Please try again later or contact the administrator",
     "goHome": "Go Home"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": {
+      "title": "Profile",
+      "username": "Username",
+      "usernamePlaceholder": "Enter username",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "password": {
+      "title": "Change Password",
+      "current": "Current Password",
+      "currentPlaceholder": "Enter current password",
+      "new": "New Password",
+      "newPlaceholder": "Enter new password (at least 6 characters)",
+      "confirm": "Confirm New Password",
+      "confirmPlaceholder": "Enter new password again",
+      "save": "Change Password",
+      "saving": "Changing..."
+    },
+    "avatar": {
+      "title": "Avatar",
+      "url": "Avatar URL",
+      "urlPlaceholder": "Enter avatar image URL",
+      "hint": "Supports JPG, PNG, GIF formats",
+      "save": "Update Avatar",
+      "saving": "Updating...",
+      "or": "Or upload a new avatar"
+    }
   }
 }

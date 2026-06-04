@@ -27,7 +27,8 @@
     "logout": "退出",
     "admin": "管理后台",
     "profile": "个人资料",
-    "welcome": "欢迎"
+    "welcome": "欢迎",
+    "settings": "设置"
   },
   "home": {
     "title": "欢迎来到 HG Web",
@@ -190,13 +191,45 @@
     "noLikes": "暂无点赞"
   },
   "errors": {
-    "404": "页面不存在",
     "403": "没有权限访问",
+    "404": "页面不存在",
     "500": "服务器错误",
     "default": "出错了",
     "notFoundMessage": "你访问的页面可能已被删除或不存在",
     "forbiddenMessage": "请联系管理员获取权限",
     "serverErrorMessage": "请稍后再试，或联系管理员",
     "goHome": "返回首页"
+  },
+  "settings": {
+    "title": "个人设置",
+    "profile": {
+      "title": "个人资料",
+      "username": "用户名",
+      "usernamePlaceholder": "请输入用户名",
+      "email": "邮箱地址",
+      "emailPlaceholder": "请输入邮箱地址",
+      "save": "保存修改",
+      "saving": "保存中..."
+    },
+    "password": {
+      "title": "修改密码",
+      "current": "当前密码",
+      "currentPlaceholder": "请输入当前密码",
+      "new": "新密码",
+      "newPlaceholder": "请输入新密码（至少 6 个字符）",
+      "confirm": "确认新密码",
+      "confirmPlaceholder": "请再次输入新密码",
+      "save": "修改密码",
+      "saving": "修改中..."
+    },
+    "avatar": {
+      "title": "头像设置",
+      "url": "头像 URL",
+      "urlPlaceholder": "请输入头像图片链接",
+      "hint": "支持 JPG、PNG、GIF 格式",
+      "save": "更新头像",
+      "saving": "更新中...",
+      "or": "或者上传新头像"
+    }
   }
 }
