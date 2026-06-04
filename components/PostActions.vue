@@ -122,9 +122,6 @@ onMounted(() => {
 .post-actions {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
 }
 
 .action-btn {

@@ -75,8 +75,14 @@ if (authStore.isLoggedIn && post.value?.id) {
         />
       </div>
 
-      <!-- 点赞收藏 -->
-      <PostActions :post-id="post.id" />
+      <!-- 点赞收藏分享 -->
+      <div class="post-footer">
+        <PostActions :post-id="post.id" />
+        <ShareButton
+          :title="post.title"
+          :description="post.content?.substring(0, 160)"
+        />
+      </div>
     </article>
 
     <!-- 评论区 -->
@@ -181,5 +187,14 @@ if (authStore.isLoggedIn && post.value?.id) {
 
 .author-link:hover {
   color: var(--color-primary);
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
 }
 </style>

@@ -355,6 +355,12 @@
     "postsCount": "{count} posts",
     "userComments": "{count} comments"
   },
+  "share": {
+    "title": "Share",
+    "copyLink": "Copy Link",
+    "copied": "Copied",
+    "shareTo": "Share to"
+  },
   "contact": {
     "title": "Contact Us",
     "description": "Have any questions or suggestions? Feel free to contact us",
