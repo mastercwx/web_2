@@ -1,4 +1,5 @@
 import { prisma } from '~/server/utils/prisma'
+import { savePostVersion } from '~/server/utils/post-version'
 
 export default defineEventHandler(async (event) => {
   const auth = event.context['auth']
@@ -39,6 +40,20 @@ export default defineEventHandler(async (event) => {
       statusCode: 403,
       message: '没有权限编辑此文章',
     })
+  }
+
+  // 检查内容是否有变化，如果有变化则保存版本
+  const titleChanged = body.title !== undefined && body.title !== existingPost.title
+  const contentChanged = body.content !== undefined && body.content !== existingPost.content
+
+  if (titleChanged || contentChanged) {
+    await savePostVersion(
+      existingPost.id,
+      existingPost.title,
+      existingPost.content,
+      auth.userId,
+      body.versionComment || '编辑保存',
+    )
   }
 
   // 处理定时发布
