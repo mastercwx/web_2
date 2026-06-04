@@ -235,6 +235,10 @@
     "comments": "评论",
     "likes": "点赞",
     "favorites": "收藏",
+    "followers": "粉丝",
+    "following": "关注",
+    "follow": "关注",
+    "unfollow": "已关注",
     "noPosts": "暂无文章",
     "noFavorites": "暂无收藏",
     "noLikes": "暂无点赞"

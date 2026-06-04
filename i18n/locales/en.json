@@ -235,6 +235,10 @@
     "comments": "Comments",
     "likes": "Likes",
     "favorites": "Favorites",
+    "followers": "Followers",
+    "following": "Following",
+    "follow": "Follow",
+    "unfollow": "Following",
     "noPosts": "No posts yet",
     "noFavorites": "No favorites yet",
     "noLikes": "No likes yet"
