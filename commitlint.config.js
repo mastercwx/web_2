@@ -40,6 +40,7 @@ export default {
         'pm2', // PM2 进程管理
         'post', // 文章
         'tag', // 标签
+        'admin', // 管理后台
       ],
     ],
     // subject 最大长度
