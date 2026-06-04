@@ -140,6 +140,18 @@ model ContactMessage {
   @@map("contact_messages")
 }
 
+// 系统设置模型
+model Setting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique @db.VarChar(100)
+  value String @db.Text
+  group String @default("general") @db.VarChar(50)
+  label String? @db.VarChar(200)
+
+  @@index([group])
+  @@map("settings")
+}
+
 // 用户角色枚举
 enum Role {
   ADMIN
