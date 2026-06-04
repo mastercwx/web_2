@@ -141,6 +141,11 @@
       "contentPlaceholder": "请输入文章内容（支持 Markdown）",
       "tagsLabel": "标签",
       "tagsPlaceholder": "输入标签后按回车添加",
+      "publishNow": "立即发布",
+      "scheduledAt": "定时发布",
+      "scheduledHint": "设置未来时间将自动保存为草稿",
+      "titleContentRequired": "标题和内容不能为空",
+      "createFailed": "创建失败",
       "submit": "发布文章",
       "submitting": "发布中..."
     },
@@ -148,6 +153,17 @@
       "title": "编辑文章",
       "submit": "保存修改",
       "submitting": "保存中..."
+    },
+    "drafts": {
+      "title": "我的草稿",
+      "description": "管理您的草稿和定时发布文章",
+      "noDrafts": "暂无草稿",
+      "draft": "草稿",
+      "scheduled": "定时发布",
+      "published": "已发布",
+      "scheduledFor": "定时发布于",
+      "createdAt": "创建于",
+      "confirmDelete": "确定要删除这篇文章吗？"
     }
   },
   "admin": {
