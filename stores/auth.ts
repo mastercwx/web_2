@@ -19,8 +19,10 @@ interface AuthResponse {
   code: number
   message: string
   data: {
-    user: User
-    token: string
+    user?: User
+    token?: string
+    require2FA?: boolean
+    tempToken?: string
   }
 }
 
@@ -72,8 +74,19 @@ export const useAuthStore = defineStore('auth', {
 
       const result = data.value as AuthResponse | null
       if (result?.code === 200) {
-        this.setAuth(result.data.user, result.data.token)
-        return result.data
+        // 检查是否需要两步验证
+        if (result.data.require2FA && result.data.tempToken) {
+          return {
+            require2FA: true,
+            tempToken: result.data.tempToken,
+          }
+        }
+
+        // 正常登录
+        if (result.data.user && result.data.token) {
+          this.setAuth(result.data.user, result.data.token)
+          return result.data
+        }
       }
 
       throw new Error('登录失败')

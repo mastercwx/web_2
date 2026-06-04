@@ -46,8 +46,10 @@
     "mariadb": "^3.5.2",
     "nodemailer": "^8.0.10",
     "nuxt": "^3.16.2",
+    "otplib": "^13.4.1",
     "pinia": "^3.0.2",
     "prisma": "^7.8.0",
+    "qrcode": "^1.5.4",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
@@ -61,6 +63,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.15.3",
     "@types/nodemailer": "^8.0.0",
+    "@types/qrcode": "^1.5.6",
     "@vue/test-utils": "^2.4.6",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.2",

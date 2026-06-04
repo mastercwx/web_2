@@ -26,7 +26,14 @@ async function handleLogin() {
   error.value = ''
 
   try {
-    await authStore.login(form.username, form.password)
+    const result = await authStore.login(form.username, form.password)
+
+    // 检查是否需要两步验证
+    if (result && result.require2FA && result.tempToken) {
+      router.push(`/auth/2fa-verify?tempToken=${result.tempToken}`)
+      return
+    }
+
     router.push('/')
   } catch (e: any) {
     error.value = e.message || t('auth.errors.loginFailed')
