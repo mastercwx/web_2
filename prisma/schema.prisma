@@ -24,6 +24,9 @@ model User {
   verifyToken      String?   @unique @db.VarChar(64) @map("verify_token")
   verifyTokenExpiry DateTime? @map("verify_token_expiry")
   emailNotifications Boolean @default(true) @map("email_notifications")
+  twoFactorEnabled   Boolean @default(false) @map("two_factor_enabled")
+  twoFactorSecret    String? @db.VarChar(255) @map("two_factor_secret")
+  twoFactorBackupCodes String? @db.Text @map("two_factor_backup_codes")
   createdAt        DateTime  @default(now()) @map("created_at")
   updatedAt        DateTime  @updatedAt @map("updated_at")
 

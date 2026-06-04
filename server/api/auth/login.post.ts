@@ -19,6 +19,16 @@ export default defineEventHandler(async (event) => {
     where: {
       OR: [{ username: body.username }, { email: body.username }],
     },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      password: true,
+      role: true,
+      status: true,
+      createdAt: true,
+      twoFactorEnabled: true,
+    },
   })
 
   if (!user) {
@@ -44,6 +54,26 @@ export default defineEventHandler(async (event) => {
       statusCode: 403,
       message: '账号已被禁用',
     })
+  }
+
+  // 检查是否启用两步验证
+  if (user.twoFactorEnabled) {
+    // 生成临时令牌（5 分钟有效）
+    const tempToken = Buffer.from(
+      JSON.stringify({
+        userId: user.id,
+        timestamp: Date.now(),
+      }),
+    ).toString('base64')
+
+    return {
+      code: 200,
+      message: '需要两步验证',
+      data: {
+        require2FA: true,
+        tempToken,
+      },
+    }
   }
 
   // 生成 Token
