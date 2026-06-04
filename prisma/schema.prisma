@@ -35,14 +35,15 @@ model User {
 
 // 文章模型
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(200)
-  content   String   @db.Text
-  slug      String   @unique @db.VarChar(200)
-  published Boolean  @default(false)
-  authorId  Int      @map("author_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(200)
+  content     String    @db.Text
+  slug        String    @unique @db.VarChar(200)
+  published   Boolean   @default(false)
+  scheduledAt DateTime? @map("scheduled_at")
+  authorId    Int       @map("author_id")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
 
   // 关联
   author    User       @relation(fields: [authorId], references: [id])
@@ -53,6 +54,7 @@ model Post {
 
   // 索引
   @@index([authorId])
+  @@index([scheduledAt])
   @@map("posts")
 }
 

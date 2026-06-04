@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 definePageMeta({
   middleware: ['auth'],
 })
@@ -10,6 +12,7 @@ const form = reactive({
   title: '',
   content: '',
   published: false,
+  scheduledAt: '',
 })
 
 const loading = ref(false)
@@ -17,7 +20,7 @@ const error = ref('')
 
 async function handleSubmit() {
   if (!form.title || !form.content) {
-    error.value = '标题和内容不能为空'
+    error.value = t('posts.createPage.titleContentRequired')
     return
   }
 
@@ -25,16 +28,28 @@ async function handleSubmit() {
   error.value = ''
 
   try {
+    const body: any = {
+      title: form.title,
+      content: form.content,
+      published: form.published,
+    }
+
+    // 如果设置了定时发布时间
+    if (form.scheduledAt) {
+      body.scheduledAt = new Date(form.scheduledAt).toISOString()
+      body.published = false
+    }
+
     const { data, error: fetchError } = await useFetch('/api/posts', {
       method: 'POST',
-      body: form,
+      body,
       headers: {
         Authorization: `Bearer ${authStore.token}`,
       },
     })
 
     if (fetchError.value) {
-      throw new Error(fetchError.value.message || '创建失败')
+      throw new Error(fetchError.value.message || t('posts.createPage.createFailed'))
     }
 
     const result = data.value as any
@@ -42,94 +57,237 @@ async function handleSubmit() {
       router.push(`/posts/${result.data.post.slug}`)
     }
   } catch (e: any) {
-    error.value = e.message || '创建失败'
+    error.value = e.message || t('posts.createPage.createFailed')
   } finally {
     loading.value = false
   }
 }
+
+const minDateTime = computed(() => {
+  const now = new Date()
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
+  return now.toISOString().slice(0, 16)
+})
 </script>
 
 <template>
-  <div class="max-w-3xl mx-auto">
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">写文章</h1>
+  <div class="create-post-page">
+    <h1>{{ t('posts.createPage.title') }}</h1>
 
     <form
-      class="space-y-6"
+      class="post-form"
       @submit.prevent="handleSubmit"
     >
       <div
         v-if="error"
-        class="rounded-md bg-red-50 p-4"
+        class="error-message"
       >
-        <p class="text-sm text-red-800">
-          {{ error }}
-        </p>
+        {{ error }}
       </div>
 
-      <div>
-        <label
-          for="title"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          标题
-        </label>
+      <div class="form-group">
+        <label for="title">{{ t('posts.createPage.titleLabel') }}</label>
         <input
           id="title"
           v-model="form.title"
           type="text"
           required
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="文章标题"
+          :placeholder="t('posts.createPage.titlePlaceholder')"
         />
       </div>
 
-      <div>
-        <label
-          for="content"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          内容
-        </label>
+      <div class="form-group">
+        <label for="content">{{ t('posts.createPage.contentLabel') }}</label>
         <textarea
           id="content"
           v-model="form.content"
           required
           rows="15"
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="文章内容"
+          :placeholder="t('posts.createPage.contentPlaceholder')"
         />
       </div>
 
-      <div class="flex items-center">
-        <input
-          id="published"
-          v-model="form.published"
-          type="checkbox"
-          class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-        />
-        <label
-          for="published"
-          class="ml-2 block text-sm text-gray-900"
-        >
-          立即发布
-        </label>
+      <div class="form-row">
+        <div class="form-group">
+          <div class="checkbox-label">
+            <input
+              id="published"
+              v-model="form.published"
+              type="checkbox"
+              :disabled="!!form.scheduledAt"
+            />
+            <label for="published">{{ t('posts.createPage.publishNow') }}</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="scheduledAt">{{ t('posts.createPage.scheduledAt') }}</label>
+          <input
+            id="scheduledAt"
+            v-model="form.scheduledAt"
+            type="datetime-local"
+            :min="minDateTime"
+          />
+          <p class="form-hint">
+            {{ t('posts.createPage.scheduledHint') }}
+          </p>
+        </div>
       </div>
 
-      <div class="flex justify-end gap-4">
+      <div class="form-actions">
         <NuxtLink
           to="/posts"
-          class="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+          class="btn-cancel"
         >
-          取消
+          {{ t('common.cancel') }}
         </NuxtLink>
         <button
           type="submit"
+          class="btn-primary"
           :disabled="loading"
-          class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
         >
-          {{ loading ? '创建中...' : '创建文章' }}
+          {{ loading ? t('posts.createPage.submitting') : t('posts.createPage.submit') }}
         </button>
       </div>
     </form>
   </div>
 </template>
+
+<style scoped>
+.create-post-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.post-form {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-group input[type='text'],
+.form-group textarea,
+.form-group input[type='datetime-local'] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 300px;
+}
+
+.form-hint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-label input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+}
+
+.checkbox-label label {
+  margin-bottom: 0;
+}
+
+.error-message {
+  background: #fee;
+  color: #c00;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-cancel {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: var(--border-color);
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

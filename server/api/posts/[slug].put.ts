@@ -41,6 +41,24 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  // 处理定时发布
+  let scheduledAt = existingPost.scheduledAt
+  if (body.scheduledAt !== undefined) {
+    if (body.scheduledAt === null) {
+      scheduledAt = null
+    } else {
+      scheduledAt = new Date(body.scheduledAt)
+      if (Number.isNaN(scheduledAt.getTime())) {
+        throw createError({
+          statusCode: 400,
+          message: '无效的定时发布时间',
+        })
+      }
+      // 如果设置了定时发布，自动设为未发布
+      body.published = false
+    }
+  }
+
   // 更新文章
   const post = await prisma.post.update({
     where: { slug },
@@ -48,6 +66,7 @@ export default defineEventHandler(async (event) => {
       title: body.title,
       content: body.content,
       published: body.published,
+      scheduledAt,
     },
     select: {
       id: true,
@@ -55,6 +74,7 @@ export default defineEventHandler(async (event) => {
       slug: true,
       content: true,
       published: true,
+      scheduledAt: true,
       updatedAt: true,
       author: {
         select: {
