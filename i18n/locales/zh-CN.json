@@ -374,6 +374,36 @@
     "backToList": "返回系列列表",
     "seriesPosts": "系列文章"
   },
+  "moderation": {
+    "title": "内容审核",
+    "comments": "评论审核",
+    "reports": "举报处理",
+    "pending": "待审核",
+    "approved": "已批准",
+    "rejected": "已拒绝",
+    "approve": "批准",
+    "reject": "拒绝",
+    "delete": "删除",
+    "dismiss": "驳回",
+    "reportCount": "{count} 次举报",
+    "reportReason": "举报原因",
+    "resolved": "已解决",
+    "dismissed": "已驳回"
+  },
+  "report": {
+    "title": "举报内容",
+    "reason": "举报原因",
+    "description": "补充说明",
+    "submit": "提交举报",
+    "success": "举报已提交，感谢您的反馈",
+    "reasons": {
+      "spam": "垃圾内容/广告",
+      "abuse": "辱骂/骚扰",
+      "inappropriate": "不当内容",
+      "copyright": "版权侵犯",
+      "other": "其他原因"
+    }
+  },
   "notifications": {
     "title": "通知中心",
     "empty": "暂无通知",

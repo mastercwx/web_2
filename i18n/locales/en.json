@@ -374,6 +374,36 @@
     "backToList": "Back to series list",
     "seriesPosts": "Series Posts"
   },
+  "moderation": {
+    "title": "Content Moderation",
+    "comments": "Comment Review",
+    "reports": "Report Management",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "approve": "Approve",
+    "reject": "Reject",
+    "delete": "Delete",
+    "dismiss": "Dismiss",
+    "reportCount": "{count} reports",
+    "reportReason": "Report Reason",
+    "resolved": "Resolved",
+    "dismissed": "Dismissed"
+  },
+  "report": {
+    "title": "Report Content",
+    "reason": "Reason",
+    "description": "Additional Details",
+    "submit": "Submit Report",
+    "success": "Report submitted. Thank you for your feedback.",
+    "reasons": {
+      "spam": "Spam/Advertising",
+      "abuse": "Abuse/Harassment",
+      "inappropriate": "Inappropriate Content",
+      "copyright": "Copyright Infringement",
+      "other": "Other Reason"
+    }
+  },
   "notifications": {
     "title": "Notification Center",
     "empty": "No notifications",
