@@ -146,6 +146,42 @@
         </select>
       </div>
 
+      <div class="filter-group">
+        <label>{{ t('search.dateRange') }}</label>
+        <input
+          v-model="dateFrom"
+          type="date"
+          class="filter-input"
+          @change="performSearch"
+        />
+        <span>-</span>
+        <input
+          v-model="dateTo"
+          type="date"
+          class="filter-input"
+          @change="performSearch"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label>{{ t('search.author') }}</label>
+        <input
+          v-model="authorFilter"
+          type="text"
+          :placeholder="t('search.authorPlaceholder')"
+          class="filter-input"
+          @keyup.enter="performSearch"
+        />
+      </div>
+
+      <button
+        v-if="hasActiveFilters"
+        class="clear-filters-btn"
+        @click="clearAllFilters"
+      >
+        {{ t('search.clearFilters') }}
+      </button>
+
       <div
         v-if="selectedTag"
         class="filter-tag"
@@ -335,6 +371,14 @@ const totalPages = ref(0)
 const total = ref(0)
 const sortBy = ref((route.query['sortBy'] as string) || 'relevance')
 const selectedTag = ref((route.query['tag'] as string) || '')
+const dateFrom = ref((route.query['dateFrom'] as string) || '')
+const dateTo = ref((route.query['dateTo'] as string) || '')
+const authorFilter = ref((route.query['author'] as string) || '')
+
+// 计算是否有激活的筛选器
+const hasActiveFilters = computed(() => {
+  return dateFrom.value || dateTo.value || authorFilter.value || selectedTag.value
+})
 
 // 搜索建议
 const showSuggestions = ref(false)
@@ -449,6 +493,15 @@ const clearTagFilter = () => {
   performSearch()
 }
 
+// 清除所有筛选器
+const clearAllFilters = () => {
+  dateFrom.value = ''
+  dateTo.value = ''
+  authorFilter.value = ''
+  selectedTag.value = ''
+  performSearch()
+}
+
 // 执行搜索
 const performSearch = async () => {
   if (!searchQuery.value.trim()) return
@@ -478,6 +531,18 @@ const fetchResults = async () => {
       params.tag = selectedTag.value
     }
 
+    if (dateFrom.value) {
+      params.dateFrom = dateFrom.value
+    }
+
+    if (dateTo.value) {
+      params.dateTo = dateTo.value
+    }
+
+    if (authorFilter.value) {
+      params.author = authorFilter.value
+    }
+
     const data = await $fetch('/api/search', { params })
 
     posts.value = (data as any).data.posts
@@ -491,6 +556,9 @@ const fetchResults = async () => {
         page: currentPage.value.toString(),
         sortBy: sortBy.value,
         ...(selectedTag.value ? { tag: selectedTag.value } : {}),
+        ...(dateFrom.value ? { dateFrom: dateFrom.value } : {}),
+        ...(dateTo.value ? { dateTo: dateTo.value } : {}),
+        ...(authorFilter.value ? { author: authorFilter.value } : {}),
       },
     })
   } catch (error) {
@@ -833,6 +901,37 @@ onUnmounted(() => {
   color: var(--text-primary);
   font-size: 0.9rem;
   cursor: pointer;
+}
+
+.filter-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  max-width: 150px;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.clear-filters-btn {
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-filters-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .filter-tag {

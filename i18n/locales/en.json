@@ -380,7 +380,11 @@
     "sortDateAsc": "Oldest First",
     "sortLikes": "Most Liked",
     "tag": "Tag",
-    "tryOtherKeywords": "Please try other keywords"
+    "tryOtherKeywords": "Please try other keywords",
+    "dateRange": "Date Range",
+    "author": "Author",
+    "authorPlaceholder": "Enter username",
+    "clearFilters": "Clear Filters"
   },
   "archive": {
     "title": "Archive",
