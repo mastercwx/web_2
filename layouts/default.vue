@@ -28,6 +28,12 @@
           >
             {{ $t('nav.tags') }}
           </NuxtLink>
+          <NuxtLink
+            to="/archive"
+            class="nav-link"
+          >
+            {{ $t('nav.archive') }}
+          </NuxtLink>
 
           <!-- 搜索 -->
           <div class="search-wrapper">

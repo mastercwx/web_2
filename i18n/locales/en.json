@@ -30,6 +30,7 @@
     "welcome": "Welcome",
     "settings": "Settings",
     "tags": "Tags",
+    "archive": "Archive",
     "search": "Search"
   },
   "home": {
@@ -253,5 +254,25 @@
     "button": "Search",
     "noResults": "No posts found for \"{query}\"",
     "resultsCount": "Found {count} posts for \"{query}\""
+  },
+  "archive": {
+    "title": "Archive",
+    "description": "{count} posts in total",
+    "allYears": "All",
+    "noPosts": "No posts yet",
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    }
   }
 }
