@@ -28,7 +28,8 @@
     "admin": "管理后台",
     "profile": "个人资料",
     "welcome": "欢迎",
-    "settings": "设置"
+    "settings": "设置",
+    "tags": "标签"
   },
   "home": {
     "title": "欢迎来到 HG Web",
@@ -231,5 +232,18 @@
       "saving": "更新中...",
       "or": "或者上传新头像"
     }
+  },
+  "tags": {
+    "title": "标签",
+    "description": "浏览所有标签，发现更多相关内容",
+    "sortBy": "排序方式",
+    "postCount": "文章数量",
+    "name": "名称",
+    "allTags": "所有标签",
+    "posts": "篇文章",
+    "noTags": "暂无标签",
+    "noPosts": "该标签下暂无文章",
+    "backToTags": "返回标签列表",
+    "postsCount": "共 {count} 篇文章"
   }
 }
