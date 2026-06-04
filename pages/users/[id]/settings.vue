@@ -151,6 +151,10 @@ function handleTabChange(tab: 'profile' | 'password' | 'avatar' | 'notifications
   avatarSuccess.value = ''
   notificationError.value = ''
   notificationSuccess.value = ''
+  // 切换到通知标签时加载设置
+  if (tab === 'notifications') {
+    loadNotificationSettings()
+  }
 }
 
 async function updateNotifications() {
@@ -225,10 +229,7 @@ async function loadNotificationSettings() {
         <button
           class="tab-btn"
           :class="{ active: activeTab === 'notifications' }"
-          @click="
-            handleTabChange('notifications')
-            loadNotificationSettings()
-          "
+          @click="handleTabChange('notifications')"
         >
           {{ t('settings.notifications.title') }}
         </button>

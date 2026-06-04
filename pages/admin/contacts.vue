@@ -83,20 +83,14 @@
     >
       <button
         :disabled="page <= 1"
-        @click="
-          page--
-          loadMessages()
-        "
+        @click="prevPage"
       >
         上一页
       </button>
       <span>{{ page }} / {{ totalPages }}</span>
       <button
         :disabled="page >= totalPages"
-        @click="
-          page++
-          loadMessages()
-        "
+        @click="nextPage"
       >
         下一页
       </button>
@@ -208,6 +202,21 @@ const totalPages = ref(1)
 const unreadCount = ref(0)
 const showUnreadOnly = ref(false)
 const selectedMessage = ref<any>(null)
+
+// 翻页
+function prevPage() {
+  if (page.value > 1) {
+    page.value--
+    loadMessages()
+  }
+}
+
+function nextPage() {
+  if (page.value < totalPages.value) {
+    page.value++
+    loadMessages()
+  }
+}
 
 // 加载消息
 async function loadMessages() {

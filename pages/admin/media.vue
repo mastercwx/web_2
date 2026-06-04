@@ -146,10 +146,7 @@
       <button
         :disabled="currentPage <= 1"
         class="page-btn"
-        @click="
-          currentPage--
-          loadFiles()
-        "
+        @click="prevPage"
       >
         {{ t('common.prev') }}
       </button>
@@ -157,10 +154,7 @@
       <button
         :disabled="currentPage >= totalPages"
         class="page-btn"
-        @click="
-          currentPage++
-          loadFiles()
-        "
+        @click="nextPage"
       >
         {{ t('common.next') }}
       </button>
@@ -337,6 +331,21 @@ const stats = reactive({
 })
 
 const fileInput = ref<HTMLInputElement | null>(null)
+
+// 翻页
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+    loadFiles()
+  }
+}
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+    loadFiles()
+  }
+}
 
 // 加载文件列表
 const loadFiles = async () => {

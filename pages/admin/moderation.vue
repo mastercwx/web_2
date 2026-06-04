@@ -21,6 +21,35 @@ const reportTotalPages = ref(1)
 const commentStatus = ref('PENDING')
 const reportStatus = ref('pending')
 
+// 翻页
+function prevCommentPage() {
+  if (commentPage.value > 1) {
+    commentPage.value--
+    fetchComments()
+  }
+}
+
+function nextCommentPage() {
+  if (commentPage.value < commentTotalPages.value) {
+    commentPage.value++
+    fetchComments()
+  }
+}
+
+function prevReportPage() {
+  if (reportPage.value > 1) {
+    reportPage.value--
+    fetchReports()
+  }
+}
+
+function nextReportPage() {
+  if (reportPage.value < reportTotalPages.value) {
+    reportPage.value++
+    fetchReports()
+  }
+}
+
 // 获取待审核评论
 async function fetchComments() {
   loading.value = true
@@ -237,20 +266,14 @@ onMounted(() => {
       >
         <button
           :disabled="commentPage <= 1"
-          @click="
-            commentPage--
-            fetchComments()
-          "
+          @click="prevCommentPage"
         >
           上一页
         </button>
         <span>{{ commentPage }} / {{ commentTotalPages }}</span>
         <button
           :disabled="commentPage >= commentTotalPages"
-          @click="
-            commentPage++
-            fetchComments()
-          "
+          @click="nextCommentPage"
         >
           下一页
         </button>
@@ -385,20 +408,14 @@ onMounted(() => {
       >
         <button
           :disabled="reportPage <= 1"
-          @click="
-            reportPage--
-            fetchReports()
-          "
+          @click="prevReportPage"
         >
           上一页
         </button>
         <span>{{ reportPage }} / {{ reportTotalPages }}</span>
         <button
           :disabled="reportPage >= reportTotalPages"
-          @click="
-            reportPage++
-            fetchReports()
-          "
+          @click="nextReportPage"
         >
           下一页
         </button>
