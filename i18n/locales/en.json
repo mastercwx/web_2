@@ -87,6 +87,35 @@
       "invalidEmail": "Invalid email format",
       "loginFailed": "Login failed",
       "registerFailed": "Registration failed"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Enter your email address and we'll send you a password reset link",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your registered email",
+      "submit": "Send Reset Link",
+      "sending": "Sending...",
+      "backToLogin": "Back to Login",
+      "failed": "Failed to send, please try again",
+      "debugTitle": "Test Mode - Reset Token:",
+      "debugHint": "Copy this token to the reset password page",
+      "resetNow": "Reset Password Now"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter the reset token and your new password",
+      "token": "Reset Token",
+      "tokenPlaceholder": "Enter reset token",
+      "password": "New Password",
+      "passwordPlaceholder": "Enter new password (at least 6 characters)",
+      "confirmPassword": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Enter new password again",
+      "submit": "Reset Password",
+      "resetting": "Resetting...",
+      "goToLogin": "Go to Login",
+      "backToLogin": "Back to Login",
+      "requestNew": "Request New",
+      "failed": "Reset failed, please try again"
     }
   },
   "posts": {

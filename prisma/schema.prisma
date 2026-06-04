@@ -11,15 +11,17 @@ datasource db {
 
 // 用户模型
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique @db.VarChar(50)
-  email     String   @unique @db.VarChar(100)
-  password  String   @db.VarChar(255)
-  avatar    String?  @db.VarChar(255)
-  role      Role     @default(USER)
-  status    Status   @default(ACTIVE)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id               Int       @id @default(autoincrement())
+  username         String    @unique @db.VarChar(50)
+  email            String    @unique @db.VarChar(100)
+  password         String    @db.VarChar(255)
+  avatar           String?   @db.VarChar(255)
+  role             Role      @default(USER)
+  status           Status    @default(ACTIVE)
+  resetToken       String?   @db.VarChar(64)
+  resetTokenExpiry DateTime?
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
 
   // 关联
   posts      Post[]
