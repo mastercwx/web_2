@@ -361,6 +361,25 @@
     "copied": "已复制",
     "shareTo": "分享到"
   },
+  "notifications": {
+    "title": "通知中心",
+    "empty": "暂无通知",
+    "markAllRead": "全部已读",
+    "unreadCount": "{count} 条未读",
+    "viewAll": "查看全部通知",
+    "types": {
+      "like": "收到新点赞",
+      "comment": "收到新评论",
+      "follow": "新的关注者",
+      "system": "系统通知"
+    },
+    "time": {
+      "justNow": "刚刚",
+      "minutesAgo": "{count}分钟前",
+      "hoursAgo": "{count}小时前",
+      "daysAgo": "{count}天前"
+    }
+  },
   "contact": {
     "title": "联系我们",
     "description": "有任何问题或建议？欢迎随时联系我们",

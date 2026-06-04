@@ -1,4 +1,5 @@
 import { prisma } from '~/server/utils/prisma'
+import { createNotification } from '~/server/utils/notification'
 
 /**
  * POST /api/follow/toggle
@@ -54,6 +55,22 @@ export default defineEventHandler(async (event) => {
         followingId: userId,
       },
     })
+
+    // 发送通知给被关注用户
+    const follower = await prisma.user.findUnique({
+      where: { id: auth.id },
+      select: { username: true },
+    })
+
+    await createNotification({
+      userId: userId,
+      type: 'follow',
+      title: '新的关注者',
+      content: `${follower?.username || '用户'} 关注了你`,
+      link: `/users/${auth.id}`,
+      actorId: auth.id,
+    })
+
     return { followed: true }
   }
 })

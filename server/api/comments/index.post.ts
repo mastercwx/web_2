@@ -1,4 +1,5 @@
 import { prisma } from '~/server/utils/prisma'
+import { createNotification } from '~/server/utils/notification'
 
 export default defineEventHandler(async (event) => {
   const auth = event.context['auth']
@@ -38,11 +39,13 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  const userId = Number(auth.userId)
+
   const comment = await prisma.comment.create({
     data: {
       content,
       postId: Number(postId),
-      authorId: Number(auth.userId),
+      authorId: userId,
     },
     include: {
       author: {
@@ -53,6 +56,22 @@ export default defineEventHandler(async (event) => {
         },
       },
     },
+  })
+
+  // 发送通知给文章作者
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { username: true },
+  })
+
+  await createNotification({
+    userId: post.authorId,
+    type: 'comment',
+    title: '收到新评论',
+    content: `${user?.username || '用户'} 评论了你的文章《${post.title}》：${content.substring(0, 50)}${content.length > 50 ? '...' : ''}`,
+    link: `/posts/${post.slug}`,
+    actorId: userId,
+    postId: Number(postId),
   })
 
   return {
