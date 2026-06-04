@@ -38,6 +38,8 @@ export default {
         'build', // 构建
         'db', // 数据库
         'pm2', // PM2 进程管理
+        'post', // 文章
+        'tag', // 标签
       ],
     ],
     // subject 最大长度

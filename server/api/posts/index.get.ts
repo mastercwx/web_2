@@ -1,27 +1,42 @@
-/**
- * 获取文章列表
- */
+import { prisma } from '~/server/utils/prisma'
+
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
 
   const page = Number(query['page']) || 1
   const pageSize = Number(query['pageSize']) || 10
-  const skip = (page - 1) * pageSize
-  const published = query['published'] !== 'false'
+  const tag = query['tag'] as string | undefined
+  const search = query['search'] as string | undefined
+
+  const where: any = {
+    published: true,
+  }
+
+  // 标签筛选
+  if (tag) {
+    where.tags = {
+      some: {
+        name: tag,
+      },
+    }
+  }
+
+  // 搜索
+  if (search) {
+    where.OR = [{ title: { contains: search } }, { content: { contains: search } }]
+  }
 
   const [posts, total] = await Promise.all([
     prisma.post.findMany({
-      skip,
+      where,
+      skip: (page - 1) * pageSize,
       take: pageSize,
-      where: {
-        published,
-      },
+      orderBy: { createdAt: 'desc' },
       select: {
         id: true,
         title: true,
         slug: true,
         content: true,
-        published: true,
         createdAt: true,
         author: {
           select: {
@@ -37,24 +52,20 @@ export default defineEventHandler(async (event) => {
           },
         },
       },
-      orderBy: {
-        createdAt: 'desc',
-      },
     }),
-    prisma.post.count({
-      where: {
-        published,
-      },
-    }),
+    prisma.post.count({ where }),
   ])
 
   return {
-    data: posts,
-    pagination: {
-      page,
-      pageSize,
-      total,
-      totalPages: Math.ceil(total / pageSize),
+    code: 200,
+    data: {
+      posts,
+      pagination: {
+        page,
+        pageSize,
+        total,
+        totalPages: Math.ceil(total / pageSize),
+      },
     },
   }
 })
