@@ -148,12 +148,15 @@ model Comment {
   status    CommentStatus @default(APPROVED)
   postId    Int           @map("post_id")
   authorId  Int           @map("author_id")
+  parentId  Int?          @map("parent_id")
   createdAt DateTime      @default(now()) @map("created_at")
   updatedAt DateTime      @updatedAt @map("updated_at")
 
   // 关联
-  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  author User @relation(fields: [authorId], references: [id])
+  post   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author User    @relation(fields: [authorId], references: [id])
+  parent Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Comment[] @relation("CommentReplies")
 
   // 举报
   reports Report[]
@@ -162,6 +165,7 @@ model Comment {
   @@index([postId])
   @@index([authorId])
   @@index([status])
+  @@index([parentId])
   @@map("comments")
 }
 

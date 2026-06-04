@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   const auth = event.context['auth']
   const isAdmin = auth?.role === 'ADMIN'
 
-  const where: any = { postId }
+  const where: any = { postId, parentId: null }
   // 非管理员只能看到已批准的评论
   if (!isAdmin || !showAll) {
     where.status = 'APPROVED'
@@ -31,6 +31,19 @@ export default defineEventHandler(async (event) => {
           username: true,
           avatar: true,
         },
+      },
+      replies: {
+        where: isAdmin && showAll ? {} : { status: 'APPROVED' },
+        include: {
+          author: {
+            select: {
+              id: true,
+              username: true,
+              avatar: true,
+            },
+          },
+        },
+        orderBy: { createdAt: 'asc' },
       },
     },
     orderBy: { createdAt: 'desc' },
