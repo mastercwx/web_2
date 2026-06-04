@@ -8,7 +8,8 @@
         >
           HG Web
         </NuxtLink>
-        <div class="flex gap-4">
+
+        <div class="flex items-center gap-4">
           <NuxtLink
             to="/"
             class="nav-link"
@@ -21,6 +22,31 @@
           >
             关于
           </NuxtLink>
+
+          <!-- 用户状态 -->
+          <template v-if="authStore.isAuthenticated">
+            <span class="text-sm text-gray-600"> 欢迎，{{ authStore.username }} </span>
+            <button
+              class="text-sm text-gray-500 hover:text-gray-700"
+              @click="authStore.logout()"
+            >
+              退出
+            </button>
+          </template>
+          <template v-else>
+            <NuxtLink
+              to="/login"
+              class="nav-link"
+            >
+              登录
+            </NuxtLink>
+            <NuxtLink
+              to="/register"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
+            >
+              注册
+            </NuxtLink>
+          </template>
         </div>
       </nav>
     </header>
@@ -38,6 +64,7 @@
 </template>
 
 <script setup lang="ts">
+const authStore = useAuthStore()
 const currentYear = new Date().getFullYear()
 </script>
 
