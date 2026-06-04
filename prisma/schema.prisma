@@ -41,6 +41,10 @@ model User {
   notifications        Notification[] @relation("notifications_received")
   triggeredNotifications Notification[] @relation("notifications_actor")
 
+  // 举报
+  reports         Report[] @relation("reporter")
+  resolvedReports Report[] @relation("resolved_reports")
+
   // 表名映射
   @@map("users")
 }
@@ -111,23 +115,61 @@ model Tag {
   @@map("tags")
 }
 
+// 评论状态枚举
+enum CommentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 // 评论模型
 model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String   @db.Text
-  postId    Int      @map("post_id")
-  authorId  Int      @map("author_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id        Int           @id @default(autoincrement())
+  content   String        @db.Text
+  status    CommentStatus @default(APPROVED)
+  postId    Int           @map("post_id")
+  authorId  Int           @map("author_id")
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
 
   // 关联
   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   author User @relation(fields: [authorId], references: [id])
 
+  // 举报
+  reports Report[]
+
   // 索引
   @@index([postId])
   @@index([authorId])
+  @@index([status])
   @@map("comments")
+}
+
+// 举报模型
+model Report {
+  id          Int      @id @default(autoincrement())
+  reason      String   @db.VarChar(500)
+  description String?  @db.Text
+  targetType  String   @map("target_type") @db.VarChar(20)
+  targetId    Int      @map("target_id")
+  reporterId  Int      @map("reporter_id")
+  status      String   @default("pending") @db.VarChar(20)
+  resolvedBy  Int?     @map("resolved_by")
+  resolvedAt  DateTime? @map("resolved_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // 关联
+  reporter User  @relation("reporter", fields: [reporterId], references: [id])
+  resolver User? @relation("resolved_reports", fields: [resolvedBy], references: [id])
+  comment  Comment? @relation(fields: [targetId], references: [id], onDelete: Cascade)
+
+  // 索引
+  @@index([targetType])
+  @@index([targetId])
+  @@index([reporterId])
+  @@index([status])
+  @@map("reports")
 }
 
 // 点赞模型

@@ -3,6 +3,7 @@ import { prisma } from '~/server/utils/prisma'
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const postId = Number(query['postId'])
+  const showAll = query['all'] === 'true' // 管理员可以看到所有评论
 
   if (!postId) {
     throw createError({
@@ -11,8 +12,18 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  // 检查是否是管理员
+  const auth = event.context['auth']
+  const isAdmin = auth?.role === 'ADMIN'
+
+  const where: any = { postId }
+  // 非管理员只能看到已批准的评论
+  if (!isAdmin || !showAll) {
+    where.status = 'APPROVED'
+  }
+
   const comments = await prisma.comment.findMany({
-    where: { postId },
+    where,
     include: {
       author: {
         select: {
