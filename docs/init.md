@@ -339,14 +339,175 @@ mysql -u hg_user -p'Hg@2026!Secure' -e "SELECT VERSION();"
 
 ---
 
-## 5. 待办事项
+## 5. Prisma ORM 配置
 
-- [ ] 安装 Prisma ORM
-- [ ] 配置 `.env` 文件
-- [ ] 创建初始数据模型（用户表等）
-- [ ] 配置 Prisma Client 单例
-- [ ] 编写数据库迁移脚本
-- [ ] 创建种子数据
+**日期**: 2026-06-04
+
+### 5.1 技术栈
+
+| 技术                    | 版本  | 用途                         |
+| ----------------------- | ----- | ---------------------------- |
+| Prisma                  | 7.8.0 | 现代化 ORM                   |
+| @prisma/client          | 7.8.0 | Prisma Client                |
+| @prisma/adapter-mariadb | 7.8.0 | MariaDB 适配器（兼容 MySQL） |
+| mariadb                 | 3.x   | MySQL 驱动                   |
+
+### 5.2 数据模型
+
+**User 模型**:
+
+```prisma
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique @db.VarChar(50)
+  email     String   @unique @db.VarChar(100)
+  password  String   @db.VarChar(255)
+  avatar    String?  @db.VarChar(255)
+  role      Role     @default(USER)
+  status    Status   @default(ACTIVE)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  posts     Post[]
+  @@map("users")
+}
+```
+
+**Post 模型**:
+
+```prisma
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(200)
+  content   String   @db.Text
+  slug      String   @unique @db.VarChar(200)
+  published Boolean  @default(false)
+  authorId  Int      @map("author_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  author    User     @relation(fields: [authorId], references: [id])
+  tags      Tag[]
+  @@index([authorId])
+  @@map("posts")
+}
+```
+
+**Tag 模型**:
+
+```prisma
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique @db.VarChar(50)
+  posts Post[]
+  @@map("tags")
+}
+```
+
+### 5.3 Prisma Client 配置
+
+**单例模式** (`server/utils/prisma.ts`):
+
+```typescript
+import { PrismaClient } from '@prisma/client'
+import { PrismaMariaDb } from '@prisma/adapter-mariadb'
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined
+}
+
+function createPrismaClient() {
+  const adapter = new PrismaMariaDb(process.env['DATABASE_URL']!)
+  return new PrismaClient({
+    adapter,
+    log: process.env['NODE_ENV'] === 'development' ? ['query', 'error', 'warn'] : ['error'],
+  })
+}
+
+export const prisma = globalForPrisma.prisma ?? createPrismaClient()
+
+if (process.env['NODE_ENV'] !== 'development') {
+  globalForPrisma.prisma = prisma
+}
+```
+
+### 5.4 种子数据
+
+**管理员用户**:
+
+- 用户名: `admin`
+- 邮箱: `admin@hgweb.com`
+- 密码: `admin123`
+- 角色: `ADMIN`
+
+**普通用户**:
+
+- 用户名: `user`
+- 邮箱: `user@hgweb.com`
+- 密码: `user123`
+- 角色: `USER`
+
+**标签**: Nuxt, Vue, TypeScript, Prisma
+
+**示例文章**: 《欢迎使用 HG Web》
+
+### 5.5 API 接口
+
+**用户列表** (`GET /api/users`):
+
+- 分页参数: `page`, `pageSize`
+- 返回: 用户列表 + 分页信息
+
+**文章列表** (`GET /api/posts`):
+
+- 分页参数: `page`, `pageSize`
+- 过滤参数: `published`
+- 返回: 文章列表 + 分页信息（包含作者和标签）
+
+### 5.6 遇到的问题及解决
+
+**问题 1: Prisma 7 配置方式变更**
+
+```
+Error: The datasource property `url` is no longer supported in schema files
+```
+
+**解决**: 将 `url` 配置移至 `prisma.config.ts`
+
+**问题 2: PrismaClient 构造函数变更**
+
+```
+PrismaClientInitializationError: `PrismaClient` needs to be constructed with a non-empty, valid `PrismaClientOptions`
+```
+
+**解决**: 使用 Driver Adapter 模式，安装 `@prisma/adapter-mariadb`
+
+**问题 3: 环境变量访问类型错误**
+
+```
+error TS4111: Property 'DATABASE_URL' comes from an index signature
+```
+
+**解决**: 使用 `process.env['DATABASE_URL']` 替代 `process.env.DATABASE_URL`
+
+### 5.7 验证结果
+
+- ✓ Prisma Client 生成成功
+- ✓ 数据库 Schema 同步成功
+- ✓ 种子数据播种成功
+- ✓ API 接口创建成功
+- ✓ ESLint 检查通过
+- ✓ TypeScript 类型检查通过
+- ✓ 单元测试通过
+
+---
+
+## 6. 待办事项
+
+- [x] 安装 Prisma ORM
+- [x] 配置 `.env` 文件
+- [x] 创建初始数据模型（用户表等）
+- [x] 配置 Prisma Client 单例
+- [x] 编写数据库迁移脚本
+- [x] 创建种子数据
 
 ---
 
