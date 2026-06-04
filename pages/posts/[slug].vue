@@ -48,6 +48,9 @@ const post = computed(() => (data.value as any)?.data?.post)
           v-html="post.content"
         />
       </div>
+
+      <!-- 点赞收藏 -->
+      <PostActions :post-id="post.id" />
     </article>
 
     <!-- 评论区 -->
