@@ -37,6 +37,12 @@
 
           <!-- 用户状态 -->
           <template v-if="authStore.isAuthenticated">
+            <NuxtLink
+              :to="`/users/${authStore.user?.id}`"
+              class="nav-link"
+            >
+              {{ $t('nav.profile') }}
+            </NuxtLink>
             <span class="text-sm text-secondary">
               {{ $t('nav.welcome') }}，{{ authStore.username }}
             </span>

@@ -179,6 +179,16 @@
     "en": "English",
     "toggle": "Switch language"
   },
+  "user": {
+    "joined": "Joined",
+    "posts": "Posts",
+    "comments": "Comments",
+    "likes": "Likes",
+    "favorites": "Favorites",
+    "noPosts": "No posts yet",
+    "noFavorites": "No favorites yet",
+    "noLikes": "No likes yet"
+  },
   "errors": {
     "404": "Page Not Found",
     "403": "Access Denied",
