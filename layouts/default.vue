@@ -17,6 +17,12 @@
             首页
           </NuxtLink>
           <NuxtLink
+            to="/posts"
+            class="nav-link"
+          >
+            文章
+          </NuxtLink>
+          <NuxtLink
             to="/about"
             class="nav-link"
           >
