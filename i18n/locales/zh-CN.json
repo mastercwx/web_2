@@ -22,6 +22,7 @@
     "home": "首页",
     "posts": "文章",
     "about": "关于",
+    "contact": "联系我们",
     "login": "登录",
     "register": "注册",
     "logout": "退出",
@@ -345,5 +346,28 @@
     "likesCount": "{count} 个赞",
     "postsCount": "{count} 篇文章",
     "userComments": "{count} 条评论"
+  },
+  "contact": {
+    "title": "联系我们",
+    "description": "有任何问题或建议？欢迎随时联系我们",
+    "email": "电子邮件",
+    "workHours": "工作时间",
+    "workHoursValue": "周一至周五 9:00 - 18:00",
+    "address": "地址",
+    "addressValue": "中国 · 互联网",
+    "sendMessage": "发送消息",
+    "name": "姓名",
+    "namePlaceholder": "请输入您的姓名",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "请输入您的邮箱",
+    "subject": "主题",
+    "subjectPlaceholder": "请输入消息主题（可选）",
+    "content": "内容",
+    "contentPlaceholder": "请输入您想说的话...",
+    "submit": "发送消息",
+    "submitting": "发送中...",
+    "success": "消息已发送，我们会尽快回复您",
+    "required": "请填写必填字段",
+    "invalidEmail": "邮箱格式不正确"
   }
 }

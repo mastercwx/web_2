@@ -124,6 +124,22 @@ model Favorite {
   @@map("favorites")
 }
 
+// 联系消息模型
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  email     String   @db.VarChar(200)
+  subject   String?  @db.VarChar(200)
+  content   String   @db.Text
+  read      Boolean  @default(false)
+  replied   Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([read])
+  @@index([createdAt])
+  @@map("contact_messages")
+}
+
 // 用户角色枚举
 enum Role {
   ADMIN
