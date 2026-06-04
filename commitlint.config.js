@@ -41,6 +41,7 @@ export default {
         'post', // 文章
         'tag', // 标签
         'admin', // 管理后台
+        'upload', // 文件上传
       ],
     ],
     // subject 最大长度
