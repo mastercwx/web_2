@@ -24,10 +24,14 @@ model User {
   updatedAt        DateTime  @updatedAt @map("updated_at")
 
   // 关联
-  posts      Post[]
-  comments   Comment[]
-  likes      Like[]
-  favorites  Favorite[]
+  posts     Post[]
+  comments  Comment[]
+  likes     Like[]
+  favorites Favorite[]
+
+  // 关注关系
+  followers Follow[] @relation("following")
+  following Follow[] @relation("follower")
 
   // 表名映射
   @@map("users")
@@ -150,6 +154,24 @@ model Setting {
 
   @@index([group])
   @@map("settings")
+}
+
+// 关注模型
+model Follow {
+  id          Int      @id @default(autoincrement())
+  followerId  Int      @map("follower_id")
+  followingId Int      @map("following_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // 关联
+  follower  User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  // 唯一约束
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
 }
 
 // 用户角色枚举

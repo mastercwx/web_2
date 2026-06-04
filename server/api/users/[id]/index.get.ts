@@ -25,6 +25,8 @@ export default defineEventHandler(async (event) => {
           comments: true,
           likes: true,
           favorites: true,
+          followers: true,
+          following: true,
         },
       },
     },

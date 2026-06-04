@@ -13,6 +13,8 @@ interface UserProfile {
     comments: number
     likes: number
     favorites: number
+    followers: number
+    following: number
   }
 }
 
@@ -185,7 +187,10 @@ await fetchPosts()
       </div>
 
       <div class="profile-info">
-        <h1>{{ user.username }}</h1>
+        <div class="profile-name-row">
+          <h1>{{ user.username }}</h1>
+          <FollowButton :user-id="user.id" />
+        </div>
         <p class="profile-role">
           {{ user.role === 'ADMIN' ? '管理员' : '用户' }}
         </p>
@@ -198,16 +203,16 @@ await fetchPosts()
           <span class="stat-label">{{ t('user.posts') }}</span>
         </div>
         <div class="stat-item">
+          <span class="stat-value">{{ user._count.followers }}</span>
+          <span class="stat-label">粉丝</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ user._count.following }}</span>
+          <span class="stat-label">关注</span>
+        </div>
+        <div class="stat-item">
           <span class="stat-value">{{ user._count.comments }}</span>
           <span class="stat-label">{{ t('user.comments') }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">{{ user._count.likes }}</span>
-          <span class="stat-label">{{ t('user.likes') }}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">{{ user._count.favorites }}</span>
-          <span class="stat-label">{{ t('user.favorites') }}</span>
         </div>
       </div>
     </div>
@@ -522,6 +527,17 @@ await fetchPosts()
 .profile-info h1 {
   margin: 0 0 0.5rem;
   font-size: 1.75rem;
+}
+
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-name-row h1 {
+  margin: 0;
 }
 
 .profile-role {
