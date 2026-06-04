@@ -31,6 +31,26 @@ async function handleTogglePublish(postId: number, published: boolean) {
   refresh()
 }
 
+async function handleTogglePin(postId: number) {
+  await $fetch(`/api/posts/${postId}/pin`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authStore.token}`,
+    },
+  })
+  refresh()
+}
+
+async function handleToggleFeature(postId: number) {
+  await $fetch(`/api/posts/${postId}/feature`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authStore.token}`,
+    },
+  })
+  refresh()
+}
+
 async function handleDelete(postId: number) {
   if (!confirm('确定要删除这篇文章吗？')) return
 
@@ -130,15 +150,31 @@ function handlePageChange(newPage: number) {
               </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <span
-                class="px-2 py-0.5 text-xs rounded-full cursor-pointer"
-                :class="
-                  post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                "
-                @click="handleTogglePublish(post.id, post.published)"
-              >
-                {{ post.published ? '已发布' : '草稿' }}
-              </span>
+              <div class="flex gap-1">
+                <span
+                  class="px-2 py-0.5 text-xs rounded-full cursor-pointer"
+                  :class="
+                    post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                  "
+                  @click="handleTogglePublish(post.id, post.published)"
+                >
+                  {{ post.published ? '已发布' : '草稿' }}
+                </span>
+                <span
+                  v-if="post.pinned"
+                  class="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800 cursor-pointer"
+                  @click="handleTogglePin(post.id)"
+                >
+                  📌 置顶
+                </span>
+                <span
+                  v-if="post.featured"
+                  class="px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-800 cursor-pointer"
+                  @click="handleToggleFeature(post.id)"
+                >
+                  ⭐ 推荐
+                </span>
+              </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
               {{ new Date(post.createdAt).toLocaleDateString() }}
@@ -150,6 +186,20 @@ function handlePageChange(newPage: number) {
               >
                 编辑
               </NuxtLink>
+              <button
+                class="hover:text-blue-900"
+                :class="post.pinned ? 'text-blue-600' : 'text-gray-500'"
+                @click="handleTogglePin(post.id)"
+              >
+                {{ post.pinned ? '取消置顶' : '置顶' }}
+              </button>
+              <button
+                class="hover:text-purple-900"
+                :class="post.featured ? 'text-purple-600' : 'text-gray-500'"
+                @click="handleToggleFeature(post.id)"
+              >
+                {{ post.featured ? '取消推荐' : '推荐' }}
+              </button>
               <button
                 class="text-red-600 hover:text-red-900"
                 @click="handleDelete(post.id)"

@@ -89,6 +89,8 @@ model Post {
   content     String    @db.Text
   slug        String    @unique @db.VarChar(200)
   published   Boolean   @default(false)
+  pinned      Boolean   @default(false)
+  featured    Boolean   @default(false)
   scheduledAt DateTime? @map("scheduled_at")
   authorId    Int       @map("author_id")
   seriesId    Int?      @map("series_id")
