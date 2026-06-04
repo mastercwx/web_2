@@ -36,6 +36,7 @@ export default {
         'api', // API
         'test', // 测试
         'build', // 构建
+        'db', // 数据库
       ],
     ],
     // subject 最大长度
