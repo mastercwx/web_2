@@ -52,7 +52,7 @@ async function handleFileSelect(event: Event) {
     const result = data.value as any
     if (result?.code === 200) {
       // 更新用户头像
-      await $fetch('/api/auth/avatar', {
+      await $fetch('/api/users/avatar', {
         method: 'PUT',
         body: { avatar: result.data.url },
         headers: {

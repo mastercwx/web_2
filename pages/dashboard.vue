@@ -326,7 +326,7 @@ function formatDate(dateStr: string) {
         🔔 通知中心
       </NuxtLink>
       <NuxtLink
-        to="/settings"
+        :to="`/users/${userId}/settings`"
         class="action-btn"
       >
         ⚙️ 个人设置
