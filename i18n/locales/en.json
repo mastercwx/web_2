@@ -135,6 +135,11 @@
       "emailSent": "Verification email sent",
       "sendFailed": "Failed to send",
       "goHome": "Go Home"
+    },
+    "oauth": {
+      "divider": "Or sign in with social account",
+      "github": "Sign in with GitHub",
+      "google": "Sign in with Google"
     }
   },
   "posts": {
@@ -346,6 +351,15 @@
       },
       "save": "Save Settings",
       "saving": "Saving..."
+    },
+    "oauth": {
+      "title": "Social Accounts",
+      "description": "Link your social accounts to sign in with them",
+      "linked": "Linked",
+      "notLinked": "Not linked",
+      "link": "Link",
+      "unlink": "Unlink",
+      "unlinkConfirm": "Are you sure you want to unlink this social account?"
     }
   },
   "tags": {

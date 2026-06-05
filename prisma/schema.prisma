@@ -61,8 +61,33 @@ model User {
   // 文章版本
   postVersions PostVersion[]
 
+  // OAuth 关联
+  oauthAccounts OAuthAccount[]
+
   // 表名映射
   @@map("users")
+}
+
+// OAuth 账号模型
+model OAuthAccount {
+  id           Int       @id @default(autoincrement())
+  userId       Int       @map("user_id")
+  provider     String    @db.VarChar(20)
+  providerId   String    @map("provider_id") @db.VarChar(100)
+  accessToken  String?   @map("access_token") @db.Text
+  refreshToken String?   @map("refresh_token") @db.Text
+  expiresAt    DateTime? @map("expires_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  // 关联
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 唯一约束
+  @@unique([provider, providerId])
+  @@index([userId])
+  @@index([provider])
+  @@map("oauth_accounts")
 }
 
 // 文章系列模型

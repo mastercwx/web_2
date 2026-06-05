@@ -135,6 +135,11 @@
       "emailSent": "验证邮件已发送",
       "sendFailed": "发送失败",
       "goHome": "返回首页"
+    },
+    "oauth": {
+      "divider": "或者使用社交账号登录",
+      "github": "使用 GitHub 登录",
+      "google": "使用 Google 登录"
     }
   },
   "posts": {
@@ -346,6 +351,15 @@
       },
       "save": "保存设置",
       "saving": "保存中..."
+    },
+    "oauth": {
+      "title": "社交账号绑定",
+      "description": "绑定社交账号后，可以直接使用社交账号登录",
+      "linked": "已绑定",
+      "notLinked": "未绑定",
+      "link": "绑定",
+      "unlink": "解绑",
+      "unlinkConfirm": "确定要解绑此社交账号吗？"
     }
   },
   "tags": {

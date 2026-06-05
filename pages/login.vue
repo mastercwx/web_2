@@ -157,6 +157,8 @@ async function handleLogin() {
           </NuxtLink>
         </div>
       </form>
+
+      <AuthOAuthButtons />
     </div>
   </div>
 </template>
