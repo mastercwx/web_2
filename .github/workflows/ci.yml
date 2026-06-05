@@ -61,12 +61,6 @@ jobs:
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     environment: production
     steps:
-      - uses: actions/checkout@v4
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-          path: .output/
       - name: Deploy to server
         uses: appleboy/ssh-action@v1
         with:
@@ -76,7 +70,7 @@ jobs:
           script: |
             cd /var/www/web_2
             git pull origin master
-            npm ci --production
+            npm install
             npx prisma generate
             npm run build
             pm2 restart web_2
