@@ -493,6 +493,24 @@
       "minutesAgo": "{count}分钟前",
       "hoursAgo": "{count}小时前",
       "daysAgo": "{count}天前"
+    },
+    "filters": {
+      "all": "全部",
+      "like": "点赞",
+      "comment": "评论",
+      "follow": "关注",
+      "system": "系统"
+    },
+    "preferences": {
+      "title": "通知偏好设置",
+      "emailNotifications": "邮件通知",
+      "emailHint": "开启后，当有新评论、点赞或关注时会收到邮件提醒",
+      "browserNotifications": "浏览器通知",
+      "browserHint": "开启后，会在浏览器中显示桌面通知",
+      "soundEnabled": "通知提示音",
+      "soundHint": "开启后，收到新通知时会播放提示音",
+      "save": "保存设置",
+      "saving": "保存中..."
     }
   },
   "contact": {

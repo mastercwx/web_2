@@ -1,11 +1,13 @@
 <script setup lang="ts">
 const authStore = useAuthStore()
 const router = useRouter()
+const { onNotification, onUnreadCount } = useWebSocket()
 
 const unreadCount = ref(0)
 const notifications = ref<any[]>([])
 const isOpen = ref(false)
 const loading = ref(false)
+const hasNewNotification = ref(false)
 
 // 获取未读数量
 async function fetchUnreadCount() {
@@ -31,6 +33,36 @@ async function fetchNotifications() {
     console.error('获取通知失败:', error)
   } finally {
     loading.value = false
+  }
+}
+
+// 监听实时通知
+onNotification((notification) => {
+  // 添加新通知到列表顶部
+  notifications.value.unshift(notification)
+  // 限制列表长度
+  if (notifications.value.length > 5) {
+    notifications.value.pop()
+  }
+  // 标记有新通知
+  hasNewNotification.value = true
+  // 播放提示音（可选）
+  playNotificationSound()
+})
+
+// 监听未读数量更新
+onUnreadCount((data) => {
+  unreadCount.value = data.count
+})
+
+// 播放通知提示音
+function playNotificationSound() {
+  try {
+    const audio = new Audio('/notification.mp3')
+    audio.volume = 0.3
+    audio.play().catch(() => {})
+  } catch (error) {
+    console.error('Failed to play notification sound:', error)
   }
 }
 
@@ -78,8 +110,11 @@ function handleNotificationClick(notification: any) {
 // 切换下拉菜单
 function toggleDropdown() {
   isOpen.value = !isOpen.value
-  if (isOpen.value && notifications.value.length === 0) {
-    fetchNotifications()
+  if (isOpen.value) {
+    hasNewNotification.value = false
+    if (notifications.value.length === 0) {
+      fetchNotifications()
+    }
   }
 }
 
@@ -150,6 +185,7 @@ onUnmounted(() => {
   >
     <button
       class="bell-btn"
+      :class="{ 'has-new': hasNewNotification }"
       @click.stop="toggleDropdown"
     >
       <span class="bell-icon">🔔</span>
@@ -256,6 +292,23 @@ onUnmounted(() => {
 
 .bell-btn:hover {
   background: var(--bg-secondary);
+}
+
+.bell-btn.has-new {
+  animation: bell-shake 0.5s ease-in-out;
+}
+
+@keyframes bell-shake {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
 }
 
 .bell-icon {
