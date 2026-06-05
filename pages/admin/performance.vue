@@ -109,7 +109,7 @@ const methodColors: Record<string, string> = {
 
 async function fetchHealth() {
   try {
-    health.value = await $fetch('/api/admin/performance/health')
+    health.value = (await $fetch('/api/admin/performance/health')) as any
   } catch (error) {
     console.error('Failed to fetch health:', error)
   }
@@ -117,7 +117,7 @@ async function fetchHealth() {
 
 async function fetchMetrics() {
   try {
-    metrics.value = await $fetch('/api/admin/performance/metrics')
+    metrics.value = (await $fetch('/api/admin/performance/metrics')) as any
   } catch (error) {
     console.error('Failed to fetch metrics:', error)
   }
@@ -127,7 +127,7 @@ async function fetchEndpoints() {
   try {
     endpoints.value = await $fetch('/api/admin/performance/report', {
       params: { period: period.value },
-    }).then((r: any) => r.endpoints || [])
+    } as any).then((r: any) => r.endpoints || [])
   } catch (error) {
     console.error('Failed to fetch endpoints:', error)
   }
@@ -135,7 +135,7 @@ async function fetchEndpoints() {
 
 async function fetchResources() {
   try {
-    resources.value = await $fetch('/api/admin/performance/resources')
+    resources.value = (await $fetch('/api/admin/performance/resources')) as any
   } catch (error) {
     console.error('Failed to fetch resources:', error)
   }
@@ -143,7 +143,7 @@ async function fetchResources() {
 
 async function fetchAlerts() {
   try {
-    alerts.value = await $fetch('/api/admin/performance/alerts')
+    alerts.value = (await $fetch('/api/admin/performance/alerts')) as any
   } catch (error) {
     console.error('Failed to fetch alerts:', error)
   }

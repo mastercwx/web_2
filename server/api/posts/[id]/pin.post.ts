@@ -1,7 +1,7 @@
 import { prisma } from '~/server/utils/prisma'
 
 export default defineEventHandler(async (event) => {
-  const auth = event.context.auth
+  const auth = event.context['auth']
 
   if (!auth || auth.role !== 'ADMIN') {
     throw createError({
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const postId = Number(event.context.params?.id)
+  const postId = Number(event.context.params?.['id'])
 
   if (!postId) {
     throw createError({

@@ -3,7 +3,10 @@
     <h1>仪表盘</h1>
 
     <!-- 统计卡片 -->
-    <div class="stats-cards">
+    <div
+      v-if="stats"
+      class="stats-cards"
+    >
       <div class="stat-card">
         <div class="stat-icon posts">
           <svg
@@ -57,7 +60,7 @@
             {{ stats.total?.comments || 0 }}
           </div>
           <div class="stat-label">总评论数</div>
-          <div class="stat-sub">待审核: {{ stats.total?.pendingComments || 0 }}</div>
+          <div class="stat-sub">待审核: 0</div>
         </div>
       </div>
 
@@ -118,8 +121,16 @@
     </div>
 
     <!-- 今日数据 -->
-    <div class="section-title">今日数据</div>
-    <div class="today-cards">
+    <div
+      v-if="stats"
+      class="section-title"
+    >
+      今日数据
+    </div>
+    <div
+      v-if="stats"
+      class="today-cards"
+    >
       <div class="today-card">
         <span class="today-number">{{ stats.today?.posts || 0 }}</span>
         <span class="today-label">新文章</span>
@@ -135,7 +146,10 @@
     </div>
 
     <!-- 趋势图表 -->
-    <div class="charts-section">
+    <div
+      v-if="stats"
+      class="charts-section"
+    >
       <div class="chart-container">
         <div class="chart-title">近7天文章发布趋势</div>
         <div class="bar-chart">
@@ -180,8 +194,16 @@
     </div>
 
     <!-- 热门文章 -->
-    <div class="section-title">热门文章</div>
-    <div class="popular-section">
+    <div
+      v-if="popular"
+      class="section-title"
+    >
+      热门文章
+    </div>
+    <div
+      v-if="popular"
+      class="popular-section"
+    >
       <div class="popular-list">
         <h3>最新发布</h3>
         <div
@@ -237,8 +259,16 @@
     </div>
 
     <!-- 活跃用户 -->
-    <div class="section-title">活跃用户</div>
-    <div class="users-list">
+    <div
+      v-if="popular"
+      class="section-title"
+    >
+      活跃用户
+    </div>
+    <div
+      v-if="popular"
+      class="users-list"
+    >
       <div
         v-for="user in popular.activeUsers"
         :key="user.id"
@@ -254,7 +284,7 @@
             v-else
             class="avatar-placeholder"
           >
-            {{ user.username[0].toUpperCase() }}
+            {{ user.username?.[0]?.toUpperCase() || '?' }}
           </div>
         </div>
         <div class="user-info">

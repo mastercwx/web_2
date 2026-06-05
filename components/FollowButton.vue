@@ -13,7 +13,7 @@ const loading = ref(false)
 
 // 检查关注状态
 async function checkFollowStatus() {
-  if (!authStore.isLoggedIn || authStore.userId === props.userId) {
+  if (!authStore.isAuthenticated || authStore.user?.id === props.userId) {
     return
   }
 
@@ -27,7 +27,7 @@ async function checkFollowStatus() {
 
 // 切换关注状态
 async function toggleFollow() {
-  if (!authStore.isLoggedIn) {
+  if (!authStore.isAuthenticated) {
     navigateTo('/login')
     return
   }
@@ -47,7 +47,7 @@ async function toggleFollow() {
 }
 
 // 是否是自己
-const isSelf = computed(() => authStore.userId === props.userId)
+const isSelf = computed(() => authStore.user?.id === props.userId)
 
 onMounted(() => {
   if (props.initialFollowing === undefined) {

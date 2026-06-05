@@ -140,7 +140,7 @@ async function updateAvatar() {
   }
 }
 
-function handleTabChange(tab: 'profile' | 'password' | 'avatar' | 'notifications') {
+function handleTabChange(tab: 'profile' | 'password' | 'avatar' | 'notifications' | 'oauth') {
   activeTab.value = tab
   // 清除消息
   profileError.value = ''

@@ -7,15 +7,15 @@ export default defineEventHandler(async (event) => {
   const pageSize = Number(query['pageSize']) || 20
 
   const filter = {
-    search: query['search'] as string | undefined,
-    role: query['role'] as string | undefined,
-    status: query['status'] as string | undefined,
-    dateFrom: query['dateFrom'] as string | undefined,
-    dateTo: query['dateTo'] as string | undefined,
+    search: (query['search'] as string) || '',
+    role: (query['role'] as string) || '',
+    status: (query['status'] as string) || '',
+    dateFrom: (query['dateFrom'] as string) || '',
+    dateTo: (query['dateTo'] as string) || '',
     minPosts: query['minPosts'] ? Number(query['minPosts']) : undefined,
     maxPosts: query['maxPosts'] ? Number(query['maxPosts']) : undefined,
-    sortBy: query['sortBy'] as string | undefined,
-    sortOrder: query['sortOrder'] as 'asc' | 'desc' | undefined,
+    sortBy: (query['sortBy'] as string) || '',
+    sortOrder: (query['sortOrder'] as 'asc' | 'desc') || 'desc',
   }
 
   const result = await getUsersWithAdvancedFilter(filter, page, pageSize)

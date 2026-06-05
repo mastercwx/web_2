@@ -54,36 +54,34 @@ function initChart() {
       bottom: '3%',
       containLabel: true,
     },
-    xAxis: {
-      type: props.horizontal ? 'value' : 'category',
-      data: props.horizontal ? undefined : props.xData,
-      axisLine: {
-        lineStyle: {
-          color: '#e5e7eb',
+    xAxis: props.horizontal
+      ? {
+          type: 'value' as const,
+          axisLine: { lineStyle: { color: '#e5e7eb' } },
+          axisLabel: { color: '#6b7280' },
+        }
+      : {
+          type: 'category' as const,
+          data: props.xData,
+          axisLine: { lineStyle: { color: '#e5e7eb' } },
+          axisLabel: { color: '#6b7280' },
         },
-      },
-      axisLabel: {
-        color: '#6b7280',
-      },
-    },
-    yAxis: {
-      type: props.horizontal ? 'category' : 'value',
-      data: props.horizontal ? props.xData : undefined,
-      axisLine: {
-        show: false,
-      },
-      axisTick: {
-        show: false,
-      },
-      axisLabel: {
-        color: '#6b7280',
-      },
-      splitLine: {
-        lineStyle: {
-          color: '#f3f4f6',
+    yAxis: props.horizontal
+      ? {
+          type: 'category' as const,
+          data: props.xData,
+          axisLine: { show: false },
+          axisTick: { show: false },
+          axisLabel: { color: '#6b7280' },
+          splitLine: { lineStyle: { color: '#f3f4f6' } },
+        }
+      : {
+          type: 'value' as const,
+          axisLine: { show: false },
+          axisTick: { show: false },
+          axisLabel: { color: '#6b7280' },
+          splitLine: { lineStyle: { color: '#f3f4f6' } },
         },
-      },
-    },
     series: [
       {
         data: props.yData,

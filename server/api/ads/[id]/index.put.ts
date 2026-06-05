@@ -50,13 +50,13 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       message: '参数错误',
-      data: result.error.errors,
+      data: result.error.issues,
     })
   }
 
   const data: Record<string, unknown> = { ...result.data }
-  if (result.data.content) {
-    data.content = JSON.stringify(result.data.content)
+  if (result.data['content']) {
+    data['content'] = JSON.stringify(result.data['content'])
   }
 
   try {

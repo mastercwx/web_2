@@ -66,7 +66,7 @@ const statusColors: Record<string, string> = {
 async function fetchEndpoints() {
   loading.value = true
   try {
-    const response = await $fetch('/api/docs/endpoints')
+    const response = (await $fetch('/api/docs/endpoints')) as any
     tags.value = response.tags
   } catch (error) {
     console.error('Failed to fetch endpoints:', error)
@@ -82,9 +82,9 @@ async function handleSearch() {
   }
 
   try {
-    const response = await $fetch('/api/docs/endpoints', {
+    const response = (await $fetch('/api/docs/endpoints', {
       params: { search: searchQuery.value },
-    })
+    })) as any
     searchResults.value = response.endpoints
   } catch (error) {
     console.error('Failed to search endpoints:', error)
@@ -115,7 +115,9 @@ async function loadExamples() {
 }
 
 function getStatusColor(status: number): string {
-  return statusColors[status.toString()[0]] || 'text-gray-600'
+  return (
+    statusColors[status.toString()[0] as unknown as keyof typeof statusColors] || 'text-gray-600'
+  )
 }
 
 const filteredTags = computed(() => {

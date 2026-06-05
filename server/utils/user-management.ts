@@ -6,8 +6,8 @@ export interface UserFilter {
   status?: string
   dateFrom?: string
   dateTo?: string
-  minPosts?: number
-  maxPosts?: number
+  minPosts?: number | undefined
+  maxPosts?: number | undefined
   sortBy?: string
   sortOrder?: 'asc' | 'desc'
 }
@@ -40,12 +40,10 @@ export interface UserDetailed {
   role: string
   status: string
   avatar: string | null
-  bio: string | null
   createdAt: Date
   updatedAt: Date
   emailVerified: boolean
   twoFactorEnabled: boolean
-  oauthProvider: string | null
   _count: {
     posts: number
     comments: number
@@ -60,7 +58,7 @@ export interface UserDetailed {
     id: number
     title: string
     createdAt: Date
-    status: string
+    published: boolean
   }>
   recentActivity: Array<{
     id: number
@@ -143,12 +141,10 @@ export async function getUsersWithAdvancedFilter(
         role: true,
         status: true,
         avatar: true,
-        bio: true,
         createdAt: true,
         updatedAt: true,
         emailVerified: true,
         twoFactorEnabled: true,
-        oauthProvider: true,
         _count: {
           select: {
             posts: true,
@@ -186,12 +182,10 @@ export async function getUserDetailed(userId: number): Promise<UserDetailed | nu
       role: true,
       status: true,
       avatar: true,
-      bio: true,
       createdAt: true,
       updatedAt: true,
       emailVerified: true,
       twoFactorEnabled: true,
-      oauthProvider: true,
       _count: {
         select: {
           posts: true,
@@ -218,7 +212,7 @@ export async function getUserDetailed(userId: number): Promise<UserDetailed | nu
       id: true,
       title: true,
       createdAt: true,
-      status: true,
+      published: true,
     },
   })
 
@@ -367,7 +361,7 @@ export async function bulkUpdateUsers(
           }
           await prisma.user.update({
             where: { id: userId },
-            data: { role: options.role },
+            data: { role: options.role as any },
           })
           break
         default:

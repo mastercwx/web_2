@@ -107,7 +107,7 @@ async function fetchRelatedPosts() {
     })
 
     if (data.success) {
-      posts.value = data.data as Post[]
+      posts.value = data.data as unknown as Post[]
     }
   } catch (error) {
     console.error('Failed to fetch related posts:', error)

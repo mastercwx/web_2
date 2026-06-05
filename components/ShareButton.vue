@@ -91,7 +91,7 @@ async function nativeShare() {
       await navigator.share({
         title: props.title,
         url: shareUrl.value,
-        text: props.description,
+        text: props.description || '',
       })
     } catch {
       // 用户取消

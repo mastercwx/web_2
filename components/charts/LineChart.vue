@@ -99,14 +99,16 @@ function initChart() {
         itemStyle: {
           color: props.color,
         },
-        areaStyle: props.areaStyle
+        ...(props.areaStyle
           ? {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: `${props.color}33` },
-                { offset: 1, color: `${props.color}0a` },
-              ]),
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: `${props.color}33` },
+                  { offset: 1, color: `${props.color}0a` },
+                ]),
+              },
             }
-          : undefined,
+          : {}),
       },
     ],
   }

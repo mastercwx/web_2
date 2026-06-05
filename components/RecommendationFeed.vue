@@ -47,8 +47,8 @@
       <PostCard
         v-for="post in posts"
         :key="post.id"
-        :post="post"
-        :show-reason="showReason"
+        :post="post as any"
+        :show-reason="showReason || false"
       />
     </div>
 
@@ -131,7 +131,7 @@ async function fetchPosts(reset = false) {
     })
 
     if (data.success) {
-      const newPosts = data.data as Post[]
+      const newPosts = data.data as unknown as Post[]
       if (reset) {
         posts.value = newPosts
       } else {

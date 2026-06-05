@@ -64,10 +64,10 @@
             v-for="tag in hotTags"
             :key="tag.id"
             class="suggestion-item"
-            @click="searchByTag(tag.name)"
+            @click="searchByTag(tag.text)"
           >
             <span class="suggestion-icon">🏷️</span>
-            <span class="suggestion-text">{{ tag.name }}</span>
+            <span class="suggestion-text">{{ tag.text }}</span>
             <span class="suggestion-count">{{ tag.count }} {{ t('search.posts') }}</span>
           </div>
         </div>
@@ -528,19 +528,19 @@ const fetchResults = async () => {
     }
 
     if (selectedTag.value) {
-      params.tag = selectedTag.value
+      params['tag'] = selectedTag.value
     }
 
     if (dateFrom.value) {
-      params.dateFrom = dateFrom.value
+      params['dateFrom'] = dateFrom.value
     }
 
     if (dateTo.value) {
-      params.dateTo = dateTo.value
+      params['dateTo'] = dateTo.value
     }
 
     if (authorFilter.value) {
-      params.author = authorFilter.value
+      params['author'] = authorFilter.value
     }
 
     const data = await $fetch('/api/search', { params })

@@ -15,7 +15,7 @@ const tempToken = ref('')
 
 // 从 URL 参数获取临时令牌
 onMounted(() => {
-  tempToken.value = (route.query.tempToken as string) || ''
+  tempToken.value = (route.query['tempToken'] as string) || ''
 
   if (!tempToken.value) {
     router.push('/auth/login')

@@ -17,7 +17,7 @@ export function useWebSocket() {
 
   // 连接 WebSocket
   function connect() {
-    if (!authStore.isLoggedIn || !authStore.user?.id) {
+    if (!authStore.isAuthenticated || !authStore.user?.id) {
       return
     }
 
@@ -110,7 +110,7 @@ export function useWebSocket() {
 
   // 自动连接/断开
   watch(
-    () => authStore.isLoggedIn,
+    () => authStore.isAuthenticated,
     (isLoggedIn) => {
       if (isLoggedIn) {
         connect()

@@ -55,16 +55,18 @@ function initChart() {
       },
       formatter: '{b}: {c} ({d}%)',
     },
-    legend: props.showLegend
+    ...(props.showLegend
       ? {
-          orient: 'vertical',
-          right: '5%',
-          top: 'center',
-          textStyle: {
-            color: '#6b7280',
+          legend: {
+            orient: 'vertical' as const,
+            right: '5%',
+            top: 'center',
+            textStyle: {
+              color: '#6b7280',
+            },
           },
         }
-      : undefined,
+      : {}),
     series: [
       {
         type: 'pie',
@@ -92,10 +94,10 @@ function initChart() {
         data: props.data.map((item, index) => ({
           ...item,
           itemStyle: {
-            color: props.colors[index % props.colors.length],
+            color: props.colors[index % props.colors.length] || '#6366f1',
           },
         })),
-        roseType: props.roseType ? 'radius' : undefined,
+        ...(props.roseType ? { roseType: 'radius' as const } : {}),
       },
     ],
   }
@@ -127,7 +129,7 @@ watch(
             data: props.data.map((item, index) => ({
               ...item,
               itemStyle: {
-                color: props.colors[index % props.colors.length],
+                color: props.colors[index % props.colors.length] || '#6366f1',
               },
             })),
           },

@@ -243,7 +243,7 @@
               <img
                 v-if="editingFile.mimeType.startsWith('image/')"
                 :src="editingFile.url"
-                :alt="editingFile.alt"
+                :alt="editingFile.alt || undefined"
               />
             </div>
             <div class="edit-form">

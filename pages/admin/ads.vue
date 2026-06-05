@@ -99,8 +99,8 @@ async function handleCreate() {
 function handleEdit(ad: Ad) {
   selectedAd.value = {
     ...ad,
-    startDate: ad.startDate.split('T')[0],
-    endDate: ad.endDate.split('T')[0],
+    startDate: ad.startDate?.split('T')[0] || '',
+    endDate: ad.endDate?.split('T')[0] || '',
   }
   showEditModal.value = true
 }
@@ -673,19 +673,19 @@ onMounted(() => {
               <div class="stats-grid">
                 <div class="stat-card">
                   <div class="stat-value">
-                    {{ formatNumber((statsData.impressions as number) || 0) }}
+                    {{ formatNumber((statsData['impressions'] as number) || 0) }}
                   </div>
                   <div class="stat-label">展示次数</div>
                 </div>
                 <div class="stat-card">
                   <div class="stat-value">
-                    {{ formatNumber((statsData.clicks as number) || 0) }}
+                    {{ formatNumber((statsData['clicks'] as number) || 0) }}
                   </div>
                   <div class="stat-label">点击次数</div>
                 </div>
                 <div class="stat-card">
                   <div class="stat-value">
-                    {{ statsData.ctr || '0%' }}
+                    {{ statsData['ctr'] || '0%' }}
                   </div>
                   <div class="stat-label">点击率 (CTR)</div>
                 </div>

@@ -32,19 +32,19 @@ export default defineNuxtConfig({
     apiSecret: '',
 
     // OAuth 配置
-    oauthGithubClientId: process.env.OAUTH_GITHUB_CLIENT_ID || '',
-    oauthGithubClientSecret: process.env.OAUTH_GITHUB_CLIENT_SECRET || '',
-    oauthGithubRedirectUri: process.env.OAUTH_GITHUB_REDIRECT_URI || '',
+    oauthGithubClientId: process.env['OAUTH_GITHUB_CLIENT_ID'] || '',
+    oauthGithubClientSecret: process.env['OAUTH_GITHUB_CLIENT_SECRET'] || '',
+    oauthGithubRedirectUri: process.env['OAUTH_GITHUB_REDIRECT_URI'] || '',
 
-    oauthGoogleClientId: process.env.OAUTH_GOOGLE_CLIENT_ID || '',
-    oauthGoogleClientSecret: process.env.OAUTH_GOOGLE_CLIENT_SECRET || '',
-    oauthGoogleRedirectUri: process.env.OAUTH_GOOGLE_REDIRECT_URI || '',
+    oauthGoogleClientId: process.env['OAUTH_GOOGLE_CLIENT_ID'] || '',
+    oauthGoogleClientSecret: process.env['OAUTH_GOOGLE_CLIENT_SECRET'] || '',
+    oauthGoogleRedirectUri: process.env['OAUTH_GOOGLE_REDIRECT_URI'] || '',
 
     // 客户端公开配置
     public: {
       apiBase: '/api',
-      oauthGithubClientId: process.env.OAUTH_GITHUB_CLIENT_ID || '',
-      oauthGoogleClientId: process.env.OAUTH_GOOGLE_CLIENT_ID || '',
+      oauthGithubClientId: process.env['OAUTH_GITHUB_CLIENT_ID'] || '',
+      oauthGoogleClientId: process.env['OAUTH_GOOGLE_CLIENT_ID'] || '',
     },
   },
   compatibilityDate: '2025-05-15',

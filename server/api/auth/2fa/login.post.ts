@@ -101,6 +101,7 @@ export default defineEventHandler(async (event) => {
         username: user.username,
         email: user.email,
         role: user.role,
+        createdAt: new Date().toISOString(),
       },
       token,
     },
