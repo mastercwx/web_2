@@ -164,6 +164,27 @@ function closeDetail() {
   selectedItem.value = null
 }
 
+function approveSelectedItem() {
+  if (selectedItem.value) {
+    handleModerate({ id: selectedItem.value.id, type: selectedItem.value.type }, 'approve')
+    closeDetail()
+  }
+}
+
+function rejectSelectedItem() {
+  if (selectedItem.value) {
+    handleModerate({ id: selectedItem.value.id, type: selectedItem.value.type }, 'reject')
+    closeDetail()
+  }
+}
+
+function deleteSelectedItem() {
+  if (selectedItem.value) {
+    handleModerate({ id: selectedItem.value.id, type: selectedItem.value.type }, 'delete')
+    closeDetail()
+  }
+}
+
 // 敏感度分析
 async function handleAnalyze() {
   if (!analyzeContent.value.trim()) return
@@ -944,28 +965,19 @@ const reasonMap: Record<string, string> = {
             <div class="flex gap-2 pt-4 border-t">
               <button
                 class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                @click="
-                  handleModerate({ id: selectedItem.id, type: selectedItem.type }, 'approve')
-                  closeDetail()
-                "
+                @click="approveSelectedItem"
               >
                 批准
               </button>
               <button
                 class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
-                @click="
-                  handleModerate({ id: selectedItem.id, type: selectedItem.type }, 'reject')
-                  closeDetail()
-                "
+                @click="rejectSelectedItem"
               >
                 拒绝
               </button>
               <button
                 class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                @click="
-                  handleModerate({ id: selectedItem.id, type: selectedItem.type }, 'delete')
-                  closeDetail()
-                "
+                @click="deleteSelectedItem"
               >
                 删除
               </button>

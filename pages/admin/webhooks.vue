@@ -74,6 +74,12 @@ async function fetchWebhooks() {
   }
 }
 
+// 切换到投递日志标签
+function switchToLogs() {
+  activeTab.value = 'logs'
+  fetchDeliveries()
+}
+
 // 获取投递日志
 async function fetchDeliveries() {
   loading.value = true
@@ -233,10 +239,7 @@ onMounted(() => {
       </button>
       <button
         :class="['tab', { active: activeTab === 'logs' }]"
-        @click="
-          activeTab = 'logs'
-          fetchDeliveries()
-        "
+        @click="switchToLogs"
       >
         投递日志
       </button>
