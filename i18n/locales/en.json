@@ -568,5 +568,14 @@
       "personal": "For You",
       "popular": "Popular"
     }
+  },
+  "pwa": {
+    "installTitle": "Install HG Web",
+    "installDescription": "Install the app to your desktop for a better experience",
+    "install": "Install",
+    "dismiss": "Not Now",
+    "offlineTitle": "No Internet Connection",
+    "offlineDescription": "You are currently offline. Please check your network connection and try again.",
+    "retry": "Retry"
   }
 }

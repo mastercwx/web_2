@@ -164,6 +164,9 @@
         &copy; {{ currentYear }} {{ $t('common.appName') }}. All rights reserved.
       </div>
     </footer>
+
+    <!-- PWA 安装提示 -->
+    <PwaInstallPrompt />
   </div>
 </template>
 
