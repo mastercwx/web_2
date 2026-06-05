@@ -3,6 +3,7 @@ const authStore = useAuthStore()
 
 const sidebarItems = [
   { label: '仪表盘', icon: '📊', to: '/admin' },
+  { label: '高级统计', icon: '📈', to: '/admin/statistics' },
   { label: '用户管理', icon: '👥', to: '/admin/users' },
   { label: '文章管理', icon: '📝', to: '/admin/posts' },
   { label: '媒体库', icon: '🖼️', to: '/admin/media' },
