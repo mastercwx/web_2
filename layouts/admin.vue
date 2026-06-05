@@ -13,6 +13,7 @@ const sidebarItems = [
   { label: 'A/B 测试', icon: '🧪', to: '/admin/experiments' },
   { label: 'Webhooks', icon: '🔗', to: '/admin/webhooks' },
   { label: 'API 文档', icon: '📚', to: '/admin/api-docs' },
+  { label: '性能监控', icon: '🚀', to: '/admin/performance' },
   { label: '广告管理', icon: '📢', to: '/admin/ads' },
   { label: '数据导出', icon: '📤', to: '/admin/export' },
   { label: '系统设置', icon: '⚙️', to: '/admin/settings' },
