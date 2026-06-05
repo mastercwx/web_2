@@ -517,5 +517,16 @@
     "success": "消息已发送，我们会尽快回复您",
     "required": "请填写必填字段",
     "invalidEmail": "邮箱格式不正确"
+  },
+  "recommendations": {
+    "title": "推荐阅读",
+    "related": "相关文章",
+    "empty": "暂无推荐内容",
+    "noRelated": "暂无相关文章",
+    "loadMore": "加载更多",
+    "tabs": {
+      "personal": "个性化推荐",
+      "popular": "热门文章"
+    }
   }
 }

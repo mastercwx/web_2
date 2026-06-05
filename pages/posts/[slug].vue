@@ -88,6 +88,13 @@ if (authStore.isLoggedIn && post.value?.id) {
     <!-- 评论区 -->
     <CommentSection :post-id="post.id" />
 
+    <!-- 相关文章推荐 -->
+    <RelatedPosts
+      :post-id="post.id"
+      :limit="5"
+      class="mt-8"
+    />
+
     <div class="mt-8 flex justify-between">
       <NuxtLink
         to="/posts"
