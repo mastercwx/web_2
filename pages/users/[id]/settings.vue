@@ -7,13 +7,20 @@ const route = useRoute()
 
 const userId = computed(() => Number(route.params['id']))
 
-// 检查是否是自己的设置页
-if (authStore.user?.id !== userId.value) {
-  throw createError({
-    statusCode: 403,
-    message: '无权访问此页面',
-  })
+// 初始化 auth store（从 localStorage 恢复）
+if (import.meta.client) {
+  authStore.init()
 }
+
+// 检查是否登录
+const isLoggedIn = computed(() => authStore.isAuthenticated && authStore.user)
+
+// 检查是否是自己的设置页（仅在客户端检查）
+onMounted(() => {
+  if (!isLoggedIn.value || authStore.user?.id !== userId.value) {
+    navigateTo('/login')
+  }
+})
 
 const activeTab = ref<'profile' | 'password' | 'avatar' | 'notifications' | 'oauth'>('profile')
 
