@@ -601,5 +601,52 @@
     "offlineTitle": "No Internet Connection",
     "offlineDescription": "You are currently offline. Please check your network connection and try again.",
     "retry": "Retry"
+  },
+  "webhooks": {
+    "title": "Webhook Management",
+    "description": "Manage external system integrations and event push notifications",
+    "add": "Add Webhook",
+    "name": "Name",
+    "url": "URL",
+    "secret": "Secret",
+    "secretHint": "Used for signature verification",
+    "events": "Subscribe Events",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "success": "Success",
+      "failed": "Failed",
+      "retrying": "Retrying"
+    },
+    "actions": {
+      "test": "Test",
+      "edit": "Edit",
+      "delete": "Delete",
+      "enable": "Enable",
+      "disable": "Disable",
+      "retry": "Retry Failed"
+    },
+    "delivery": {
+      "title": "Delivery Logs",
+      "id": "ID",
+      "webhook": "Webhook",
+      "event": "Event",
+      "statusCode": "HTTP Status",
+      "retryCount": "Retry Count",
+      "createdAt": "Created At"
+    },
+    "eventsList": {
+      "post.created": "Post Created",
+      "post.updated": "Post Updated",
+      "post.deleted": "Post Deleted",
+      "post.published": "Post Published",
+      "comment.created": "Comment Created",
+      "comment.approved": "Comment Approved",
+      "comment.rejected": "Comment Rejected",
+      "user.registered": "User Registered",
+      "user.updated": "User Updated",
+      "user.banned": "User Banned"
+    }
   }
 }
