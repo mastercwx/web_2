@@ -430,7 +430,15 @@
     "commentsCount": "{count} 条评论",
     "likesCount": "{count} 个赞",
     "postsCount": "{count} 篇文章",
-    "userComments": "{count} 条评论"
+    "userComments": "{count} 条评论",
+    "charts": {
+      "contentGrowth": "内容增长趋势",
+      "commentTrend": "评论趋势",
+      "dailyLikes": "每日点赞",
+      "followerGrowth": "粉丝增长",
+      "tagDistribution": "标签分布",
+      "postStatus": "文章状态"
+    }
   },
   "share": {
     "title": "分享",

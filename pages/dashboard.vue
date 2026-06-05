@@ -5,6 +5,7 @@ definePageMeta({
 
 const authStore = useAuthStore()
 const userId = computed(() => authStore.user?.id)
+const chartDays = ref(30)
 
 // 获取统计数据
 const { data: statsData } = useFetch(`/api/users/${userId.value}/dashboard/stats`, {
@@ -35,11 +36,20 @@ const { data: growthData } = useFetch(`/api/users/${userId.value}/dashboard/foll
   },
 })
 
+// 获取图表数据
+const { data: chartsData } = useFetch(`/api/users/${userId.value}/dashboard/charts`, {
+  params: { days: chartDays.value },
+  headers: {
+    Authorization: `Bearer ${authStore.token}`,
+  },
+})
+
 const stats = computed(() => (statsData.value as any)?.data?.stats || {})
 const monthly = computed(() => (statsData.value as any)?.data?.monthly || {})
 const activities = computed(() => (activityData.value as any)?.data?.activities || [])
 const popularPosts = computed(() => (popularData.value as any)?.data?.posts || [])
 const followerGrowth = computed(() => (growthData.value as any)?.data?.growth || [])
+const chartData = computed(() => (chartsData.value as any)?.data || {})
 
 // 格式化日期
 function formatDate(dateStr: string) {
@@ -137,6 +147,57 @@ function formatDate(dateStr: string) {
     </div>
 
     <div class="dashboard-content">
+      <!-- 图表区域 -->
+      <div class="charts-section">
+        <div class="chart-card">
+          <LineChart
+            title="📈 内容增长趋势"
+            :x-data="chartData.daily?.dates || []"
+            :y-data="chartData.daily?.posts || []"
+            color="#6366f1"
+          />
+        </div>
+        <div class="chart-card">
+          <LineChart
+            title="💬 评论趋势"
+            :x-data="chartData.daily?.dates || []"
+            :y-data="chartData.daily?.comments || []"
+            color="#8b5cf6"
+          />
+        </div>
+        <div class="chart-card">
+          <BarChart
+            title="❤️ 每日点赞"
+            :x-data="chartData.daily?.dates || []"
+            :y-data="chartData.daily?.likes || []"
+            color="#ec4899"
+          />
+        </div>
+        <div class="chart-card">
+          <LineChart
+            title="👥 粉丝增长"
+            :x-data="chartData.daily?.dates || []"
+            :y-data="chartData.daily?.followers || []"
+            color="#10b981"
+          />
+        </div>
+        <div class="chart-card">
+          <PieChart
+            title="🏷️ 标签分布"
+            :data="chartData.tags || []"
+            :show-legend="true"
+          />
+        </div>
+        <div class="chart-card">
+          <PieChart
+            title="📊 文章状态"
+            :data="chartData.status || []"
+            :colors="['#10b981', '#f59e0b']"
+            :show-legend="true"
+          />
+        </div>
+      </div>
+
       <!-- 粉丝增长趋势 -->
       <div class="card">
         <h2 class="card-title">📈 粉丝增长趋势（近30天）</h2>
@@ -376,6 +437,29 @@ function formatDate(dateStr: string) {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
+}
+
+/* 图表区域 */
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  min-height: 350px;
 }
 
 /* 内容区域 */
