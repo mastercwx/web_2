@@ -37,8 +37,8 @@ export default defineEventHandler(async (event) => {
   const ext = file.originalFilename?.split('.').pop() || 'jpg'
   const filename = `${auth.userId}-${Date.now()}.${ext}`
 
-  // 确保目录存在
-  const uploadDir = join(process.cwd(), 'public', 'uploads', 'avatars')
+  // 确保目录存在 - 使用 .output/public 目录（生产模式静态文件目录）
+  const uploadDir = join(process.cwd(), '.output', 'public', 'uploads', 'avatars')
   if (!existsSync(uploadDir)) {
     await mkdir(uploadDir, { recursive: true })
   }
@@ -48,8 +48,8 @@ export default defineEventHandler(async (event) => {
   const newPath = join(uploadDir, filename)
   await rename(oldPath, newPath)
 
-  // 返回文件 URL
-  const url = `/uploads/avatars/${filename}`
+  // 返回文件 URL（使用 API 路由）
+  const url = `/api/uploads/avatars/${filename}`
 
   return {
     code: 200,

@@ -29,13 +29,11 @@ const PUBLIC_GET_ROUTES = [
   '/api/moderation/stats',
   '/api/moderation/reports',
   '/api/moderation/comments',
+  '/api/uploads',
 ]
 
 // 公开的 POST 路由（POST 请求不需要认证）
-const PUBLIC_POST_ROUTES = [
-  '/api/contact',
-  '/api/ads/click',
-]
+const PUBLIC_POST_ROUTES = ['/api/contact', '/api/ads/click']
 
 function isPublicRoute(path: string, method: string): boolean {
   // 前缀匹配
