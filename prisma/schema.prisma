@@ -588,6 +588,75 @@ enum DeliveryStatus {
   RETRYING
 }
 
+// 广告模型
+model Ad {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(100)
+  description String?  @db.Text
+  position    String   @db.VarChar(50) // sidebar, header, footer, in-article
+  type        AdType   @default(BANNER)
+  content     String   @db.Text // JSON: { imageUrl, linkUrl, html, text }
+  startDate   DateTime @map("start_date")
+  endDate     DateTime @map("end_date")
+  isActive    Boolean  @default(true) @map("is_active")
+  priority    Int      @default(0) // 越大越优先
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  impressions AdImpression[]
+  clicks      AdClick[]
+
+  @@index([position])
+  @@index([isActive])
+  @@index([startDate])
+  @@index([endDate])
+  @@map("ads")
+}
+
+// 广告展示记录
+model AdImpression {
+  id        Int      @id @default(autoincrement())
+  adId      Int      @map("ad_id")
+  userId    Int?     @map("user_id")
+  ip        String?  @db.VarChar(45)
+  userAgent String?  @db.VarChar(500) @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // 关联
+  ad Ad @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+  @@index([adId])
+  @@index([createdAt])
+  @@map("ad_impressions")
+}
+
+// 广告点击记录
+model AdClick {
+  id        Int      @id @default(autoincrement())
+  adId      Int      @map("ad_id")
+  userId    Int?     @map("user_id")
+  ip        String?  @db.VarChar(45)
+  userAgent String?  @db.VarChar(500) @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // 关联
+  ad Ad @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+  @@index([adId])
+  @@index([createdAt])
+  @@map("ad_clicks")
+}
+
+// 广告类型枚举
+enum AdType {
+  BANNER
+  SIDEBAR
+  IN_ARTICLE
+  NATIVE
+  POPUP
+}
+
 // 用户角色枚举
 enum Role {
   ADMIN
