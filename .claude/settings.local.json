@@ -13,7 +13,8 @@
       "Bash(mysqld --initialize-insecure --user=mysql)",
       "Bash(rm -rf /var/lib/mysql/* /tmp/mysql_tmp)",
       "Bash(chmod 777 /tmp/mysql_tmp)",
-      "Bash(TMPDIR=/tmp/mysql_tmp mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql)"
+      "Bash(TMPDIR=/tmp/mysql_tmp mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql)",
+      "Bash(npx prisma *)"
     ]
   }
 }
