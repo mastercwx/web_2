@@ -9,24 +9,6 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-      <FeatureCard
-        :title="$t('home.features.nuxt.title')"
-        :description="$t('home.features.nuxt.description')"
-        icon="⚡"
-      />
-      <FeatureCard
-        :title="$t('home.features.typescript.title')"
-        :description="$t('home.features.typescript.description')"
-        icon="🔒"
-      />
-      <FeatureCard
-        :title="$t('home.features.tailwind.title')"
-        :description="$t('home.features.tailwind.description')"
-        icon="🎨"
-      />
-    </div>
-
     <div class="max-w-6xl mx-auto">
       <RecommendationFeed
         :title="$t('recommendations.title')"

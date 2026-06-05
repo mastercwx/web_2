@@ -53,7 +53,7 @@ async function toggleLike() {
     })
     const result = (data as any).data
     liked.value = result.liked
-    likeCount.value += result.liked ? 1 : -1
+    likeCount.value = result.count
   } catch (error: any) {
     alert(error.message || '操作失败')
   } finally {
@@ -79,7 +79,7 @@ async function toggleFavorite() {
     })
     const result = (data as any).data
     favorited.value = result.favorited
-    favoriteCount.value += result.favorited ? 1 : -1
+    favoriteCount.value = result.count
   } catch (error: any) {
     alert(error.message || '操作失败')
   } finally {

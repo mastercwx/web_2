@@ -37,9 +37,15 @@ export default defineEventHandler(async (event) => {
     await prisma.favorite.delete({
       where: { id: existingFavorite.id },
     })
+
+    // 获取最新收藏数
+    const count = await prisma.favorite.count({
+      where: { postId: postIdNum },
+    })
+
     return {
       success: true,
-      data: { favorited: false },
+      data: { favorited: false, count },
       message: '已取消收藏',
     }
   } else {
@@ -50,9 +56,15 @@ export default defineEventHandler(async (event) => {
         userId,
       },
     })
+
+    // 获取最新收藏数
+    const count = await prisma.favorite.count({
+      where: { postId: postIdNum },
+    })
+
     return {
       success: true,
-      data: { favorited: true },
+      data: { favorited: true, count },
       message: '已收藏',
     }
   }

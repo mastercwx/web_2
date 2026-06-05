@@ -40,6 +40,11 @@ export default defineEventHandler(async (event) => {
       where: { id: existingLike.id },
     })
 
+    // 获取最新点赞数
+    const count = await prisma.like.count({
+      where: { postId: postIdNum },
+    })
+
     // 记录取消点赞活动
     await logActivityFromEvent(event, ActivityActions.UNLIKE, {
       entity: 'post',
@@ -49,7 +54,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      data: { liked: false },
+      data: { liked: false, count },
       message: '已取消点赞',
     }
   } else {
@@ -59,6 +64,11 @@ export default defineEventHandler(async (event) => {
         postId: postIdNum,
         userId,
       },
+    })
+
+    // 获取最新点赞数
+    const count = await prisma.like.count({
+      where: { postId: postIdNum },
     })
 
     // 发送通知给文章作者
@@ -93,7 +103,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      data: { liked: true },
+      data: { liked: true, count },
       message: '已点赞',
     }
   }
