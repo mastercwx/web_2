@@ -1,8 +1,12 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <header class="header">
-      <nav class="container mx-auto px-4 py-3">
-        <div class="nav-main">
+    <!-- 背景装饰 -->
+    <div class="bg-decoration" />
+
+    <!-- 透明浮动导航 -->
+    <header class="floating-header">
+      <nav class="nav-container">
+        <div class="nav-inner">
           <!-- Logo -->
           <NuxtLink
             to="/"
@@ -148,8 +152,10 @@
             </button>
           </div>
         </div>
+      </nav>
 
-        <!-- 移动端菜单 -->
+      <!-- 移动端菜单 -->
+      <Transition name="menu-fade">
         <div
           v-if="showMobileMenu"
           class="mobile-menu"
@@ -255,17 +261,15 @@
             </NuxtLink>
           </template>
         </div>
-      </nav>
+      </Transition>
     </header>
 
-    <main class="flex-1 container mx-auto px-4 py-8">
+    <main class="main-content">
       <slot />
     </main>
 
-    <footer class="footer">
-      <div class="container mx-auto px-4 text-center text-secondary text-sm">
-        &copy; {{ currentYear }} {{ $t('common.appName') }}. All rights reserved.
-      </div>
+    <footer class="floating-footer">
+      <div class="footer-inner">&copy; {{ currentYear }} {{ $t('common.appName') }}.</div>
     </footer>
 
     <!-- PWA 安装提示 -->
@@ -337,27 +341,61 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.header {
+/* 背景装饰 */
+.bg-decoration {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--bg-base);
+  pointer-events: none;
+}
+
+.bg-decoration::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(47, 203, 231, 0.15) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.bg-decoration::after {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(238, 194, 94, 0.12) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+/* 浮动导航 */
+.floating-header {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  z-index: 100;
   background: var(--bg-primary);
   backdrop-filter: blur(var(--blur-lg));
   -webkit-backdrop-filter: blur(var(--blur-lg));
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
 }
 
-.footer {
-  background: var(--bg-secondary);
-  backdrop-filter: blur(var(--blur-md));
-  -webkit-backdrop-filter: blur(var(--blur-md));
-  border-top: 1px solid var(--border-color);
-  padding: 1.25rem 0;
-  margin-top: auto;
+.nav-container {
+  padding: 0.5rem 1.5rem;
 }
 
-.nav-main {
+.nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -365,7 +403,7 @@ onUnmounted(() => {
 
 .logo {
   font-family: 'Averia Gruesa Libre', cursive;
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   font-weight: 700;
   color: var(--color-primary);
   text-decoration: none;
@@ -376,7 +414,7 @@ onUnmounted(() => {
 .nav-links-desktop {
   display: none;
   align-items: center;
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 1024px) {
@@ -389,7 +427,7 @@ onUnmounted(() => {
   color: var(--text-secondary);
   transition: color var(--transition-fast);
   white-space: nowrap;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 .nav-link:hover {
@@ -404,15 +442,15 @@ onUnmounted(() => {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .icon-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   color: var(--text-secondary);
   background: none;
   border: none;
@@ -427,8 +465,8 @@ onUnmounted(() => {
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 /* 搜索框 */
@@ -438,26 +476,25 @@ onUnmounted(() => {
 
 .search-dropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0.75rem);
   right: 0;
-  margin-top: 0.5rem;
   padding: 0.75rem;
   background: var(--bg-primary);
   backdrop-filter: blur(var(--blur-lg));
   -webkit-backdrop-filter: blur(var(--blur-lg));
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   display: flex;
   gap: 0.5rem;
   z-index: 50;
-  min-width: 260px;
+  min-width: 280px;
 }
 
 @media (max-width: 480px) {
   .search-dropdown {
     position: fixed;
-    top: 60px;
+    top: 72px;
     left: 1rem;
     right: 1rem;
     min-width: auto;
@@ -468,7 +505,7 @@ onUnmounted(() => {
   flex: 1;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: 0.875rem;
@@ -484,7 +521,7 @@ onUnmounted(() => {
   background: var(--color-brand);
   color: #5b423f;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
@@ -501,8 +538,8 @@ onUnmounted(() => {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   color: var(--text-primary);
   background: none;
   border: none;
@@ -518,21 +555,41 @@ onUnmounted(() => {
 
 /* 移动端菜单 */
 .mobile-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-  padding: 1rem 0;
-  border-top: 1px solid var(--border-color);
-  margin-top: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-primary);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.menu-fade-enter-active,
+.menu-fade-leave-active {
+  transition: all 0.25s ease;
+}
+
+.menu-fade-enter-from,
+.menu-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 .mobile-link {
   display: flex;
   align-items: center;
-  padding: 0.75rem 0.5rem;
+  padding: 0.625rem 0.75rem;
   color: var(--text-secondary);
   text-decoration: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   transition: all var(--transition-fast);
+  font-size: 0.9rem;
 }
 
 .mobile-link:hover {
@@ -552,7 +609,7 @@ onUnmounted(() => {
 }
 
 .mobile-user-info {
-  padding: 0.75rem 0.5rem;
+  padding: 0.625rem 0.75rem;
   color: var(--text-secondary);
   font-size: 0.875rem;
 }
@@ -568,5 +625,37 @@ onUnmounted(() => {
 .mobile-register {
   color: var(--color-brand);
   font-weight: 500;
+}
+
+/* 主内容区 */
+.main-content {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1023px) {
+  .main-content {
+    padding-top: 5rem;
+  }
+}
+
+/* 浮动底部 */
+.floating-footer {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
 }
 </style>
