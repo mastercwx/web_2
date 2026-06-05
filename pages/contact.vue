@@ -374,7 +374,7 @@ async function handleSubmit() {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-light);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
 .form-group textarea {
@@ -403,7 +403,7 @@ async function handleSubmit() {
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: var(--primary-dark);
+  background: var(--color-primary-hover);
 }
 
 .submit-btn:disabled {

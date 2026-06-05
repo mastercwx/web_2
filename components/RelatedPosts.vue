@@ -236,7 +236,7 @@ onMounted(() => {
 .image-placeholder {
   width: 100%;
   height: 100%;
-  background: var(--primary-color);
+  background: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,6 +273,6 @@ onMounted(() => {
 }
 
 .meta-reason {
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 </style>

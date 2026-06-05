@@ -122,17 +122,22 @@ function formatDate(date: string) {
 <style scoped>
 .post-card {
   display: block;
-  background: var(--bg-secondary);
-  border-radius: 12px;
+  background: var(--bg-primary);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s;
+  transition: all 0.35s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(47, 203, 231, 0.3);
 }
 
 .card-image {
@@ -145,12 +150,17 @@ function formatDate(date: string) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.post-card:hover .card-image img {
+  transform: scale(1.05);
 }
 
 .image-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,15 +174,16 @@ function formatDate(date: string) {
   top: 0.75rem;
   left: 0.75rem;
   padding: 0.25rem 0.75rem;
-  background: var(--primary-color);
-  color: white;
+  background: var(--color-brand);
+  color: #5b423f;
   border-radius: 2rem;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
 }
 
 .card-content {
-  padding: 1rem;
+  padding: 1.25rem;
 }
 
 .card-tags {
@@ -183,11 +194,12 @@ function formatDate(date: string) {
 }
 
 .tag {
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   background: var(--bg-tertiary);
   color: var(--text-secondary);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
+  border: 1px solid var(--border-color);
 }
 
 .card-title {
@@ -209,6 +221,7 @@ function formatDate(date: string) {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  line-height: 1.6;
 }
 
 .card-footer {
@@ -228,13 +241,14 @@ function formatDate(date: string) {
   height: 24px;
   border-radius: 50%;
   object-fit: cover;
+  border: 1px solid var(--border-color);
 }
 
 .avatar-placeholder {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-secondary));
   color: white;
   display: flex;
   align-items: center;
@@ -251,6 +265,6 @@ function formatDate(date: string) {
 
 .post-date {
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
 }
 </style>

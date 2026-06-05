@@ -546,7 +546,7 @@ onMounted(() => {
 
 .upload-btn {
   padding: 0.75rem 1.5rem;
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -621,7 +621,7 @@ onMounted(() => {
 
 .search-btn {
   padding: 0.5rem 1rem;
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -646,12 +646,12 @@ onMounted(() => {
 }
 
 .file-card:hover {
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .file-card.selected {
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
   background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.05);
 }
 
@@ -740,7 +740,7 @@ onMounted(() => {
 }
 
 .page-btn:hover:not(:disabled) {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
 }
 
@@ -820,7 +820,7 @@ onMounted(() => {
 }
 
 .upload-area:hover {
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
   background: rgba(var(--primary-color-rgb, 59, 130, 246), 0.02);
 }
 
@@ -853,7 +853,7 @@ onMounted(() => {
 
 .progress-fill {
   height: 100%;
-  background: var(--primary-color);
+  background: var(--color-primary);
   transition: width 0.3s;
 }
 
@@ -911,7 +911,7 @@ onMounted(() => {
 }
 
 .save-btn {
-  background: var(--primary-color);
+  background: var(--color-primary);
   border: none;
   color: white;
 }

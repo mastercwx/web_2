@@ -695,14 +695,14 @@ onUnmounted(() => {
 
 .search-input:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
 }
 
 .search-btn {
   padding: 0.875rem 2rem;
   font-size: 1.1rem;
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 12px;
@@ -821,7 +821,7 @@ onUnmounted(() => {
 }
 
 .history-tag:hover {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
 }
 
@@ -858,8 +858,8 @@ onUnmounted(() => {
 }
 
 .hot-tag:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .hot-tag-count {
@@ -915,7 +915,7 @@ onUnmounted(() => {
 
 .filter-input:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
 }
 
 .clear-filters-btn {
@@ -939,7 +939,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -973,7 +973,7 @@ onUnmounted(() => {
   width: 40px;
   height: 40px;
   border: 3px solid var(--border-color);
-  border-top-color: var(--primary-color);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -1039,7 +1039,7 @@ onUnmounted(() => {
 }
 
 .post-card:hover .post-title {
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 
 .post-excerpt {
@@ -1097,7 +1097,7 @@ onUnmounted(() => {
 }
 
 .tag:hover {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
 }
 
@@ -1127,15 +1127,15 @@ onUnmounted(() => {
 }
 
 .page-btn:hover:not(:disabled) {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
 }
 
 .page-btn.active {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
 }
 
 .page-btn:disabled {
@@ -1149,7 +1149,7 @@ onUnmounted(() => {
 }
 
 :deep(mark) {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
   padding: 0.1em 0.2em;
   border-radius: 2px;

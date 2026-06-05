@@ -622,7 +622,7 @@ onMounted(() => {
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
+  background: var(--color-primary-hover);
 }
 
 .btn-secondary {

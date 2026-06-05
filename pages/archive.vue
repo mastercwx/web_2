@@ -239,14 +239,14 @@ watch(selectedYear, () => {
 }
 
 .year-btn:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .year-btn.active {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
 }
 
 .loading {
@@ -282,7 +282,7 @@ watch(selectedYear, () => {
 .year-title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--color-primary);
   margin-bottom: 1.5rem;
   padding-left: 50px;
   position: relative;
@@ -296,7 +296,7 @@ watch(selectedYear, () => {
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
-  background: var(--primary-color);
+  background: var(--color-primary);
   border-radius: 50%;
   border: 3px solid var(--bg-primary);
 }
@@ -368,7 +368,7 @@ watch(selectedYear, () => {
 }
 
 .post-link:hover {
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 
 .post-tags {
@@ -388,7 +388,7 @@ watch(selectedYear, () => {
 }
 
 .tag:hover {
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
 }
 

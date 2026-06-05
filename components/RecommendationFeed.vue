@@ -173,6 +173,7 @@ onMounted(() => {
 }
 
 .feed-title {
+  font-family: 'Averia Gruesa Libre', cursive;
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -188,20 +189,24 @@ onMounted(() => {
   border: 1px solid var(--border-color);
   border-radius: 2rem;
   background: var(--bg-secondary);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 0.875rem;
 }
 
 .tab-btn:hover {
-  border-color: var(--primary-color);
-  color: var(--primary-color);
+  border-color: var(--color-brand);
+  color: var(--color-primary);
 }
 
 .tab-btn.active {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  color: white;
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #5b423f;
+  font-weight: 600;
 }
 
 .feed-loading {
@@ -211,9 +216,12 @@ onMounted(() => {
 }
 
 .skeleton-card {
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--border-color);
 }
 
 .skeleton-image {
@@ -275,16 +283,22 @@ onMounted(() => {
 
 .btn-load-more {
   padding: 0.75rem 2rem;
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--border-color);
   border-radius: 2rem;
-  background: transparent;
-  color: var(--primary-color);
+  background: var(--bg-primary);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
+  font-size: 0.9rem;
 }
 
 .btn-load-more:hover {
-  background: var(--primary-color);
-  color: white;
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #5b423f;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 </style>

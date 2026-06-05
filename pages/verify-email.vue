@@ -164,7 +164,7 @@ onMounted(() => {
   width: 48px;
   height: 48px;
   border: 4px solid var(--border-color);
-  border-top-color: var(--primary-color);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -212,7 +212,7 @@ onMounted(() => {
 .verify-btn {
   display: inline-block;
   padding: 0.75rem 2rem;
-  background: var(--primary-color);
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;

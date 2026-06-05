@@ -306,7 +306,6 @@ const goToSearch = () => {
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
-  // 防止背景滚动
   document.body.style.overflow = showMobileMenu.value ? 'hidden' : ''
 }
 
@@ -320,7 +319,6 @@ const handleLogout = () => {
   authStore.logout()
 }
 
-// 点击外部关闭搜索框
 const closeSearch = (e: MouseEvent) => {
   const target = e.target as HTMLElement
   if (!target.closest('.search-wrapper')) {
@@ -341,6 +339,8 @@ onUnmounted(() => {
 <style scoped>
 .header {
   background: var(--bg-primary);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   position: sticky;
@@ -350,8 +350,11 @@ onUnmounted(() => {
 
 .footer {
   background: var(--bg-secondary);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
   border-top: 1px solid var(--border-color);
-  padding: 1rem 0;
+  padding: 1.25rem 0;
+  margin-top: auto;
 }
 
 .nav-main {
@@ -361,17 +364,19 @@ onUnmounted(() => {
 }
 
 .logo {
-  font-size: 1.25rem;
+  font-family: 'Averia Gruesa Libre', cursive;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-primary);
   text-decoration: none;
   flex-shrink: 0;
+  letter-spacing: 0.02em;
 }
 
 .nav-links-desktop {
   display: none;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 @media (min-width: 1024px) {
@@ -384,15 +389,16 @@ onUnmounted(() => {
   color: var(--text-secondary);
   transition: color var(--transition-fast);
   white-space: nowrap;
+  font-size: 0.9rem;
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
+  color: var(--color-brand);
 }
 
 .nav-link.router-link-active {
   color: var(--color-primary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .nav-actions {
@@ -416,8 +422,8 @@ onUnmounted(() => {
 }
 
 .icon-btn:hover {
-  color: var(--color-primary);
-  background: var(--bg-secondary);
+  color: var(--color-brand);
+  background: var(--bg-tertiary);
 }
 
 .icon {
@@ -437,6 +443,8 @@ onUnmounted(() => {
   margin-top: 0.5rem;
   padding: 0.75rem;
   background: var(--bg-primary);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
@@ -461,30 +469,31 @@ onUnmounted(() => {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: 0.875rem;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--color-brand);
 }
 
 .search-btn {
   padding: 0.5rem 1rem;
-  background: var(--color-primary);
-  color: white;
+  background: var(--color-brand);
+  color: #5b423f;
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 0.875rem;
-  transition: background var(--transition-fast);
+  font-weight: 500;
+  transition: all var(--transition-fast);
   white-space: nowrap;
 }
 
 .search-btn:hover {
-  background: var(--color-primary-hover);
+  filter: brightness(1.1);
 }
 
 /* 汉堡菜单 */
@@ -527,8 +536,8 @@ onUnmounted(() => {
 }
 
 .mobile-link:hover {
-  color: var(--color-primary);
-  background: var(--bg-secondary);
+  color: var(--color-brand);
+  background: var(--bg-tertiary);
 }
 
 .mobile-link.router-link-active {
@@ -549,15 +558,15 @@ onUnmounted(() => {
 }
 
 .mobile-logout {
-  color: #ef4444;
+  color: var(--color-danger);
 }
 
 .mobile-logout:hover {
-  background: #fef2f2;
+  background: rgba(239, 68, 68, 0.08);
 }
 
 .mobile-register {
-  color: var(--color-primary);
+  color: var(--color-brand);
   font-weight: 500;
 }
 </style>
