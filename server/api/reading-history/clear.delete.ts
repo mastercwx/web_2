@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   }
 
   await prisma.readingHistory.deleteMany({
-    where: { userId: auth.id },
+    where: { userId: auth.userId },
   })
 
   return { message: '阅读历史已清空' }

@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
       description,
       slug,
       coverImage,
-      authorId: auth.id,
+      authorId: auth.userId,
     },
     include: {
       author: {

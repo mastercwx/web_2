@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, message: '记录不存在' })
   }
 
-  if (record.userId !== auth.id && auth.role !== 'ADMIN') {
+  if (record.userId !== auth.userId && auth.role !== 'ADMIN') {
     throw createError({ statusCode: 403, message: '无权删除此记录' })
   }
 

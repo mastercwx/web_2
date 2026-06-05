@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // 检查权限（只有作者可以删除）
-  if (existingSeries.authorId !== auth.id) {
+  if (existingSeries.authorId !== auth.userId) {
     throw createError({ statusCode: 403, message: '没有权限删除此系列' })
   }
 

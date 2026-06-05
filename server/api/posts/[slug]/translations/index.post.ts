@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // 只有作者或管理员可以添加翻译
-  if (post.authorId !== auth.id && auth.role !== 'ADMIN') {
+  if (post.authorId !== auth.userId && auth.role !== 'ADMIN') {
     throw createError({
       statusCode: 403,
       message: '没有权限',

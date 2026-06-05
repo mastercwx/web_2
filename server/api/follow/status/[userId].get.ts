@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   const follow = await prisma.follow.findUnique({
     where: {
       followerId_followingId: {
-        followerId: auth.id,
+        followerId: auth.userId,
         followingId: userId,
       },
     },

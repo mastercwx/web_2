@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: '用户ID不能为空' })
   }
 
-  if (userId === auth.id) {
+  if (userId === auth.userId) {
     throw createError({ statusCode: 400, message: '不能关注自己' })
   }
 
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
   const existingFollow = await prisma.follow.findUnique({
     where: {
       followerId_followingId: {
-        followerId: auth.id,
+        followerId: auth.userId,
         followingId: userId,
       },
     },
@@ -51,14 +51,14 @@ export default defineEventHandler(async (event) => {
     // 添加关注
     await prisma.follow.create({
       data: {
-        followerId: auth.id,
+        followerId: auth.userId,
         followingId: userId,
       },
     })
 
     // 发送通知给被关注用户
     const follower = await prisma.user.findUnique({
-      where: { id: auth.id },
+      where: { id: auth.userId },
       select: { username: true },
     })
 
@@ -67,8 +67,8 @@ export default defineEventHandler(async (event) => {
       type: 'follow',
       title: '新的关注者',
       content: `${follower?.username || '用户'} 关注了你`,
-      link: `/users/${auth.id}`,
-      actorId: auth.id,
+      link: `/users/${auth.userId}`,
+      actorId: auth.userId,
     })
 
     return { followed: true }

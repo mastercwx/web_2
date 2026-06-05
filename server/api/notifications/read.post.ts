@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     // 标记所有为已读
     await prisma.notification.updateMany({
       where: {
-        userId: auth.id,
+        userId: auth.userId,
         isRead: false,
       },
       data: { isRead: true },
@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
   const notification = await prisma.notification.findFirst({
     where: {
       id: notificationId,
-      userId: auth.id,
+      userId: auth.userId,
     },
   })
 

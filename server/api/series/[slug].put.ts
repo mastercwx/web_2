@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // 检查权限（只有作者可以编辑）
-  if (existingSeries.authorId !== auth.id) {
+  if (existingSeries.authorId !== auth.userId) {
     throw createError({ statusCode: 403, message: '没有权限编辑此系列' })
   }
 

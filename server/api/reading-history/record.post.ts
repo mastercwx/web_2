@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
   await prisma.readingHistory.upsert({
     where: {
       userId_postId: {
-        userId: auth.id,
+        userId: auth.userId,
         postId: postId,
       },
     },
@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
       readAt: new Date(),
     },
     create: {
-      userId: auth.id,
+      userId: auth.userId,
       postId: postId,
     },
   })

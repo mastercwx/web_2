@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
 
   const count = await prisma.notification.count({
     where: {
-      userId: auth.id,
+      userId: auth.userId,
       isRead: false,
     },
   })

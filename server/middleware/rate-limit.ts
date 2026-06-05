@@ -14,25 +14,26 @@ export default defineEventHandler(async (event) => {
 
   // 根据路径选择不同的速率限制配置
   let config = RateLimits.api
+  const method = event.node.req.method
 
   // 认证相关
-  if (path.includes('/auth/login')) {
+  if (path.startsWith('/api/auth/login')) {
     config = RateLimits.auth
-  } else if (path.includes('/auth/register')) {
+  } else if (path.startsWith('/api/auth/register')) {
     config = RateLimits.register
-  } else if (path.includes('/auth/reset-password') || path.includes('/auth/forgot-password')) {
+  } else if (path.startsWith('/api/auth/reset-password') || path.startsWith('/api/auth/forgot-password')) {
     config = RateLimits.passwordReset
   }
-  // 文件上传
-  else if (path.includes('/media') && event.node.req.method === 'POST') {
+  // 文件上传（仅 POST）
+  else if (path.startsWith('/api/media') && method === 'POST') {
     config = RateLimits.upload
   }
-  // 评论
-  else if (path.includes('/comments')) {
+  // 评论（仅 POST/PUT/DELETE，GET 不限制）
+  else if (path.startsWith('/api/comments') && method !== 'GET') {
     config = RateLimits.comment
   }
   // 搜索
-  else if (path.includes('/search')) {
+  else if (path.startsWith('/api/search')) {
     config = RateLimits.search
   }
 

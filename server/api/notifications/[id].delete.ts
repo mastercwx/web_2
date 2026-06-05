@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
   const notification = await prisma.notification.findFirst({
     where: {
       id,
-      userId: auth.id,
+      userId: auth.userId,
     },
   })
 

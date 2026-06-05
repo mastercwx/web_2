@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
     where: { id },
     data: {
       status,
-      resolvedBy: auth.id,
+      resolvedBy: auth.userId,
       resolvedAt: new Date(),
     },
   })

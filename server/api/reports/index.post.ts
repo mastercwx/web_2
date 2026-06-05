@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
     where: {
       targetType,
       targetId: Number(targetId),
-      reporterId: auth.id,
+      reporterId: auth.userId,
       status: 'pending',
     },
   })
@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
       targetId: Number(targetId),
       reason,
       description,
-      reporterId: auth.id,
+      reporterId: auth.userId,
     },
   })
 

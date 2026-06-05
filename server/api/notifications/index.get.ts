@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   const unreadOnly = query.unreadOnly === 'true'
 
   const where = {
-    userId: auth.id,
+    userId: auth.userId,
     ...(unreadOnly ? { isRead: false } : {}),
   }
 
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
     }),
     prisma.notification.count({ where }),
     prisma.notification.count({
-      where: { userId: auth.id, isRead: false },
+      where: { userId: auth.userId, isRead: false },
     }),
   ])
 

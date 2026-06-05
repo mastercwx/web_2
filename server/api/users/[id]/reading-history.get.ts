@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // 只能查看自己的阅读历史
-  if (auth.id !== userId && auth.role !== 'ADMIN') {
+  if (auth.userId !== userId && auth.role !== 'ADMIN') {
     throw createError({ statusCode: 403, message: '无权查看他人阅读历史' })
   }
 
