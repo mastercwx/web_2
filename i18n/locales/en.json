@@ -517,5 +517,16 @@
     "success": "Message sent, we will reply as soon as possible",
     "required": "Please fill in required fields",
     "invalidEmail": "Invalid email format"
+  },
+  "recommendations": {
+    "title": "Recommended",
+    "related": "Related Posts",
+    "empty": "No recommendations yet",
+    "noRelated": "No related posts",
+    "loadMore": "Load More",
+    "tabs": {
+      "personal": "For You",
+      "popular": "Popular"
+    }
   }
 }

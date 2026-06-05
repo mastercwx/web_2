@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-8">
     <div class="text-center py-12">
       <h1 class="text-4xl font-bold text-primary mb-4">
         {{ $t('home.title') }}
@@ -24,6 +24,14 @@
         :title="$t('home.features.tailwind.title')"
         :description="$t('home.features.tailwind.description')"
         icon="🎨"
+      />
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <RecommendationFeed
+        :title="$t('recommendations.title')"
+        :limit="12"
+        show-reason
       />
     </div>
   </div>
