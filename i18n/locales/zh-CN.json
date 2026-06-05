@@ -602,6 +602,29 @@
     "offlineDescription": "您当前处于离线状态，请检查网络连接后重试",
     "retry": "重试"
   },
+  "translations": {
+    "title": "翻译管理",
+    "add": "添加翻译",
+    "edit": "编辑翻译",
+    "delete": "删除翻译",
+    "language": "语言",
+    "selectLanguage": "选择语言",
+    "translatedTitle": "翻译标题",
+    "translatedContent": "翻译内容",
+    "excerpt": "摘要",
+    "original": "原文",
+    "viewIn": "查看语言",
+    "noTranslations": "暂无翻译",
+    "titlePlaceholder": "输入翻译标题",
+    "contentPlaceholder": "输入翻译内容",
+    "excerptPlaceholder": "输入翻译摘要（可选）",
+    "stats": {
+      "title": "翻译统计",
+      "totalPosts": "总文章数",
+      "translatedCount": "翻译数量",
+      "percentage": "翻译率"
+    }
+  },
   "webhooks": {
     "title": "Webhook 管理",
     "description": "管理外部系统集成和事件推送",
