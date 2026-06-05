@@ -266,6 +266,30 @@
       "caption": "Caption",
       "captionPlaceholder": "File caption",
       "confirmDelete": "Are you sure you want to delete \"{name}\"?"
+    },
+    "experiments": {
+      "title": "A/B Testing",
+      "create": "Create Experiment",
+      "createTitle": "Create New Experiment",
+      "noExperiments": "No experiments yet",
+      "name": "Experiment Name",
+      "namePlaceholder": "Enter experiment name",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter experiment description (optional)",
+      "variants": "Variants",
+      "variantName": "Variant Name",
+      "weight": "Weight",
+      "control": "Control",
+      "addVariant": "Add Variant",
+      "users": "Users",
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "complete": "Complete",
+      "stats": "Stats",
+      "statsTitle": "Experiment Stats",
+      "totalUsers": "Total Users",
+      "controlGroup": "Control Group"
     }
   },
   "theme": {

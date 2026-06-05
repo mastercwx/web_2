@@ -266,6 +266,30 @@
       "caption": "说明文字",
       "captionPlaceholder": "文件说明文字",
       "confirmDelete": "确定要删除 \"{name}\" 吗？"
+    },
+    "experiments": {
+      "title": "A/B 测试",
+      "create": "创建实验",
+      "createTitle": "创建新实验",
+      "noExperiments": "暂无实验",
+      "name": "实验名称",
+      "namePlaceholder": "输入实验名称",
+      "description": "实验描述",
+      "descriptionPlaceholder": "输入实验描述（可选）",
+      "variants": "变体",
+      "variantName": "变体名称",
+      "weight": "权重",
+      "control": "控制组",
+      "addVariant": "添加变体",
+      "users": "用户数",
+      "start": "开始",
+      "pause": "暂停",
+      "resume": "恢复",
+      "complete": "完成",
+      "stats": "统计",
+      "statsTitle": "实验统计",
+      "totalUsers": "总用户数",
+      "controlGroup": "控制组"
     }
   },
   "theme": {
