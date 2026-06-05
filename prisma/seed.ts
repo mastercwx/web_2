@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaMariaDb } from '@prisma/adapter-mariadb'
+import bcrypt from 'bcryptjs'
 
 const adapter = new PrismaMariaDb(process.env['DATABASE_URL']!)
 
@@ -11,13 +12,14 @@ async function main() {
   console.log('🌱 开始播种数据...')
 
   // 创建管理员用户
+  const adminPassword = await bcrypt.hash('admin123', 10)
   const admin = await prisma.user.upsert({
     where: { email: 'admin@hgweb.com' },
     update: {},
     create: {
       username: 'admin',
       email: 'admin@hgweb.com',
-      password: 'admin123', // 实际项目中应该使用加密密码
+      password: adminPassword,
       role: 'ADMIN',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=admin',
     },
@@ -25,13 +27,14 @@ async function main() {
   console.log('✅ 创建管理员用户:', admin.username)
 
   // 创建普通用户
+  const userPassword = await bcrypt.hash('user123', 10)
   const user = await prisma.user.upsert({
     where: { email: 'user@hgweb.com' },
     update: {},
     create: {
       username: 'user',
       email: 'user@hgweb.com',
-      password: 'user123',
+      password: userPassword,
       role: 'USER',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=user',
     },
