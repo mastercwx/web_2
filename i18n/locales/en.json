@@ -602,6 +602,29 @@
     "offlineDescription": "You are currently offline. Please check your network connection and try again.",
     "retry": "Retry"
   },
+  "translations": {
+    "title": "Translation Management",
+    "add": "Add Translation",
+    "edit": "Edit Translation",
+    "delete": "Delete Translation",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "translatedTitle": "Translated Title",
+    "translatedContent": "Translated Content",
+    "excerpt": "Excerpt",
+    "original": "Original",
+    "viewIn": "View in",
+    "noTranslations": "No translations yet",
+    "titlePlaceholder": "Enter translated title",
+    "contentPlaceholder": "Enter translated content",
+    "excerptPlaceholder": "Enter translated excerpt (optional)",
+    "stats": {
+      "title": "Translation Statistics",
+      "totalPosts": "Total Posts",
+      "translatedCount": "Translated Count",
+      "percentage": "Translation Rate"
+    }
+  },
   "webhooks": {
     "title": "Webhook Management",
     "description": "Manage external system integrations and event push notifications",

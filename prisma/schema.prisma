@@ -119,6 +119,7 @@ model Post {
   title       String    @db.VarChar(200)
   content     String    @db.Text
   slug        String    @unique @db.VarChar(200)
+  language    String    @default("zh-CN") @db.VarChar(10)
   published   Boolean   @default(false)
   pinned      Boolean   @default(false)
   featured    Boolean   @default(false)
@@ -130,13 +131,14 @@ model Post {
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
   // 关联
-  author    User       @relation(fields: [authorId], references: [id])
-  series    Series?    @relation(fields: [seriesId], references: [id], onDelete: SetNull)
-  tags      Tag[]
-  comments  Comment[]
-  likes     Like[]
-  favorites Favorite[]
-  versions  PostVersion[]
+  author        User               @relation(fields: [authorId], references: [id])
+  series        Series?            @relation(fields: [seriesId], references: [id], onDelete: SetNull)
+  tags          Tag[]
+  comments      Comment[]
+  likes         Like[]
+  favorites     Favorite[]
+  versions      PostVersion[]
+  translations  PostTranslation[]
 
   // 阅读历史
   readingHistory ReadingHistory[]
@@ -148,7 +150,29 @@ model Post {
   @@index([authorId])
   @@index([seriesId])
   @@index([scheduledAt])
+  @@index([language])
   @@map("posts")
+}
+
+// 文章翻译模型
+model PostTranslation {
+  id          Int      @id @default(autoincrement())
+  postId      Int      @map("post_id")
+  language    String   @db.VarChar(10)
+  title       String   @db.VarChar(200)
+  content     String   @db.Text
+  excerpt     String?  @db.VarChar(500)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // 唯一约束：一篇文章每种语言只有一个翻译
+  @@unique([postId, language])
+  @@index([postId])
+  @@index([language])
+  @@map("post_translations")
 }
 
 // 标签模型
