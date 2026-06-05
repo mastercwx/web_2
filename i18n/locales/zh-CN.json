@@ -601,5 +601,52 @@
     "offlineTitle": "网络连接已断开",
     "offlineDescription": "您当前处于离线状态，请检查网络连接后重试",
     "retry": "重试"
+  },
+  "webhooks": {
+    "title": "Webhook 管理",
+    "description": "管理外部系统集成和事件推送",
+    "add": "添加 Webhook",
+    "name": "名称",
+    "url": "URL",
+    "secret": "密钥",
+    "secretHint": "用于签名验证",
+    "events": "订阅事件",
+    "status": {
+      "active": "启用",
+      "inactive": "禁用",
+      "pending": "等待中",
+      "success": "成功",
+      "failed": "失败",
+      "retrying": "重试中"
+    },
+    "actions": {
+      "test": "测试",
+      "edit": "编辑",
+      "delete": "删除",
+      "enable": "启用",
+      "disable": "禁用",
+      "retry": "重试失败"
+    },
+    "delivery": {
+      "title": "投递日志",
+      "id": "ID",
+      "webhook": "Webhook",
+      "event": "事件",
+      "statusCode": "HTTP 状态码",
+      "retryCount": "重试次数",
+      "createdAt": "创建时间"
+    },
+    "eventsList": {
+      "post.created": "文章创建",
+      "post.updated": "文章更新",
+      "post.deleted": "文章删除",
+      "post.published": "文章发布",
+      "comment.created": "评论创建",
+      "comment.approved": "评论批准",
+      "comment.rejected": "评论拒绝",
+      "user.registered": "用户注册",
+      "user.updated": "用户更新",
+      "user.banned": "用户封禁"
+    }
   }
 }

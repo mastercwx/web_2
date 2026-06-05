@@ -10,6 +10,7 @@ const sidebarItems = [
   { label: '内容审核', icon: '🛡️', to: '/admin/moderation' },
   { label: '活动日志', icon: '📋', to: '/admin/activity' },
   { label: 'A/B 测试', icon: '🧪', to: '/admin/experiments' },
+  { label: 'Webhooks', icon: '🔗', to: '/admin/webhooks' },
   { label: '数据导出', icon: '📤', to: '/admin/export' },
   { label: '系统设置', icon: '⚙️', to: '/admin/settings' },
 ]
