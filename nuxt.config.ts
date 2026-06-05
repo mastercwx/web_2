@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // 模块
-  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
+  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@vite-pwa/nuxt'],
   devtools: { enabled: true },
 
   // 应用配置
@@ -10,7 +10,16 @@ export default defineNuxtConfig({
       title: 'HG Web',
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      meta: [{ name: 'description', content: 'HG Web Application' }],
+      meta: [
+        { name: 'description', content: 'HG Web Application' },
+        { name: 'theme-color', content: '#3b82f6' },
+        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', href: '/icons/apple-touch-icon.png' },
+      ],
     },
   },
 
@@ -71,6 +80,103 @@ export default defineNuxtConfig({
       useCookie: true,
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
+    },
+  },
+
+  // PWA 配置
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'HG Web',
+      short_name: 'HG Web',
+      description: 'HG Web Application - 现代化内容管理系统',
+      theme_color: '#3b82f6',
+      background_color: '#ffffff',
+      display: 'standalone',
+      scope: '/',
+      start_url: '/',
+      icons: [
+        {
+          src: '/icons/icon-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: '/icons/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+        {
+          src: '/icons/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable',
+        },
+      ],
+    },
+    workbox: {
+      navigateFallback: '/',
+      cleanupOutdatedCaches: true,
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365,
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'gstatic-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365,
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          urlPattern: /\/api\/.+json/i,
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'api-cache',
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 60 * 60 * 24,
+            },
+            networkTimeoutSeconds: 10,
+          },
+        },
+        {
+          urlPattern: /\/_nuxt\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'nuxt-assets-cache',
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 60 * 60 * 24 * 30,
+            },
+          },
+        },
+      ],
+    },
+    client: {
+      installPrompt: true,
+    },
+    devOptions: {
+      enabled: true,
+      type: 'module',
     },
   },
 })

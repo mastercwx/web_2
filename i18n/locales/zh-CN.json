@@ -568,5 +568,14 @@
       "personal": "个性化推荐",
       "popular": "热门文章"
     }
+  },
+  "pwa": {
+    "installTitle": "安装 HG Web",
+    "installDescription": "将应用安装到桌面，获得更好的使用体验",
+    "install": "安装",
+    "dismiss": "以后再说",
+    "offlineTitle": "网络连接已断开",
+    "offlineDescription": "您当前处于离线状态，请检查网络连接后重试",
+    "retry": "重试"
   }
 }
