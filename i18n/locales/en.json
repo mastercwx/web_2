@@ -430,7 +430,15 @@
     "commentsCount": "{count} comments",
     "likesCount": "{count} likes",
     "postsCount": "{count} posts",
-    "userComments": "{count} comments"
+    "userComments": "{count} comments",
+    "charts": {
+      "contentGrowth": "Content Growth",
+      "commentTrend": "Comment Trend",
+      "dailyLikes": "Daily Likes",
+      "followerGrowth": "Follower Growth",
+      "tagDistribution": "Tag Distribution",
+      "postStatus": "Post Status"
+    }
   },
   "share": {
     "title": "Share",
