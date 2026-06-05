@@ -1,0 +1,716 @@
+{
+  "common": {
+    "appName": "HG Web",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "reset": "Reset",
+    "back": "Back",
+    "next": "Next",
+    "prev": "Previous",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "posts": "Posts",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "admin": "Admin",
+    "profile": "Profile",
+    "welcome": "Welcome",
+    "settings": "Settings",
+    "tags": "Tags",
+    "archive": "Archive",
+    "search": "Search",
+    "series": "Series",
+    "dashboard": "Dashboard"
+  },
+  "home": {
+    "title": "Welcome to HG Web",
+    "subtitle": "A modern web application built with Nuxt 3",
+    "features": {
+      "nuxt": {
+        "title": "Nuxt 3",
+        "description": "Full-stack framework based on Vue 3"
+      },
+      "typescript": {
+        "title": "TypeScript",
+        "description": "Type-safe development experience"
+      },
+      "tailwind": {
+        "title": "Tailwind CSS",
+        "description": "Utility-first CSS framework"
+      }
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "description": "HG Web is a modern web application built with Nuxt 3, using the latest frontend technology stack, committed to providing excellent user experience and development experience.",
+    "techStack": "Tech Stack"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to your account",
+      "subtitle": "Or",
+      "registerLink": "register a new account",
+      "username": "Username or email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "noAccount": "Don't have an account?"
+    },
+    "register": {
+      "title": "Create a new account",
+      "subtitle": "Or",
+      "loginLink": "sign in to your existing account",
+      "username": "Username",
+      "email": "Email address",
+      "password": "Password (at least 6 characters)",
+      "confirmPassword": "Confirm password",
+      "submit": "Register",
+      "submitting": "Registering...",
+      "hasAccount": "Already have an account?"
+    },
+    "errors": {
+      "required": "Please fill in all required fields",
+      "usernameLength": "Username must be between 2-50 characters",
+      "passwordLength": "Password must be at least 6 characters",
+      "passwordMismatch": "Passwords do not match",
+      "invalidEmail": "Invalid email format",
+      "loginFailed": "Login failed",
+      "registerFailed": "Registration failed"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Enter your email address and we'll send you a password reset link",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your registered email",
+      "submit": "Send Reset Link",
+      "sending": "Sending...",
+      "backToLogin": "Back to Login",
+      "failed": "Failed to send, please try again",
+      "debugTitle": "Test Mode - Reset Token:",
+      "debugHint": "Copy this token to the reset password page",
+      "resetNow": "Reset Password Now"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter the reset token and your new password",
+      "token": "Reset Token",
+      "tokenPlaceholder": "Enter reset token",
+      "password": "New Password",
+      "passwordPlaceholder": "Enter new password (at least 6 characters)",
+      "confirmPassword": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Enter new password again",
+      "submit": "Reset Password",
+      "resetting": "Resetting...",
+      "goToLogin": "Go to Login",
+      "backToLogin": "Back to Login",
+      "requestNew": "Request New",
+      "failed": "Reset failed, please try again"
+    },
+    "verify": {
+      "verifying": "Verifying email...",
+      "pleaseWait": "Please wait",
+      "success": "Email Verified!",
+      "successMessage": "Your email has been verified successfully. You can now use all features.",
+      "goToLogin": "Go to Login",
+      "failed": "Verification Failed",
+      "errorMessage": "An error occurred during verification. Please try again later.",
+      "checkEmail": "Check Your Email",
+      "checkEmailMessage": "We have sent a verification link to your email. Please click the link to verify.",
+      "resend": "Resend Verification Email",
+      "resending": "Sending...",
+      "emailSent": "Verification email sent",
+      "sendFailed": "Failed to send",
+      "goHome": "Go Home"
+    },
+    "oauth": {
+      "divider": "Or sign in with social account",
+      "github": "Sign in with GitHub",
+      "google": "Sign in with Google"
+    }
+  },
+  "posts": {
+    "title": "Posts",
+    "create": "Write Post",
+    "search": "Search posts...",
+    "noPosts": "No posts yet",
+    "author": "Author",
+    "date": "Date",
+    "tags": "Tags",
+    "readMore": "Read more",
+    "detail": {
+      "title": "Post Detail",
+      "backToList": "Back to list",
+      "edit": "Edit Post",
+      "delete": "Delete Post"
+    },
+    "createPage": {
+      "title": "Create Post",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Enter post title",
+      "contentLabel": "Content",
+      "contentPlaceholder": "Enter post content (Markdown supported)",
+      "tagsLabel": "Tags",
+      "tagsPlaceholder": "Press Enter to add tags",
+      "publishNow": "Publish now",
+      "scheduledAt": "Schedule for later",
+      "scheduledHint": "Set a future time to save as draft",
+      "titleContentRequired": "Title and content are required",
+      "createFailed": "Failed to create post",
+      "submit": "Publish Post",
+      "submitting": "Publishing...",
+      "seriesLabel": "Series",
+      "noSeries": "No Series",
+      "seriesOrder": "Series Order",
+      "seriesOrderHint": "Order in the series"
+    },
+    "editPage": {
+      "title": "Edit Post",
+      "submit": "Save Changes",
+      "submitting": "Saving..."
+    },
+    "drafts": {
+      "title": "My Drafts",
+      "description": "Manage your drafts and scheduled posts",
+      "noDrafts": "No drafts yet",
+      "draft": "Draft",
+      "scheduled": "Scheduled",
+      "published": "Published",
+      "scheduledFor": "Scheduled for",
+      "createdAt": "Created at",
+      "confirmDelete": "Are you sure you want to delete this post?"
+    }
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "dashboard": {
+      "title": "Dashboard",
+      "users": "Total Users",
+      "posts": "Total Posts",
+      "published": "Published",
+      "drafts": "Drafts",
+      "recentUsers": "Recent Users",
+      "recentPosts": "Recent Posts"
+    },
+    "users": {
+      "title": "User Management",
+      "search": "Search users...",
+      "id": "ID",
+      "username": "Username",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "posts": "Posts",
+      "createdAt": "Registered",
+      "actions": "Actions",
+      "delete": "Delete",
+      "roles": {
+        "USER": "User",
+        "ADMIN": "Admin",
+        "GUEST": "Guest"
+      },
+      "statuses": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "BANNED": "Banned"
+      }
+    },
+    "posts": {
+      "title": "Post Management",
+      "search": "Search posts...",
+      "id": "ID",
+      "titleColumn": "Title",
+      "author": "Author",
+      "tags": "Tags",
+      "status": "Status",
+      "createdAt": "Created",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "published": "Published",
+      "draft": "Draft",
+      "allStatus": "All Status"
+    },
+    "media": {
+      "title": "Media Library",
+      "upload": "Upload",
+      "uploadFile": "Upload File",
+      "totalFiles": "Total Files",
+      "totalSize": "Total Size",
+      "allTypes": "All Types",
+      "images": "Images",
+      "videos": "Videos",
+      "documents": "Documents",
+      "searchPlaceholder": "Search filename...",
+      "noFiles": "No files yet",
+      "dragOrClick": "Drag and drop files here, or click to select",
+      "maxSize": "Maximum 10MB",
+      "copyUrl": "Copy URL",
+      "urlCopied": "URL copied",
+      "editFile": "Edit File",
+      "altText": "Alt Text",
+      "altPlaceholder": "Image description (for accessibility)",
+      "caption": "Caption",
+      "captionPlaceholder": "File caption",
+      "confirmDelete": "Are you sure you want to delete \"{name}\"?"
+    },
+    "experiments": {
+      "title": "A/B Testing",
+      "create": "Create Experiment",
+      "createTitle": "Create New Experiment",
+      "noExperiments": "No experiments yet",
+      "name": "Experiment Name",
+      "namePlaceholder": "Enter experiment name",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter experiment description (optional)",
+      "variants": "Variants",
+      "variantName": "Variant Name",
+      "weight": "Weight",
+      "control": "Control",
+      "addVariant": "Add Variant",
+      "users": "Users",
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "complete": "Complete",
+      "stats": "Stats",
+      "statsTitle": "Experiment Stats",
+      "totalUsers": "Total Users",
+      "controlGroup": "Control Group"
+    }
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Toggle theme"
+  },
+  "language": {
+    "zh-CN": "中文",
+    "en": "English",
+    "toggle": "Switch language"
+  },
+  "user": {
+    "joined": "Joined",
+    "posts": "Posts",
+    "comments": "Comments",
+    "likes": "Likes",
+    "favorites": "Favorites",
+    "followers": "Followers",
+    "following": "Following",
+    "follow": "Follow",
+    "unfollow": "Following",
+    "readingHistory": "Reading History",
+    "clearHistory": "Clear History",
+    "noHistory": "No reading history yet",
+    "readAt": "Read at",
+    "noPosts": "No posts yet",
+    "noFavorites": "No favorites yet",
+    "noLikes": "No likes yet"
+  },
+  "errors": {
+    "403": "Access Denied",
+    "404": "Page Not Found",
+    "500": "Server Error",
+    "default": "Something went wrong",
+    "notFoundMessage": "The page you visited may have been deleted or does not exist",
+    "forbiddenMessage": "Please contact the administrator for access",
+    "serverErrorMessage": "Please try again later or contact the administrator",
+    "goHome": "Go Home"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": {
+      "title": "Profile",
+      "username": "Username",
+      "usernamePlaceholder": "Enter username",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "password": {
+      "title": "Change Password",
+      "current": "Current Password",
+      "currentPlaceholder": "Enter current password",
+      "new": "New Password",
+      "newPlaceholder": "Enter new password (at least 6 characters)",
+      "confirm": "Confirm New Password",
+      "confirmPlaceholder": "Enter new password again",
+      "save": "Change Password",
+      "saving": "Changing..."
+    },
+    "avatar": {
+      "title": "Avatar",
+      "url": "Avatar URL",
+      "urlPlaceholder": "Enter avatar image URL",
+      "hint": "Supports JPG, PNG, GIF formats",
+      "save": "Update Avatar",
+      "saving": "Updating...",
+      "or": "Or upload a new avatar"
+    },
+    "notifications": {
+      "title": "Email Notifications",
+      "emailEnabled": "Enable Email Notifications",
+      "emailHint": "Receive email alerts when there are new comments, likes, or followers",
+      "types": "Notification Types",
+      "typesList": {
+        "comments": "Comment notifications - when someone comments on your post",
+        "likes": "Like notifications - when someone likes your post",
+        "follows": "Follow notifications - when someone follows you",
+        "system": "System announcements - important updates and announcements"
+      },
+      "save": "Save Settings",
+      "saving": "Saving..."
+    },
+    "oauth": {
+      "title": "Social Accounts",
+      "description": "Link your social accounts to sign in with them",
+      "linked": "Linked",
+      "notLinked": "Not linked",
+      "link": "Link",
+      "unlink": "Unlink",
+      "unlinkConfirm": "Are you sure you want to unlink this social account?"
+    }
+  },
+  "tags": {
+    "title": "Tags",
+    "description": "Browse all tags and discover more related content",
+    "sortBy": "Sort by",
+    "postCount": "Post Count",
+    "name": "Name",
+    "allTags": "All Tags",
+    "posts": "posts",
+    "noTags": "No tags yet",
+    "noPosts": "No posts under this tag",
+    "backToTags": "Back to tags",
+    "postsCount": "{count} posts total"
+  },
+  "search": {
+    "title": "Search",
+    "subtitle": "Search posts, tags and authors",
+    "placeholder": "Enter keywords to search...",
+    "button": "Search",
+    "noResults": "No posts found for \"{query}\"",
+    "resultsCount": "Found {count} posts for \"{query}\"",
+    "suggestions": "Suggestions",
+    "hotTags": "Hot Tags",
+    "hotSearches": "Hot Searches",
+    "posts": "posts",
+    "history": "Search History",
+    "clearHistory": "Clear History",
+    "sortBy": "Sort By",
+    "sortRelevance": "Relevance",
+    "sortDateDesc": "Newest First",
+    "sortDateAsc": "Oldest First",
+    "sortLikes": "Most Liked",
+    "tag": "Tag",
+    "tryOtherKeywords": "Please try other keywords",
+    "dateRange": "Date Range",
+    "author": "Author",
+    "authorPlaceholder": "Enter username",
+    "clearFilters": "Clear Filters"
+  },
+  "archive": {
+    "title": "Archive",
+    "description": "{count} posts in total",
+    "allYears": "All",
+    "noPosts": "No posts yet",
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalPosts": "Total Posts",
+    "publishedPosts": "Published",
+    "draftPosts": "Drafts",
+    "totalComments": "Total Comments",
+    "pendingComments": "Pending",
+    "totalUsers": "Users",
+    "totalViews": "Total Views",
+    "totalTags": "Tags",
+    "todayData": "Today's Data",
+    "todayPosts": "New Posts",
+    "todayComments": "New Comments",
+    "todayUsers": "New Users",
+    "trendPosts": "Posts in Last 7 Days",
+    "trendComments": "Comments in Last 7 Days",
+    "topByViews": "Most Viewed",
+    "topByComments": "Most Commented",
+    "topByLikes": "Most Liked",
+    "activeUsers": "Active Users",
+    "viewsCount": "{count} views",
+    "commentsCount": "{count} comments",
+    "likesCount": "{count} likes",
+    "postsCount": "{count} posts",
+    "userComments": "{count} comments",
+    "charts": {
+      "contentGrowth": "Content Growth",
+      "commentTrend": "Comment Trend",
+      "dailyLikes": "Daily Likes",
+      "followerGrowth": "Follower Growth",
+      "tagDistribution": "Tag Distribution",
+      "postStatus": "Post Status"
+    }
+  },
+  "share": {
+    "title": "Share",
+    "copyLink": "Copy Link",
+    "copied": "Copied",
+    "shareTo": "Share to"
+  },
+  "series": {
+    "title": "Post Series",
+    "description": "Browse all post series for systematic learning",
+    "empty": "No post series yet",
+    "postCount": "{count} posts",
+    "backToList": "Back to series list",
+    "seriesPosts": "Series Posts"
+  },
+  "moderation": {
+    "title": "Content Moderation",
+    "comments": "Comment Review",
+    "reports": "Report Management",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "approve": "Approve",
+    "reject": "Reject",
+    "delete": "Delete",
+    "dismiss": "Dismiss",
+    "reportCount": "{count} reports",
+    "reportReason": "Report Reason",
+    "resolved": "Resolved",
+    "dismissed": "Dismissed"
+  },
+  "report": {
+    "title": "Report Content",
+    "reason": "Reason",
+    "description": "Additional Details",
+    "submit": "Submit Report",
+    "success": "Report submitted. Thank you for your feedback.",
+    "reasons": {
+      "spam": "Spam/Advertising",
+      "abuse": "Abuse/Harassment",
+      "inappropriate": "Inappropriate Content",
+      "copyright": "Copyright Infringement",
+      "other": "Other Reason"
+    }
+  },
+  "notifications": {
+    "title": "Notification Center",
+    "empty": "No notifications",
+    "markAllRead": "Mark all read",
+    "unreadCount": "{count} unread",
+    "viewAll": "View all notifications",
+    "types": {
+      "like": "New like",
+      "comment": "New comment",
+      "follow": "New follower",
+      "system": "System notification"
+    },
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{count} minutes ago",
+      "hoursAgo": "{count} hours ago",
+      "daysAgo": "{count} days ago"
+    },
+    "filters": {
+      "all": "All",
+      "like": "Likes",
+      "comment": "Comments",
+      "follow": "Follows",
+      "system": "System"
+    },
+    "preferences": {
+      "title": "Notification Preferences",
+      "emailNotifications": "Email Notifications",
+      "emailHint": "Receive email alerts for new comments, likes, or follows",
+      "browserNotifications": "Browser Notifications",
+      "browserHint": "Show desktop notifications in your browser",
+      "soundEnabled": "Notification Sound",
+      "soundHint": "Play a sound when receiving new notifications",
+      "save": "Save Settings",
+      "saving": "Saving..."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Have any questions or suggestions? Feel free to contact us",
+    "email": "Email",
+    "workHours": "Work Hours",
+    "workHoursValue": "Mon-Fri 9:00 - 18:00",
+    "address": "Address",
+    "addressValue": "China · Internet",
+    "sendMessage": "Send Message",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "subject": "Subject",
+    "subjectPlaceholder": "Enter message subject (optional)",
+    "content": "Content",
+    "contentPlaceholder": "Enter your message...",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "success": "Message sent, we will reply as soon as possible",
+    "required": "Please fill in required fields",
+    "invalidEmail": "Invalid email format"
+  },
+  "recommendations": {
+    "title": "Recommended",
+    "related": "Related Posts",
+    "empty": "No recommendations yet",
+    "noRelated": "No related posts",
+    "loadMore": "Load More",
+    "tabs": {
+      "personal": "For You",
+      "popular": "Popular"
+    }
+  },
+  "pwa": {
+    "installTitle": "Install HG Web",
+    "installDescription": "Install the app to your desktop for a better experience",
+    "install": "Install",
+    "dismiss": "Not Now",
+    "offlineTitle": "No Internet Connection",
+    "offlineDescription": "You are currently offline. Please check your network connection and try again.",
+    "retry": "Retry"
+  },
+  "translations": {
+    "title": "Translation Management",
+    "add": "Add Translation",
+    "edit": "Edit Translation",
+    "delete": "Delete Translation",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "translatedTitle": "Translated Title",
+    "translatedContent": "Translated Content",
+    "excerpt": "Excerpt",
+    "original": "Original",
+    "viewIn": "View in",
+    "noTranslations": "No translations yet",
+    "titlePlaceholder": "Enter translated title",
+    "contentPlaceholder": "Enter translated content",
+    "excerptPlaceholder": "Enter translated excerpt (optional)",
+    "stats": {
+      "title": "Translation Statistics",
+      "totalPosts": "Total Posts",
+      "translatedCount": "Translated Count",
+      "percentage": "Translation Rate"
+    }
+  },
+  "ads": {
+    "title": "Ad Management",
+    "description": "Manage website ad placements and campaigns",
+    "add": "Add Ad",
+    "edit": "Edit Ad",
+    "name": "Name",
+    "descriptionLabel": "Description",
+    "position": "Position",
+    "type": "Type",
+    "content": "Ad Content",
+    "imageUrl": "Image URL",
+    "linkUrl": "Link URL",
+    "text": "Text Content",
+    "html": "HTML Code",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "priority": "Priority",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "positions": {
+      "sidebar": "Sidebar",
+      "header": "Header",
+      "footer": "Footer",
+      "in-article": "In Article"
+    },
+    "types": {
+      "BANNER": "Banner Ad",
+      "SIDEBAR": "Sidebar Ad",
+      "IN_ARTICLE": "In-Article Ad",
+      "NATIVE": "Native Ad",
+      "POPUP": "Popup Ad"
+    },
+    "stats": {
+      "title": "Ad Statistics",
+      "impressions": "Impressions",
+      "clicks": "Clicks",
+      "ctr": "Click-Through Rate (CTR)"
+    }
+  },
+  "webhooks": {
+    "title": "Webhook Management",
+    "description": "Manage external system integrations and event push notifications",
+    "add": "Add Webhook",
+    "name": "Name",
+    "url": "URL",
+    "secret": "Secret",
+    "secretHint": "Used for signature verification",
+    "events": "Subscribe Events",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "success": "Success",
+      "failed": "Failed",
+      "retrying": "Retrying"
+    },
+    "actions": {
+      "test": "Test",
+      "edit": "Edit",
+      "delete": "Delete",
+      "enable": "Enable",
+      "disable": "Disable",
+      "retry": "Retry Failed"
+    },
+    "delivery": {
+      "title": "Delivery Logs",
+      "id": "ID",
+      "webhook": "Webhook",
+      "event": "Event",
+      "statusCode": "HTTP Status",
+      "retryCount": "Retry Count",
+      "createdAt": "Created At"
+    },
+    "eventsList": {
+      "post.created": "Post Created",
+      "post.updated": "Post Updated",
+      "post.deleted": "Post Deleted",
+      "post.published": "Post Published",
+      "comment.created": "Comment Created",
+      "comment.approved": "Comment Approved",
+      "comment.rejected": "Comment Rejected",
+      "user.registered": "User Registered",
+      "user.updated": "User Updated",
+      "user.banned": "User Banned"
+    }
+  }
+}

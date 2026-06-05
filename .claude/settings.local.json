@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill -f nuxi)",
+      "Bash(rm -rf .* *)",
+      "Bash(git checkout *)",
+      "Bash(git clean *)",
+      "Bash(mkdir -p .husky)",
+      "Bash(npx husky *)",
+      "Bash(rm -rf /var/lib/mysql/*)",
+      "Bash(mkdir -p /tmp/mysql_tmp)",
+      "Bash(export TMPDIR=/tmp/mysql_tmp)",
+      "Bash(mysqld --initialize-insecure --user=mysql)",
+      "Bash(rm -rf /var/lib/mysql/* /tmp/mysql_tmp)",
+      "Bash(chmod 777 /tmp/mysql_tmp)",
+      "Bash(TMPDIR=/tmp/mysql_tmp mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql)",
+      "Bash(npx prisma *)"
+    ]
+  }
+}

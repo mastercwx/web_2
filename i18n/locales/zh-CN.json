@@ -1,0 +1,716 @@
+{
+  "common": {
+    "appName": "HG Web",
+    "loading": "加载中...",
+    "error": "出错了",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "search": "搜索",
+    "reset": "重置",
+    "back": "返回",
+    "next": "下一页",
+    "prev": "上一页",
+    "submit": "提交",
+    "close": "关闭"
+  },
+  "nav": {
+    "home": "首页",
+    "posts": "文章",
+    "about": "关于",
+    "contact": "联系我们",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出",
+    "admin": "管理后台",
+    "profile": "个人资料",
+    "welcome": "欢迎",
+    "settings": "设置",
+    "tags": "标签",
+    "archive": "归档",
+    "search": "搜索",
+    "series": "系列",
+    "dashboard": "仪表盘"
+  },
+  "home": {
+    "title": "欢迎来到 HG Web",
+    "subtitle": "基于 Nuxt 3 构建的现代化 Web 应用",
+    "features": {
+      "nuxt": {
+        "title": "Nuxt 3",
+        "description": "基于 Vue 3 的全栈框架"
+      },
+      "typescript": {
+        "title": "TypeScript",
+        "description": "类型安全的开发体验"
+      },
+      "tailwind": {
+        "title": "Tailwind CSS",
+        "description": "实用优先的 CSS 框架"
+      }
+    }
+  },
+  "about": {
+    "title": "关于我们",
+    "description": "HG Web 是一个基于 Nuxt 3 构建的现代化 Web 应用，采用最新的前端技术栈，致力于提供优秀的用户体验和开发体验。",
+    "techStack": "技术栈"
+  },
+  "auth": {
+    "login": {
+      "title": "登录账号",
+      "subtitle": "或者",
+      "registerLink": "注册新账号",
+      "username": "用户名或邮箱",
+      "password": "密码",
+      "submit": "登录",
+      "submitting": "登录中...",
+      "noAccount": "还没有账号？"
+    },
+    "register": {
+      "title": "注册新账号",
+      "subtitle": "或者",
+      "loginLink": "登录已有账号",
+      "username": "用户名",
+      "email": "邮箱地址",
+      "password": "密码（至少 6 个字符）",
+      "confirmPassword": "确认密码",
+      "submit": "注册",
+      "submitting": "注册中...",
+      "hasAccount": "已有账号？"
+    },
+    "errors": {
+      "required": "请填写所有必填字段",
+      "usernameLength": "用户名长度需要在 2-50 个字符之间",
+      "passwordLength": "密码长度不能少于 6 个字符",
+      "passwordMismatch": "两次输入的密码不一致",
+      "invalidEmail": "邮箱格式不正确",
+      "loginFailed": "登录失败",
+      "registerFailed": "注册失败"
+    },
+    "forgotPassword": {
+      "title": "忘记密码",
+      "description": "输入您的邮箱地址，我们将发送重置密码的链接",
+      "email": "邮箱地址",
+      "emailPlaceholder": "请输入注册时的邮箱",
+      "submit": "发送重置链接",
+      "sending": "发送中...",
+      "backToLogin": "返回登录",
+      "failed": "发送失败，请稍后重试",
+      "debugTitle": "测试模式 - 重置令牌：",
+      "debugHint": "请复制此令牌到重置密码页面",
+      "resetNow": "前往重置密码"
+    },
+    "resetPassword": {
+      "title": "重置密码",
+      "description": "请输入重置令牌和新密码",
+      "token": "重置令牌",
+      "tokenPlaceholder": "请输入重置令牌",
+      "password": "新密码",
+      "passwordPlaceholder": "请输入新密码（至少 6 个字符）",
+      "confirmPassword": "确认新密码",
+      "confirmPasswordPlaceholder": "请再次输入新密码",
+      "submit": "重置密码",
+      "resetting": "重置中...",
+      "goToLogin": "前往登录",
+      "backToLogin": "返回登录",
+      "requestNew": "重新申请",
+      "failed": "重置失败，请稍后重试"
+    },
+    "verify": {
+      "verifying": "正在验证邮箱...",
+      "pleaseWait": "请稍候",
+      "success": "邮箱验证成功！",
+      "successMessage": "你的邮箱已成功验证，现在可以正常使用所有功能。",
+      "goToLogin": "前往登录",
+      "failed": "验证失败",
+      "errorMessage": "验证过程中出现错误，请稍后重试。",
+      "checkEmail": "请检查邮箱",
+      "checkEmailMessage": "我们已向你的邮箱发送了验证链接，请点击链接完成验证。",
+      "resend": "重新发送验证邮件",
+      "resending": "发送中...",
+      "emailSent": "验证邮件已发送",
+      "sendFailed": "发送失败",
+      "goHome": "返回首页"
+    },
+    "oauth": {
+      "divider": "或者使用社交账号登录",
+      "github": "使用 GitHub 登录",
+      "google": "使用 Google 登录"
+    }
+  },
+  "posts": {
+    "title": "文章列表",
+    "create": "写文章",
+    "search": "搜索文章...",
+    "noPosts": "暂无文章",
+    "author": "作者",
+    "date": "日期",
+    "tags": "标签",
+    "readMore": "阅读更多",
+    "detail": {
+      "title": "文章详情",
+      "backToList": "返回列表",
+      "edit": "编辑文章",
+      "delete": "删除文章"
+    },
+    "createPage": {
+      "title": "创建文章",
+      "titleLabel": "标题",
+      "titlePlaceholder": "请输入文章标题",
+      "contentLabel": "内容",
+      "contentPlaceholder": "请输入文章内容（支持 Markdown）",
+      "tagsLabel": "标签",
+      "tagsPlaceholder": "输入标签后按回车添加",
+      "publishNow": "立即发布",
+      "scheduledAt": "定时发布",
+      "scheduledHint": "设置未来时间将自动保存为草稿",
+      "titleContentRequired": "标题和内容不能为空",
+      "createFailed": "创建失败",
+      "submit": "发布文章",
+      "submitting": "发布中...",
+      "seriesLabel": "所属系列",
+      "noSeries": "不加入系列",
+      "seriesOrder": "系列顺序",
+      "seriesOrderHint": "在系列中的排列顺序"
+    },
+    "editPage": {
+      "title": "编辑文章",
+      "submit": "保存修改",
+      "submitting": "保存中..."
+    },
+    "drafts": {
+      "title": "我的草稿",
+      "description": "管理您的草稿和定时发布文章",
+      "noDrafts": "暂无草稿",
+      "draft": "草稿",
+      "scheduled": "定时发布",
+      "published": "已发布",
+      "scheduledFor": "定时发布于",
+      "createdAt": "创建于",
+      "confirmDelete": "确定要删除这篇文章吗？"
+    }
+  },
+  "admin": {
+    "title": "管理后台",
+    "dashboard": {
+      "title": "仪表盘",
+      "users": "用户总数",
+      "posts": "文章总数",
+      "published": "已发布",
+      "drafts": "草稿",
+      "recentUsers": "最近注册用户",
+      "recentPosts": "最近发布文章"
+    },
+    "users": {
+      "title": "用户管理",
+      "search": "搜索用户...",
+      "id": "ID",
+      "username": "用户名",
+      "email": "邮箱",
+      "role": "角色",
+      "status": "状态",
+      "posts": "文章数",
+      "createdAt": "注册时间",
+      "actions": "操作",
+      "delete": "删除",
+      "roles": {
+        "USER": "普通用户",
+        "ADMIN": "管理员",
+        "GUEST": "访客"
+      },
+      "statuses": {
+        "ACTIVE": "正常",
+        "INACTIVE": "未激活",
+        "BANNED": "封禁"
+      }
+    },
+    "posts": {
+      "title": "文章管理",
+      "search": "搜索文章...",
+      "id": "ID",
+      "titleColumn": "标题",
+      "author": "作者",
+      "tags": "标签",
+      "status": "状态",
+      "createdAt": "创建时间",
+      "actions": "操作",
+      "edit": "编辑",
+      "delete": "删除",
+      "published": "已发布",
+      "draft": "草稿",
+      "allStatus": "全部状态"
+    },
+    "media": {
+      "title": "媒体库",
+      "upload": "上传文件",
+      "uploadFile": "上传文件",
+      "totalFiles": "文件总数",
+      "totalSize": "总大小",
+      "allTypes": "所有类型",
+      "images": "图片",
+      "videos": "视频",
+      "documents": "文档",
+      "searchPlaceholder": "搜索文件名...",
+      "noFiles": "暂无文件",
+      "dragOrClick": "拖放文件到这里，或点击选择",
+      "maxSize": "最大支持 10MB",
+      "copyUrl": "复制链接",
+      "urlCopied": "链接已复制",
+      "editFile": "编辑文件",
+      "altText": "替代文本",
+      "altPlaceholder": "图片描述（用于无障碍访问）",
+      "caption": "说明文字",
+      "captionPlaceholder": "文件说明文字",
+      "confirmDelete": "确定要删除 \"{name}\" 吗？"
+    },
+    "experiments": {
+      "title": "A/B 测试",
+      "create": "创建实验",
+      "createTitle": "创建新实验",
+      "noExperiments": "暂无实验",
+      "name": "实验名称",
+      "namePlaceholder": "输入实验名称",
+      "description": "实验描述",
+      "descriptionPlaceholder": "输入实验描述（可选）",
+      "variants": "变体",
+      "variantName": "变体名称",
+      "weight": "权重",
+      "control": "控制组",
+      "addVariant": "添加变体",
+      "users": "用户数",
+      "start": "开始",
+      "pause": "暂停",
+      "resume": "恢复",
+      "complete": "完成",
+      "stats": "统计",
+      "statsTitle": "实验统计",
+      "totalUsers": "总用户数",
+      "controlGroup": "控制组"
+    }
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "system": "跟随系统",
+    "toggle": "切换主题"
+  },
+  "language": {
+    "zh-CN": "中文",
+    "en": "English",
+    "toggle": "切换语言"
+  },
+  "user": {
+    "joined": "加入时间",
+    "posts": "文章",
+    "comments": "评论",
+    "likes": "点赞",
+    "favorites": "收藏",
+    "followers": "粉丝",
+    "following": "关注",
+    "follow": "关注",
+    "unfollow": "已关注",
+    "readingHistory": "阅读历史",
+    "clearHistory": "清空历史",
+    "noHistory": "暂无阅读记录",
+    "readAt": "阅读时间",
+    "noPosts": "暂无文章",
+    "noFavorites": "暂无收藏",
+    "noLikes": "暂无点赞"
+  },
+  "errors": {
+    "403": "没有权限访问",
+    "404": "页面不存在",
+    "500": "服务器错误",
+    "default": "出错了",
+    "notFoundMessage": "你访问的页面可能已被删除或不存在",
+    "forbiddenMessage": "请联系管理员获取权限",
+    "serverErrorMessage": "请稍后再试，或联系管理员",
+    "goHome": "返回首页"
+  },
+  "settings": {
+    "title": "个人设置",
+    "profile": {
+      "title": "个人资料",
+      "username": "用户名",
+      "usernamePlaceholder": "请输入用户名",
+      "email": "邮箱地址",
+      "emailPlaceholder": "请输入邮箱地址",
+      "save": "保存修改",
+      "saving": "保存中..."
+    },
+    "password": {
+      "title": "修改密码",
+      "current": "当前密码",
+      "currentPlaceholder": "请输入当前密码",
+      "new": "新密码",
+      "newPlaceholder": "请输入新密码（至少 6 个字符）",
+      "confirm": "确认新密码",
+      "confirmPlaceholder": "请再次输入新密码",
+      "save": "修改密码",
+      "saving": "修改中..."
+    },
+    "avatar": {
+      "title": "头像设置",
+      "url": "头像 URL",
+      "urlPlaceholder": "请输入头像图片链接",
+      "hint": "支持 JPG、PNG、GIF 格式",
+      "save": "更新头像",
+      "saving": "更新中...",
+      "or": "或者上传新头像"
+    },
+    "notifications": {
+      "title": "邮件通知",
+      "emailEnabled": "启用邮件通知",
+      "emailHint": "开启后，当有新评论、点赞或关注时会收到邮件提醒",
+      "types": "通知类型",
+      "typesList": {
+        "comments": "新评论通知 - 有人评论你的文章时",
+        "likes": "点赞通知 - 有人点赞你的文章时",
+        "follows": "关注通知 - 有人关注你时",
+        "system": "系统公告 - 重要系统更新和公告"
+      },
+      "save": "保存设置",
+      "saving": "保存中..."
+    },
+    "oauth": {
+      "title": "社交账号绑定",
+      "description": "绑定社交账号后，可以直接使用社交账号登录",
+      "linked": "已绑定",
+      "notLinked": "未绑定",
+      "link": "绑定",
+      "unlink": "解绑",
+      "unlinkConfirm": "确定要解绑此社交账号吗？"
+    }
+  },
+  "tags": {
+    "title": "标签",
+    "description": "浏览所有标签，发现更多相关内容",
+    "sortBy": "排序方式",
+    "postCount": "文章数量",
+    "name": "名称",
+    "allTags": "所有标签",
+    "posts": "篇文章",
+    "noTags": "暂无标签",
+    "noPosts": "该标签下暂无文章",
+    "backToTags": "返回标签列表",
+    "postsCount": "共 {count} 篇文章"
+  },
+  "search": {
+    "title": "搜索",
+    "subtitle": "搜索文章、标签和作者",
+    "placeholder": "输入关键词搜索...",
+    "button": "搜索",
+    "noResults": "未找到与 \"{query}\" 相关的文章",
+    "resultsCount": "找到 {count} 篇与 \"{query}\" 相关的文章",
+    "suggestions": "搜索建议",
+    "hotTags": "热门标签",
+    "hotSearches": "热门搜索",
+    "posts": "篇文章",
+    "history": "搜索历史",
+    "clearHistory": "清除历史",
+    "sortBy": "排序方式",
+    "sortRelevance": "相关性",
+    "sortDateDesc": "最新发布",
+    "sortDateAsc": "最早发布",
+    "sortLikes": "最多点赞",
+    "tag": "标签",
+    "tryOtherKeywords": "请尝试其他关键词",
+    "dateRange": "日期范围",
+    "author": "作者",
+    "authorPlaceholder": "输入用户名",
+    "clearFilters": "清除筛选"
+  },
+  "archive": {
+    "title": "文章归档",
+    "description": "共 {count} 篇文章",
+    "allYears": "全部",
+    "noPosts": "暂无文章",
+    "months": {
+      "jan": "一月",
+      "feb": "二月",
+      "mar": "三月",
+      "apr": "四月",
+      "may": "五月",
+      "jun": "六月",
+      "jul": "七月",
+      "aug": "八月",
+      "sep": "九月",
+      "oct": "十月",
+      "nov": "十一月",
+      "dec": "十二月"
+    }
+  },
+  "dashboard": {
+    "title": "仪表盘",
+    "totalPosts": "总文章数",
+    "publishedPosts": "已发布",
+    "draftPosts": "草稿",
+    "totalComments": "总评论数",
+    "pendingComments": "待审核",
+    "totalUsers": "注册用户",
+    "totalViews": "总阅读量",
+    "totalTags": "标签数",
+    "todayData": "今日数据",
+    "todayPosts": "新文章",
+    "todayComments": "新评论",
+    "todayUsers": "新用户",
+    "trendPosts": "近7天文章发布趋势",
+    "trendComments": "近7天评论趋势",
+    "topByViews": "最多阅读",
+    "topByComments": "最多评论",
+    "topByLikes": "最多点赞",
+    "activeUsers": "活跃用户",
+    "viewsCount": "{count} 次阅读",
+    "commentsCount": "{count} 条评论",
+    "likesCount": "{count} 个赞",
+    "postsCount": "{count} 篇文章",
+    "userComments": "{count} 条评论",
+    "charts": {
+      "contentGrowth": "内容增长趋势",
+      "commentTrend": "评论趋势",
+      "dailyLikes": "每日点赞",
+      "followerGrowth": "粉丝增长",
+      "tagDistribution": "标签分布",
+      "postStatus": "文章状态"
+    }
+  },
+  "share": {
+    "title": "分享",
+    "copyLink": "复制链接",
+    "copied": "已复制",
+    "shareTo": "分享到"
+  },
+  "series": {
+    "title": "文章系列",
+    "description": "浏览所有文章系列，系统化学习知识",
+    "empty": "暂无文章系列",
+    "postCount": "{count} 篇文章",
+    "backToList": "返回系列列表",
+    "seriesPosts": "系列文章"
+  },
+  "moderation": {
+    "title": "内容审核",
+    "comments": "评论审核",
+    "reports": "举报处理",
+    "pending": "待审核",
+    "approved": "已批准",
+    "rejected": "已拒绝",
+    "approve": "批准",
+    "reject": "拒绝",
+    "delete": "删除",
+    "dismiss": "驳回",
+    "reportCount": "{count} 次举报",
+    "reportReason": "举报原因",
+    "resolved": "已解决",
+    "dismissed": "已驳回"
+  },
+  "report": {
+    "title": "举报内容",
+    "reason": "举报原因",
+    "description": "补充说明",
+    "submit": "提交举报",
+    "success": "举报已提交，感谢您的反馈",
+    "reasons": {
+      "spam": "垃圾内容/广告",
+      "abuse": "辱骂/骚扰",
+      "inappropriate": "不当内容",
+      "copyright": "版权侵犯",
+      "other": "其他原因"
+    }
+  },
+  "notifications": {
+    "title": "通知中心",
+    "empty": "暂无通知",
+    "markAllRead": "全部已读",
+    "unreadCount": "{count} 条未读",
+    "viewAll": "查看全部通知",
+    "types": {
+      "like": "收到新点赞",
+      "comment": "收到新评论",
+      "follow": "新的关注者",
+      "system": "系统通知"
+    },
+    "time": {
+      "justNow": "刚刚",
+      "minutesAgo": "{count}分钟前",
+      "hoursAgo": "{count}小时前",
+      "daysAgo": "{count}天前"
+    },
+    "filters": {
+      "all": "全部",
+      "like": "点赞",
+      "comment": "评论",
+      "follow": "关注",
+      "system": "系统"
+    },
+    "preferences": {
+      "title": "通知偏好设置",
+      "emailNotifications": "邮件通知",
+      "emailHint": "开启后，当有新评论、点赞或关注时会收到邮件提醒",
+      "browserNotifications": "浏览器通知",
+      "browserHint": "开启后，会在浏览器中显示桌面通知",
+      "soundEnabled": "通知提示音",
+      "soundHint": "开启后，收到新通知时会播放提示音",
+      "save": "保存设置",
+      "saving": "保存中..."
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "description": "有任何问题或建议？欢迎随时联系我们",
+    "email": "电子邮件",
+    "workHours": "工作时间",
+    "workHoursValue": "周一至周五 9:00 - 18:00",
+    "address": "地址",
+    "addressValue": "中国 · 互联网",
+    "sendMessage": "发送消息",
+    "name": "姓名",
+    "namePlaceholder": "请输入您的姓名",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "请输入您的邮箱",
+    "subject": "主题",
+    "subjectPlaceholder": "请输入消息主题（可选）",
+    "content": "内容",
+    "contentPlaceholder": "请输入您想说的话...",
+    "submit": "发送消息",
+    "submitting": "发送中...",
+    "success": "消息已发送，我们会尽快回复您",
+    "required": "请填写必填字段",
+    "invalidEmail": "邮箱格式不正确"
+  },
+  "recommendations": {
+    "title": "推荐阅读",
+    "related": "相关文章",
+    "empty": "暂无推荐内容",
+    "noRelated": "暂无相关文章",
+    "loadMore": "加载更多",
+    "tabs": {
+      "personal": "个性化推荐",
+      "popular": "热门文章"
+    }
+  },
+  "pwa": {
+    "installTitle": "安装 HG Web",
+    "installDescription": "将应用安装到桌面，获得更好的使用体验",
+    "install": "安装",
+    "dismiss": "以后再说",
+    "offlineTitle": "网络连接已断开",
+    "offlineDescription": "您当前处于离线状态，请检查网络连接后重试",
+    "retry": "重试"
+  },
+  "translations": {
+    "title": "翻译管理",
+    "add": "添加翻译",
+    "edit": "编辑翻译",
+    "delete": "删除翻译",
+    "language": "语言",
+    "selectLanguage": "选择语言",
+    "translatedTitle": "翻译标题",
+    "translatedContent": "翻译内容",
+    "excerpt": "摘要",
+    "original": "原文",
+    "viewIn": "查看语言",
+    "noTranslations": "暂无翻译",
+    "titlePlaceholder": "输入翻译标题",
+    "contentPlaceholder": "输入翻译内容",
+    "excerptPlaceholder": "输入翻译摘要（可选）",
+    "stats": {
+      "title": "翻译统计",
+      "totalPosts": "总文章数",
+      "translatedCount": "翻译数量",
+      "percentage": "翻译率"
+    }
+  },
+  "ads": {
+    "title": "广告管理",
+    "description": "管理网站广告位和投放",
+    "add": "添加广告",
+    "edit": "编辑广告",
+    "name": "名称",
+    "descriptionLabel": "描述",
+    "position": "位置",
+    "type": "类型",
+    "content": "广告内容",
+    "imageUrl": "图片 URL",
+    "linkUrl": "链接 URL",
+    "text": "文字内容",
+    "html": "HTML 代码",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "priority": "优先级",
+    "status": {
+      "active": "启用",
+      "inactive": "禁用"
+    },
+    "positions": {
+      "sidebar": "侧边栏",
+      "header": "页头",
+      "footer": "页脚",
+      "in-article": "文章内"
+    },
+    "types": {
+      "BANNER": "横幅广告",
+      "SIDEBAR": "侧边栏广告",
+      "IN_ARTICLE": "文章内广告",
+      "NATIVE": "原生广告",
+      "POPUP": "弹窗广告"
+    },
+    "stats": {
+      "title": "广告统计",
+      "impressions": "展示次数",
+      "clicks": "点击次数",
+      "ctr": "点击率 (CTR)"
+    }
+  },
+  "webhooks": {
+    "title": "Webhook 管理",
+    "description": "管理外部系统集成和事件推送",
+    "add": "添加 Webhook",
+    "name": "名称",
+    "url": "URL",
+    "secret": "密钥",
+    "secretHint": "用于签名验证",
+    "events": "订阅事件",
+    "status": {
+      "active": "启用",
+      "inactive": "禁用",
+      "pending": "等待中",
+      "success": "成功",
+      "failed": "失败",
+      "retrying": "重试中"
+    },
+    "actions": {
+      "test": "测试",
+      "edit": "编辑",
+      "delete": "删除",
+      "enable": "启用",
+      "disable": "禁用",
+      "retry": "重试失败"
+    },
+    "delivery": {
+      "title": "投递日志",
+      "id": "ID",
+      "webhook": "Webhook",
+      "event": "事件",
+      "statusCode": "HTTP 状态码",
+      "retryCount": "重试次数",
+      "createdAt": "创建时间"
+    },
+    "eventsList": {
+      "post.created": "文章创建",
+      "post.updated": "文章更新",
+      "post.deleted": "文章删除",
+      "post.published": "文章发布",
+      "comment.created": "评论创建",
+      "comment.approved": "评论批准",
+      "comment.rejected": "评论拒绝",
+      "user.registered": "用户注册",
+      "user.updated": "用户更新",
+      "user.banned": "用户封禁"
+    }
+  }
+}
