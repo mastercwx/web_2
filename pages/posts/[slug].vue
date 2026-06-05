@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { marked } from 'marked'
+
 const route = useRoute()
 const slug = route.params['slug'] as string
 const authStore = useAuthStore()
@@ -13,6 +15,16 @@ if (error.value) {
 }
 
 const post = computed(() => (data.value as any)?.data?.post)
+
+// Markdown 渲染
+const renderedContent = computed(() => {
+  if (!post.value?.content) return ''
+  try {
+    return marked(post.value.content, { breaks: true })
+  } catch {
+    return post.value.content
+  }
+})
 
 // SEO 优化
 useSeo({
@@ -71,18 +83,16 @@ if (authStore.isAuthenticated && post.value?.id) {
       <div class="prose prose-lg max-w-none">
         <div
           class="post-content"
-          v-html="post.content"
+          v-html="renderedContent"
         />
       </div>
 
-      <!-- 点赞收藏分享 -->
-      <div class="post-footer">
-        <PostActions :post-id="post.id" />
-        <ShareButton
-          :title="post.title"
-          :description="post.content?.substring(0, 160)"
-        />
-      </div>
+      <!-- 点赞收藏分享举报 -->
+      <PostActions
+        :post-id="post.id"
+        :title="post.title"
+        :slug="post.slug"
+      />
     </article>
 
     <!-- 评论区 -->
@@ -109,6 +119,8 @@ if (authStore.isAuthenticated && post.value?.id) {
 <style scoped>
 .post-article {
   background: var(--bg-primary);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
@@ -136,12 +148,27 @@ if (authStore.isAuthenticated && post.value?.id) {
   margin-bottom: 0.5em;
 }
 
+.post-content :deep(h1) {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.post-content :deep(h2) {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.post-content :deep(h3) {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
 .post-content :deep(p) {
   margin-bottom: 1em;
 }
 
 .post-content :deep(a) {
-  color: var(--color-primary);
+  color: var(--color-brand);
   text-decoration: underline;
 }
 
@@ -166,7 +193,7 @@ if (authStore.isAuthenticated && post.value?.id) {
 }
 
 .post-content :deep(blockquote) {
-  border-left: 4px solid var(--color-primary);
+  border-left: 4px solid var(--color-brand);
   padding-left: 1rem;
   margin: 1em 0;
   color: var(--text-secondary);
@@ -176,6 +203,40 @@ if (authStore.isAuthenticated && post.value?.id) {
   max-width: 100%;
   border-radius: var(--radius-md);
   margin: 1em 0;
+}
+
+.post-content :deep(ul),
+.post-content :deep(ol) {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.post-content :deep(li) {
+  margin-bottom: 0.25em;
+}
+
+.post-content :deep(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+.post-content :deep(th),
+.post-content :deep(td) {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.post-content :deep(th) {
+  background: var(--bg-tertiary);
+  font-weight: 600;
+}
+
+.post-content :deep(hr) {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2em 0;
 }
 
 .text-primary {
@@ -193,15 +254,6 @@ if (authStore.isAuthenticated && post.value?.id) {
 }
 
 .author-link:hover {
-  color: var(--color-primary);
-}
-
-.post-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
+  color: var(--color-brand);
 }
 </style>
