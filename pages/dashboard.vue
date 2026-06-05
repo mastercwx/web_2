@@ -215,7 +215,7 @@ function formatDate(dateStr: string) {
               <div
                 class="chart-bar"
                 :style="{
-                  height: `${Math.max(4, (item.count / Math.max(...followerGrowth.map((g) => g.count), 1)) * 100)}%`,
+                  height: `${Math.max(4, (item.count / Math.max(...followerGrowth.map((g: any) => g.count), 1)) * 100)}%`,
                 }"
               />
               <span

@@ -14,7 +14,7 @@ export async function savePostVersion(
   const lastVersion = await prisma.postVersion.findFirst({
     where: { postId },
     orderBy: { version: 'desc' },
-    select: { version: true },
+    select: { version: true, postId: true },
   })
 
   const newVersion = (lastVersion?.version || 0) + 1
@@ -41,6 +41,7 @@ export async function getPostVersions(postId: number) {
     select: {
       id: true,
       version: true,
+      postId: true,
       title: true,
       comment: true,
       createdAt: true,
@@ -140,11 +141,25 @@ export async function compareVersions(postId: number, versionId1: number, versio
   const [version1, version2] = await Promise.all([
     prisma.postVersion.findUnique({
       where: { id: versionId1 },
-      select: { id: true, version: true, title: true, content: true, createdAt: true },
+      select: {
+        id: true,
+        version: true,
+        postId: true,
+        title: true,
+        content: true,
+        createdAt: true,
+      },
     }),
     prisma.postVersion.findUnique({
       where: { id: versionId2 },
-      select: { id: true, version: true, title: true, content: true, createdAt: true },
+      select: {
+        id: true,
+        version: true,
+        postId: true,
+        title: true,
+        content: true,
+        createdAt: true,
+      },
     }),
   ])
 

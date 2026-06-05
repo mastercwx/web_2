@@ -98,8 +98,8 @@ async function handleSubmit() {
     message.value = data.message
 
     // 测试用，生产环境应删除
-    if (data.debug) {
-      debugToken.value = data.debug.resetToken
+    if ((data as any).debug) {
+      debugToken.value = (data as any).debug.resetToken
     }
   } catch (err: any) {
     error.value = err.data?.message || t('auth.forgotPassword.failed')

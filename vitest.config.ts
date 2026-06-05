@@ -5,6 +5,7 @@ export default defineVitestConfig({
     environment: 'nuxt',
     globals: true,
     include: ['tests/**/*.{test,spec}.{js,ts}'],
+    setupFiles: ['tests/setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

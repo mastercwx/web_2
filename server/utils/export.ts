@@ -7,7 +7,7 @@ export function jsonToCSV(data: Record<string, any>[], columns?: string[]): stri
   }
 
   // 确定列名
-  const keys = columns || Object.keys(data[0])
+  const keys = columns || Object.keys(data[0]!)
 
   // 生成 CSV 头部
   const header = keys.map((key) => escapeCSVField(key)).join(',')

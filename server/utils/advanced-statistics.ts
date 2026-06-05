@@ -251,7 +251,6 @@ export async function getContentAnalytics(period: string = 'month'): Promise<Con
           id: true,
           title: true,
           slug: true,
-          views: true,
           _count: {
             select: {
               likes: true,
@@ -262,7 +261,7 @@ export async function getContentAnalytics(period: string = 'month'): Promise<Con
         },
       }),
       prisma.post.groupBy({
-        by: ['status'],
+        by: ['published'],
         _count: true,
       }),
       prisma.post.findMany({
@@ -272,7 +271,7 @@ export async function getContentAnalytics(period: string = 'month'): Promise<Con
       prisma.post.count(),
       prisma.comment.count(),
       prisma.post.aggregate({
-        _avg: { content: true },
+        _avg: { id: true },
       }),
     ])
 
@@ -280,12 +279,12 @@ export async function getContentAnalytics(period: string = 'month'): Promise<Con
   const postsByDayMap = new Map<string, number>()
   for (let i = 0; i < 30; i++) {
     const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000)
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = date.toISOString().split('T')[0] || ''
     postsByDayMap.set(dateStr, 0)
   }
 
   for (const post of postsByDay) {
-    const dateStr = post.createdAt.toISOString().split('T')[0]
+    const dateStr = post.createdAt.toISOString().split('T')[0] || ''
     postsByDayMap.set(dateStr, (postsByDayMap.get(dateStr) || 0) + 1)
   }
 
@@ -294,18 +293,18 @@ export async function getContentAnalytics(period: string = 'month'): Promise<Con
     id: post.id,
     title: post.title,
     slug: post.slug,
-    views: post.views || 0,
+    views: post._count.likes || 0,
     likes: post._count.likes,
     comments: post._count.comments,
-    engagementRate: post.views
-      ? Math.round(((post._count.likes + post._count.comments) / post.views) * 100)
+    engagementRate: post._count.likes
+      ? Math.round(((post._count.likes + post._count.comments) / post._count.likes) * 100)
       : 0,
   }))
 
   return {
     topPosts: topPostsWithEngagement,
     postsByStatus: postsByStatus.map((s) => ({
-      status: s.status,
+      status: s.published ? 'published' : 'draft',
       count: s._count,
     })),
     postsByCategory: [], // 需要分类模型
@@ -363,12 +362,12 @@ export async function getUserAnalytics(period: string = 'month'): Promise<UserAn
 
   for (let i = 0; i < 30; i++) {
     const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000)
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = date.toISOString().split('T')[0] || ''
     userGrowthMap.set(dateStr, { newUsers: 0, totalUsers })
   }
 
   for (const user of userGrowthData) {
-    const dateStr = user.createdAt.toISOString().split('T')[0]
+    const dateStr = user.createdAt.toISOString().split('T')[0] || ''
     const entry = userGrowthMap.get(dateStr)
     if (entry) {
       entry.newUsers++
@@ -491,24 +490,24 @@ export async function getEngagementAnalytics(
 
   for (let i = 0; i < 30; i++) {
     const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000)
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = date.toISOString().split('T')[0] || ''
     likesByDayMap.set(dateStr, 0)
     commentsByDayMap.set(dateStr, 0)
     favoritesByDayMap.set(dateStr, 0)
   }
 
   for (const like of likesByDay) {
-    const dateStr = like.createdAt.toISOString().split('T')[0]
+    const dateStr = like.createdAt.toISOString().split('T')[0] || ''
     likesByDayMap.set(dateStr, (likesByDayMap.get(dateStr) || 0) + 1)
   }
 
   for (const comment of commentsByDay) {
-    const dateStr = comment.createdAt.toISOString().split('T')[0]
+    const dateStr = comment.createdAt.toISOString().split('T')[0] || ''
     commentsByDayMap.set(dateStr, (commentsByDayMap.get(dateStr) || 0) + 1)
   }
 
   for (const favorite of favoritesByDay) {
-    const dateStr = favorite.createdAt.toISOString().split('T')[0]
+    const dateStr = favorite.createdAt.toISOString().split('T')[0] || ''
     favoritesByDayMap.set(dateStr, (favoritesByDayMap.get(dateStr) || 0) + 1)
   }
 
@@ -581,12 +580,12 @@ export async function getRevenueAnalytics(period: string = 'month'): Promise<Rev
   >()
   for (let i = 0; i < 30; i++) {
     const date = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000)
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = date.toISOString().split('T')[0] || ''
     revenueByDayMap.set(dateStr, { impressions: 0, clicks: 0, revenue: 0 })
   }
 
   for (const impression of revenueByDay) {
-    const dateStr = impression.createdAt.toISOString().split('T')[0]
+    const dateStr = impression.createdAt.toISOString().split('T')[0] || ''
     const entry = revenueByDayMap.get(dateStr)
     if (entry) {
       entry.impressions++

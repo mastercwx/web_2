@@ -135,7 +135,7 @@ async function fetchDrafts() {
   loading.value = true
   try {
     const data = await $fetch('/api/posts/my-drafts')
-    posts.value = data.posts
+    posts.value = data.data.posts
   } catch (error) {
     console.error('Failed to fetch drafts:', error)
   } finally {

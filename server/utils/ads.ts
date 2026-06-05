@@ -165,7 +165,7 @@ export async function getAdDailyStats(adId: number, days = 30) {
   const dailyStats: Record<string, { impressions: number; clicks: number }> = {}
 
   impressions.forEach((item) => {
-    const date = item.createdAt.toISOString().split('T')[0]
+    const date = item.createdAt.toISOString().split('T')[0] || ''
     if (!dailyStats[date]) {
       dailyStats[date] = { impressions: 0, clicks: 0 }
     }
@@ -173,7 +173,7 @@ export async function getAdDailyStats(adId: number, days = 30) {
   })
 
   clicks.forEach((item) => {
-    const date = item.createdAt.toISOString().split('T')[0]
+    const date = item.createdAt.toISOString().split('T')[0] || ''
     if (!dailyStats[date]) {
       dailyStats[date] = { impressions: 0, clicks: 0 }
     }

@@ -11,7 +11,6 @@ export interface RecommendedPost {
   title: string
   slug: string
   excerpt: string | null
-  coverImage: string | null
   author: {
     id: number
     username: string
@@ -105,8 +104,7 @@ export async function getContentBasedRecommendations(
       id: post.id,
       title: post.title,
       slug: post.slug,
-      excerpt: post.excerpt,
-      coverImage: post.coverImage,
+      excerpt: post.content,
       author: post.author,
       tags: post.tags.map((t) => ({ id: t.id, name: t.name })),
       score,
@@ -220,7 +218,7 @@ export async function getBehaviorBasedRecommendations(
     const matchingTags = post.tags.filter((tag) => sortedTags.includes(tag.id))
     const tagScore =
       matchingTags.reduce((sum, tag) => sum + (tagCounts.get(tag.id) || 0), 0) /
-      (tagCounts.get(sortedTags[0]) || 1)
+      (tagCounts.get(sortedTags[0] || 0) || 1)
 
     const interactionScore =
       (post._count.likes * 2 + post._count.favorites * 3 + post._count.comments) / 100
@@ -237,8 +235,7 @@ export async function getBehaviorBasedRecommendations(
       id: post.id,
       title: post.title,
       slug: post.slug,
-      excerpt: post.excerpt,
-      coverImage: post.coverImage,
+      excerpt: post.content,
       author: post.author,
       tags: post.tags.map((t) => ({ id: t.id, name: t.name })),
       score,
@@ -307,8 +304,7 @@ export async function getPopularPosts(
       id: post.id,
       title: post.title,
       slug: post.slug,
-      excerpt: post.excerpt,
-      coverImage: post.coverImage,
+      excerpt: post.content,
       author: post.author,
       tags: post.tags.map((t) => ({ id: t.id, name: t.name })),
       score,
@@ -362,8 +358,7 @@ export async function getFollowingPosts(
     id: post.id,
     title: post.title,
     slug: post.slug,
-    excerpt: post.excerpt,
-    coverImage: post.coverImage,
+    excerpt: post.content,
     author: post.author,
     tags: post.tags.map((t) => ({ id: t.id, name: t.name })),
     score: 1,

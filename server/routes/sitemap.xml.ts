@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
   const urls = allPages
     .map(
       (page) => `  <url>
-    <loc>${siteUrl}${page.url}</loc>${page.lastmod ? `\n    <lastmod>${page.lastmod}</lastmod>` : ''}
+    <loc>${siteUrl}${page.url}</loc>${'lastmod' in page && page.lastmod ? `\n    <lastmod>${page.lastmod}</lastmod>` : ''}
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`,

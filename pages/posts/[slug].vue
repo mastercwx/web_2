@@ -27,7 +27,7 @@ useSeo({
 })
 
 // 记录阅读历史
-if (authStore.isLoggedIn && post.value?.id) {
+if (authStore.isAuthenticated && post.value?.id) {
   $fetch('/api/reading-history/record', {
     method: 'POST',
     body: { postId: post.value.id },

@@ -1,10 +1,10 @@
-import { authenticator } from 'otplib'
+import { generateSecret as _generateSecret, generateSync, verifySync, generateURI } from 'otplib'
 import QRCode from 'qrcode'
 import { randomBytes } from 'node:crypto'
 
 // 生成 2FA 密钥
 export function generateSecret(): string {
-  return authenticator.generateSecret()
+  return _generateSecret()
 }
 
 // 生成备份恢复码
@@ -21,13 +21,14 @@ export function generateBackupCodes(count: number = 8): string[] {
 
 // 生成 TOTP 令牌
 export function generateTOTP(secret: string): string {
-  return authenticator.generate(secret)
+  return generateSync({ secret })
 }
 
 // 验证 TOTP 令牌
 export function verifyTOTP(token: string, secret: string): boolean {
   try {
-    return authenticator.verify({ token, secret })
+    const result = verifySync({ token, secret })
+    return result.valid
   } catch {
     return false
   }
@@ -51,7 +52,7 @@ export function generateOTPAuthURI(
   secret: string,
   issuer: string = 'HG Web',
 ): string {
-  return authenticator.keyuri(username, issuer, secret)
+  return generateURI({ issuer, label: username, secret })
 }
 
 // 验证备份恢复码

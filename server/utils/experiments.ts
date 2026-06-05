@@ -71,6 +71,7 @@ export async function assignVariant(userId: number, experimentId: number) {
 
   // 默认返回第一个变体
   const firstVariant = variants[0]
+  if (!firstVariant) throw new Error('No variants available')
   await prisma.userExperiment.create({
     data: {
       userId,

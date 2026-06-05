@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       message: '参数错误',
-      data: result.error.errors,
+      data: result.error.issues,
     })
   }
 

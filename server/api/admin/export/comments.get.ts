@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   // 获取评论数据
   const comments = await prisma.comment.findMany({
     include: {
-      user: {
+      author: {
         select: {
           username: true,
         },

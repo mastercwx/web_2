@@ -95,8 +95,8 @@ export function calculateSensitivityScore(content: string): { score: number; fla
   }
 
   // 检查重复字符
-  const重复字符 = content.match(/(.)\1{4,}/g)
-  if (重复字符) {
+  const repeatedChars = content.match(/(.)\1{4,}/g)
+  if (repeatedChars) {
     score += 15
     flags.push('包含重复字符')
   }
@@ -461,12 +461,12 @@ export async function getModerationStats(): Promise<ModerationStats> {
   const activityMap = new Map<string, number>()
   for (let i = 0; i < 30; i++) {
     const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000)
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = date.toISOString().split('T')[0] || ''
     activityMap.set(dateStr, 0)
   }
 
   for (const report of dailyActivity) {
-    const dateStr = report.createdAt.toISOString().split('T')[0]
+    const dateStr = report.createdAt.toISOString().split('T')[0] || ''
     activityMap.set(dateStr, (activityMap.get(dateStr) || 0) + 1)
   }
 

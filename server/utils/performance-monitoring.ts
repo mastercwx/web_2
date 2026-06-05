@@ -238,8 +238,8 @@ export async function getApiPerformanceStats(): Promise<EndpointPerformance[]> {
       const sortedTimes = stats.responseTimes.sort((a, b) => a - b)
 
       return {
-        path,
-        method,
+        path: path || '',
+        method: method || '',
         requests: stats.requests,
         avgResponseTime:
           stats.responseTimes.reduce((a, b) => a + b, 0) / stats.responseTimes.length,
@@ -598,12 +598,12 @@ export async function logApiRequest(
     await prisma.activityLog.create({
       data: {
         action: 'api_request',
-        details: {
+        details: JSON.stringify({
           path,
           method,
           statusCode,
           responseTime,
-        },
+        }),
         createdAt: new Date(),
       },
     })
@@ -627,12 +627,12 @@ export async function logSlowQuery(
     await prisma.activityLog.create({
       data: {
         action: 'slow_query',
-        details: {
+        details: JSON.stringify({
           query,
           duration,
           table,
           rowsExamined,
-        },
+        }),
         createdAt: new Date(),
       },
     })

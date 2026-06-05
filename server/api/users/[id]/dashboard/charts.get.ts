@@ -108,14 +108,14 @@ export default defineEventHandler(async (event) => {
   for (let i = days - 1; i >= 0; i--) {
     const date = new Date(now)
     date.setDate(date.getDate() - i)
-    dateSeries.push(date.toISOString().split('T')[0])
+    dateSeries.push(date.toISOString().split('T')[0] || '')
   }
 
   // 按日期聚合数据
   function aggregateByDate(data: any[], dateField: string = 'createdAt') {
     const aggregated = new Map<string, number>()
     data.forEach((item) => {
-      const date = new Date(item[dateField]).toISOString().split('T')[0]
+      const date = new Date(item[dateField]).toISOString().split('T')[0] || ''
       aggregated.set(date, (aggregated.get(date) || 0) + item._count.id)
     })
     return dateSeries.map((date) => aggregated.get(date) || 0)

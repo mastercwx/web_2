@@ -54,13 +54,13 @@ export default defineEventHandler(async (event) => {
   for (let i = 0; i < days; i++) {
     const date = new Date(startDate)
     date.setDate(date.getDate() + i)
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = date.toISOString().split('T')[0] || ''
     dailyCounts[dateStr] = 0
   }
 
   // 统计每日新增
   follows.forEach((follow) => {
-    const dateStr = follow.createdAt.toISOString().split('T')[0]
+    const dateStr = follow.createdAt.toISOString().split('T')[0] || ''
     if (dailyCounts[dateStr] !== undefined) {
       dailyCounts[dateStr]++
     }

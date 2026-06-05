@@ -106,7 +106,7 @@ export const useAuthStore = defineStore('auth', {
       }
 
       const result = data.value as AuthResponse | null
-      if (result?.code === 200) {
+      if (result?.code === 200 && result.data.user && result.data.token) {
         this.setAuth(result.data.user, result.data.token)
         return result.data
       }
@@ -133,7 +133,7 @@ export const useAuthStore = defineStore('auth', {
         }
 
         const result = data.value as AuthResponse | null
-        if (result?.code === 200) {
+        if (result?.code === 200 && result.data.user) {
           this.user = result.data.user
           if (import.meta.client) {
             localStorage.setItem('user', JSON.stringify(this.user))
