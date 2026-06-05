@@ -367,7 +367,7 @@ function getStatusColor(status: string): string {
                 {{ index + 1 }}
               </span>
               <img
-                :src="user.avatar || '/default-avatar.png'"
+                :src="user.avatar || '/default-avatar.svg'"
                 class="w-8 h-8 rounded-full"
               />
               <span class="text-sm font-medium">
@@ -392,7 +392,7 @@ function getStatusColor(status: string): string {
                 {{ index + 1 }}
               </span>
               <img
-                :src="user.avatar || '/default-avatar.png'"
+                :src="user.avatar || '/default-avatar.svg'"
                 class="w-8 h-8 rounded-full"
               />
               <span class="text-sm font-medium">
@@ -641,7 +641,7 @@ function getStatusColor(status: string): string {
                 <td class="px-4 py-3">
                   <div class="flex items-center gap-3">
                     <img
-                      :src="user.avatar || '/default-avatar.png'"
+                      :src="user.avatar || '/default-avatar.svg'"
                       class="w-8 h-8 rounded-full"
                     />
                     <div>
@@ -789,7 +789,7 @@ function getStatusColor(status: string): string {
             <!-- 基本信息 -->
             <div class="flex items-start gap-6">
               <img
-                :src="userDetail.avatar || '/default-avatar.png'"
+                :src="userDetail.avatar || '/default-avatar.svg'"
                 class="w-20 h-20 rounded-full"
               />
               <div class="flex-1">

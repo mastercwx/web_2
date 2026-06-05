@@ -43,6 +43,7 @@
     "@types/formidable": "^3.5.1",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
+    "cropperjs": "^1.6.2",
     "echarts": "^6.1.0",
     "formidable": "^3.5.4",
     "jsonwebtoken": "^9.0.3",

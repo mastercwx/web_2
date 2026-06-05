@@ -748,7 +748,7 @@ const reasonMap: Record<string, string> = {
               <!-- 作者信息 -->
               <div class="flex items-center gap-2 mb-2">
                 <img
-                  :src="item.author.avatar || '/default-avatar.png'"
+                  :src="item.author.avatar || '/default-avatar.svg'"
                   class="w-6 h-6 rounded-full"
                 />
                 <span class="text-sm font-medium text-gray-700">
@@ -906,7 +906,7 @@ const reasonMap: Record<string, string> = {
             <!-- 作者信息 -->
             <div class="flex items-center gap-3 p-3 bg-gray-50 rounded">
               <img
-                :src="selectedItem.author.avatar || '/default-avatar.png'"
+                :src="selectedItem.author.avatar || '/default-avatar.svg'"
                 class="w-10 h-10 rounded-full"
               />
               <div>

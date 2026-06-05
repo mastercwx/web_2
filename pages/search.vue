@@ -243,7 +243,7 @@
 
             <div class="post-meta">
               <img
-                :src="post.author.avatar || '/default-avatar.png'"
+                :src="post.author.avatar || '/default-avatar.svg'"
                 :alt="post.author.username"
                 class="author-avatar"
               />

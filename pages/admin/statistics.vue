@@ -608,7 +608,7 @@ function formatDate(dateStr: string): string {
                 {{ index + 1 }}
               </span>
               <img
-                :src="user.avatar || '/default-avatar.png'"
+                :src="user.avatar || '/default-avatar.svg'"
                 class="w-8 h-8 rounded-full"
               />
               <span class="font-medium">
