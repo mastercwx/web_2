@@ -625,6 +625,47 @@
       "percentage": "Translation Rate"
     }
   },
+  "ads": {
+    "title": "Ad Management",
+    "description": "Manage website ad placements and campaigns",
+    "add": "Add Ad",
+    "edit": "Edit Ad",
+    "name": "Name",
+    "descriptionLabel": "Description",
+    "position": "Position",
+    "type": "Type",
+    "content": "Ad Content",
+    "imageUrl": "Image URL",
+    "linkUrl": "Link URL",
+    "text": "Text Content",
+    "html": "HTML Code",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "priority": "Priority",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "positions": {
+      "sidebar": "Sidebar",
+      "header": "Header",
+      "footer": "Footer",
+      "in-article": "In Article"
+    },
+    "types": {
+      "BANNER": "Banner Ad",
+      "SIDEBAR": "Sidebar Ad",
+      "IN_ARTICLE": "In-Article Ad",
+      "NATIVE": "Native Ad",
+      "POPUP": "Popup Ad"
+    },
+    "stats": {
+      "title": "Ad Statistics",
+      "impressions": "Impressions",
+      "clicks": "Clicks",
+      "ctr": "Click-Through Rate (CTR)"
+    }
+  },
   "webhooks": {
     "title": "Webhook Management",
     "description": "Manage external system integrations and event push notifications",

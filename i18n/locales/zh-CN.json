@@ -625,6 +625,47 @@
       "percentage": "翻译率"
     }
   },
+  "ads": {
+    "title": "广告管理",
+    "description": "管理网站广告位和投放",
+    "add": "添加广告",
+    "edit": "编辑广告",
+    "name": "名称",
+    "descriptionLabel": "描述",
+    "position": "位置",
+    "type": "类型",
+    "content": "广告内容",
+    "imageUrl": "图片 URL",
+    "linkUrl": "链接 URL",
+    "text": "文字内容",
+    "html": "HTML 代码",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "priority": "优先级",
+    "status": {
+      "active": "启用",
+      "inactive": "禁用"
+    },
+    "positions": {
+      "sidebar": "侧边栏",
+      "header": "页头",
+      "footer": "页脚",
+      "in-article": "文章内"
+    },
+    "types": {
+      "BANNER": "横幅广告",
+      "SIDEBAR": "侧边栏广告",
+      "IN_ARTICLE": "文章内广告",
+      "NATIVE": "原生广告",
+      "POPUP": "弹窗广告"
+    },
+    "stats": {
+      "title": "广告统计",
+      "impressions": "展示次数",
+      "clicks": "点击次数",
+      "ctr": "点击率 (CTR)"
+    }
+  },
   "webhooks": {
     "title": "Webhook 管理",
     "description": "管理外部系统集成和事件推送",
