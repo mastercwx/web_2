@@ -15,7 +15,7 @@ if (authStore.user?.id !== userId.value) {
   })
 }
 
-const activeTab = ref<'profile' | 'password' | 'avatar' | 'notifications'>('profile')
+const activeTab = ref<'profile' | 'password' | 'avatar' | 'notifications' | 'oauth'>('profile')
 
 // 个人资料表单
 const profileForm = reactive({
@@ -232,6 +232,13 @@ async function loadNotificationSettings() {
           @click="handleTabChange('notifications')"
         >
           {{ t('settings.notifications.title') }}
+        </button>
+        <button
+          class="tab-btn"
+          :class="{ active: activeTab === 'oauth' }"
+          @click="handleTabChange('oauth')"
+        >
+          {{ t('settings.oauth.title') }}
         </button>
       </div>
 
@@ -476,6 +483,14 @@ async function loadNotificationSettings() {
             }}
           </button>
         </form>
+      </div>
+
+      <!-- OAuth 账号管理 -->
+      <div
+        v-if="activeTab === 'oauth'"
+        class="settings-content card"
+      >
+        <AuthOAuthManager />
       </div>
     </div>
   </div>

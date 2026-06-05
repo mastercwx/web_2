@@ -1,7 +1,7 @@
 import { verifyToken, extractTokenFromHeader } from '~/server/utils/jwt'
 
 // 不需要认证的路由
-const PUBLIC_ROUTES = ['/api/auth/login', '/api/auth/register', '/api/health']
+const PUBLIC_ROUTES = ['/api/auth/login', '/api/auth/register', '/api/health', '/api/auth/oauth']
 
 export default defineEventHandler(async (event) => {
   const path = getRequestURL(event).pathname
