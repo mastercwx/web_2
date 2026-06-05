@@ -493,6 +493,24 @@
       "minutesAgo": "{count} minutes ago",
       "hoursAgo": "{count} hours ago",
       "daysAgo": "{count} days ago"
+    },
+    "filters": {
+      "all": "All",
+      "like": "Likes",
+      "comment": "Comments",
+      "follow": "Follows",
+      "system": "System"
+    },
+    "preferences": {
+      "title": "Notification Preferences",
+      "emailNotifications": "Email Notifications",
+      "emailHint": "Receive email alerts for new comments, likes, or follows",
+      "browserNotifications": "Browser Notifications",
+      "browserHint": "Show desktop notifications in your browser",
+      "soundEnabled": "Notification Sound",
+      "soundHint": "Play a sound when receiving new notifications",
+      "save": "Save Settings",
+      "saving": "Saving..."
     }
   },
   "contact": {

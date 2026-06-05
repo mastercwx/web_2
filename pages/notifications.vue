@@ -1,18 +1,27 @@
 <script setup lang="ts">
 const authStore = useAuthStore()
 const router = useRouter()
+const { onNotification, onUnreadCount } = useWebSocket()
 
 const notifications = ref<any[]>([])
 const loading = ref(true)
 const page = ref(1)
 const totalPages = ref(1)
 const unreadCount = ref(0)
+const activeFilter = ref('all')
+const preferences = ref({
+  emailNotifications: true,
+  browserNotifications: true,
+  soundEnabled: true,
+})
+const savingPreferences = ref(false)
 
 // 获取通知列表
 async function fetchNotifications() {
   loading.value = true
   try {
-    const data = await $fetch(`/api/notifications?page=${page.value}&limit=20`)
+    const filterParam = activeFilter.value !== 'all' ? `&type=${activeFilter.value}` : ''
+    const data = await $fetch(`/api/notifications?page=${page.value}&limit=20${filterParam}`)
     const result = (data as any).data
     notifications.value = result.notifications
     totalPages.value = result.totalPages
@@ -21,6 +30,63 @@ async function fetchNotifications() {
     console.error('获取通知失败:', error)
   } finally {
     loading.value = false
+  }
+}
+
+// 监听实时通知
+onNotification((notification) => {
+  if (page.value === 1) {
+    notifications.value.unshift(notification)
+    if (notifications.value.length > 20) {
+      notifications.value.pop()
+    }
+  }
+  unreadCount.value++
+})
+
+// 监听未读数量更新
+onUnreadCount((data) => {
+  unreadCount.value = data.count
+})
+
+// 切换筛选
+function setFilter(filter: string) {
+  activeFilter.value = filter
+  page.value = 1
+  fetchNotifications()
+}
+
+// 获取通知偏好设置
+async function fetchPreferences() {
+  try {
+    const data = await $fetch('/api/notifications/preferences')
+    const result = (data as any).data
+    preferences.value = {
+      emailNotifications: result.emailNotifications,
+      browserNotifications: result.browserNotifications,
+      soundEnabled: result.soundEnabled,
+    }
+  } catch (error) {
+    console.error('获取通知偏好设置失败:', error)
+  }
+}
+
+// 保存通知偏好设置
+async function savePreferences() {
+  savingPreferences.value = true
+  try {
+    await $fetch('/api/notifications/preferences', {
+      method: 'PUT',
+      body: {
+        emailNotifications: preferences.value.emailNotifications,
+      },
+    })
+    // 保存到本地存储
+    localStorage.setItem('notificationPreferences', JSON.stringify(preferences.value))
+  } catch (error) {
+    console.error('保存通知偏好设置失败:', error)
+  } finally {
+    savingPreferences.value = false
   }
 }
 
@@ -129,6 +195,17 @@ onMounted(() => {
     return
   }
   fetchNotifications()
+  fetchPreferences()
+
+  // 从本地存储加载偏好设置
+  const savedPreferences = localStorage.getItem('notificationPreferences')
+  if (savedPreferences) {
+    try {
+      preferences.value = JSON.parse(savedPreferences)
+    } catch (error) {
+      console.error('Failed to parse saved preferences:', error)
+    }
+  }
 })
 </script>
 
@@ -151,6 +228,28 @@ onMounted(() => {
           全部已读
         </button>
       </div>
+    </div>
+
+    <!-- 筛选标签 -->
+    <div class="filter-tabs">
+      <button
+        v-for="filter in ['all', 'like', 'comment', 'follow', 'system']"
+        :key="filter"
+        :class="['filter-btn', { active: activeFilter === filter }]"
+        @click="setFilter(filter)"
+      >
+        {{
+          filter === 'all'
+            ? '全部'
+            : filter === 'like'
+              ? '点赞'
+              : filter === 'comment'
+                ? '评论'
+                : filter === 'follow'
+                  ? '关注'
+                  : '系统'
+        }}
+      </button>
     </div>
 
     <div
@@ -239,6 +338,55 @@ onMounted(() => {
         下一页
       </button>
     </div>
+
+    <!-- 通知偏好设置 -->
+    <div class="preferences-section">
+      <h2>通知偏好设置</h2>
+      <div class="preferences-card">
+        <div class="preference-item">
+          <div class="preference-info">
+            <h3>邮件通知</h3>
+            <p>开启后，当有新评论、点赞或关注时会收到邮件提醒</p>
+          </div>
+          <label class="toggle-switch">
+            <input
+              v-model="preferences.emailNotifications"
+              type="checkbox"
+              @change="savePreferences"
+            />
+            <span class="toggle-slider" />
+          </label>
+        </div>
+        <div class="preference-item">
+          <div class="preference-info">
+            <h3>浏览器通知</h3>
+            <p>开启后，会在浏览器中显示桌面通知</p>
+          </div>
+          <label class="toggle-switch">
+            <input
+              v-model="preferences.browserNotifications"
+              type="checkbox"
+              @change="savePreferences"
+            />
+            <span class="toggle-slider" />
+          </label>
+        </div>
+        <div class="preference-item">
+          <div class="preference-info">
+            <h3>通知提示音</h3>
+            <p>开启后，收到新通知时会播放提示音</p>
+          </div>
+          <label class="toggle-switch">
+            <input
+              v-model="preferences.soundEnabled"
+              type="checkbox"
+              @change="savePreferences"
+            />
+            <span class="toggle-slider" />
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -287,6 +435,35 @@ onMounted(() => {
 
 .btn-mark-all:hover {
   background: var(--color-primary);
+  color: white;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 2rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: white;
 }
 
@@ -440,5 +617,96 @@ onMounted(() => {
 .pagination span {
   font-size: 0.875rem;
   color: var(--text-secondary);
+}
+
+.preferences-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.preferences-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.preferences-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.preference-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.preference-item:last-child {
+  border-bottom: none;
+}
+
+.preference-info h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.preference-info p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 3rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-tertiary);
+  transition: 0.3s;
+  border-radius: 1.5rem;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: '';
+  height: 1.25rem;
+  width: 1.25rem;
+  left: 0.125rem;
+  bottom: 0.125rem;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(1.5rem);
 }
 </style>

@@ -5,6 +5,7 @@ import {
   getLikeNotificationTemplate,
   getFollowNotificationTemplate,
 } from '~/server/utils/email'
+import { wsManager } from '~/server/utils/websocket'
 
 interface CreateNotificationParams {
   userId: number
@@ -40,6 +41,21 @@ export async function createNotification(params: CreateNotificationParams) {
     sendEmailNotification(params).catch((err) =>
       console.error('Failed to send email notification:', err),
     )
+
+    // 通过 WebSocket 实时推送通知
+    wsManager.sendToUser(params.userId, 'notification', {
+      id: notification.id,
+      type: notification.type,
+      title: notification.title,
+      content: notification.content,
+      link: notification.link,
+      isRead: notification.isRead,
+      createdAt: notification.createdAt,
+    })
+
+    // 推送未读通知数量更新
+    const unreadCount = await getUnreadCount(params.userId)
+    wsManager.sendToUser(params.userId, 'unread-count', { count: unreadCount })
 
     return notification
   } catch (error) {
